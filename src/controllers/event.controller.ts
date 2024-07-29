@@ -3,7 +3,7 @@ import EventService from "../services/event.service";
 
 const { create, getEventById, getEvents, getEventByQuery } = new EventService();
 
-const devnetBlink = "https://dial.to/devnet?action=solana-action:";
+const deployedLink = "https://eventmint.onrender.com/";
 
 export default class EventController {
   async createEvent(req: Request, res: Response) {
@@ -17,15 +17,14 @@ export default class EventController {
       }
 
       const event = await create({ ...req.body, userId: req.params.userId });
-      const blinkUrl = `${devnetBlink}${encodeURIComponent(
-        `http://localhost:5500/api/v1/action/${event.name}`
-      )}`;
 
       return res.status(200).send({
         success: true,
         message: "Event created successfully",
         event,
-        blink: blinkUrl,
+        blink: `${deployedLink}/api/v1/action/${encodeURIComponent(
+          event.name
+        )}`,
       });
     } catch (error: any) {
       return res.status(500).send({
