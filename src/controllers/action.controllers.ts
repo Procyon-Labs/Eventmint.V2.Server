@@ -55,4 +55,19 @@ export default class ActionController {
       });
     }
   }
+
+  async postAction(req: Request, res: Response) {
+    try {
+      const eventName = decodeURIComponent(req.params.name);
+      const event = await getEventByQuery({
+        name: eventName,
+      });
+
+      if (!event) {
+        throw new BadRequestError("invaild event Id");
+      }
+
+      const body: ActionPostRequest = req.body;
+    } catch (error) {}
+  }
 }
