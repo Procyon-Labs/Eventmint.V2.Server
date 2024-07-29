@@ -3,7 +3,8 @@ import EventService from "../services/event.service";
 
 const { create, getEventById, getEvents, getEventByQuery } = new EventService();
 
-const deployedLink = "https://eventmint.onrender.com/";
+const deployedLink =
+  "https://dial.to/?action=solana-action:https://eventmint.onrender.com/";
 
 export default class EventController {
   async createEvent(req: Request, res: Response) {
