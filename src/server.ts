@@ -39,7 +39,7 @@ const checkServerHealth = () => {
     });
 };
 
-const interval = 2 * 60 * 1000;
+const interval: number = 2 * 60 * 1000;
 setInterval(checkServerHealth, interval);
 
 // Catch-all route

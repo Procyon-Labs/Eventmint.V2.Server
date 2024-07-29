@@ -84,7 +84,7 @@ const eventSchema = new Schema<IEvent>(
     },
   },
   {
-    strict: false,
+    strict: true,
     timestamps: true,
     versionKey: false,
   }
