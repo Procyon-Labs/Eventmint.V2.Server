@@ -14,8 +14,8 @@ const upload = multer({
 const router = Router();
 const userController = new UserController();
 
-router.post("/users", upload.single("image"), userController.createUser);
-router.get("/users/:id", userController.getUserById);
+router.post("/:id", upload.single("image"), userController.createUser);
+router.get("/:id", userController.getUserById);
 router.get("/users", userController.getUsers);
 router.post("/upload", upload.single("file"), userController.uploadImage);
 
