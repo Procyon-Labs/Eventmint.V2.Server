@@ -25,7 +25,7 @@ app.use(json());
 app.use(cors());
 app.use(urlencoded());
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/v1/event-blink", actionRoutes);
