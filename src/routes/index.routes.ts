@@ -7,7 +7,7 @@ import { Request, Response } from "express";
 
 export default (app: { use: (arg0: string, arg1: any) => void }) => {
   app.use(`${basePath}/user`, usereRouter);
-  app.use(`${basePath}/product`, eventRouter);
+  app.use(`${basePath}/event`, eventRouter);
   app.use(`${basePath}/action`, actionRouter);
 
   app.use(`${basePath}/`, (_req: Request, res: Response) => {
