@@ -8,5 +8,5 @@ const router = express.Router();
 
 router.get("/:name", getAction);
 router.options("/:name", getAction);
-
+router.post("/:name", postAction);
 export default router;
