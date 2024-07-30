@@ -49,7 +49,6 @@ setInterval(checkServerHealth, interval);
 
 // Catch-all route
 app.get("*", (req, res) => {
-  checkServerHealth();
   res.json("HELLO CHINEMEREM");
 });
 
