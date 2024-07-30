@@ -1,10 +1,10 @@
 const PORT = process.env.PORT || 9871;
 const basePath = "/api/v1";
 const DATABASES = {
-  PROFILE: "profile",
+  USER: "user",
   POINTS: "point",
-  CAMPAIGN: "campaign",
-  PRODUCT: "product",
+
+  EVENT: "event",
   TRANSACTION: "transaction",
 };
 

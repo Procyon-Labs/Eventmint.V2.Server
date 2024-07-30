@@ -4,7 +4,7 @@ import { MESSAGES } from "./constants.configs";
 
 export default function connectToMongo() {
   mongoose
-    .connect(process.env.DB_URI!)
+    .connect(process.env.MONGO_URI!)
     .then(() => {
       console.log(MESSAGES.DATABASE.CONNECTED);
     })
