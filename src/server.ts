@@ -49,11 +49,6 @@ const checkServerHealth = () => {
 const interval: number = 2 * 60 * 1000;
 setInterval(checkServerHealth, interval);
 
-// Catch-all route
-app.get("*", (req, res) => {
-  res.json("HELLO CHINEMEREM");
-});
-
 const start = async () => {
   try {
     await connectDB(MONGODB_URI);
