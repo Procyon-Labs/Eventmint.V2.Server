@@ -7,6 +7,8 @@ import userRoutes from "./routes/user.routes";
 import connectDB from "./db/connect";
 import axios from "axios";
 import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
 import { Application, json, urlencoded } from "express";
 dotenv.config();
 
@@ -21,11 +23,11 @@ if (!MONGODB_URI) {
 }
 
 // Middleware
-app.use(json());
+app.use(morgan("combined"));
 app.use(cors());
+app.use(json());
+app.use(helmet());
 app.use(urlencoded());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/v1/event-blink", actionRoutes);
