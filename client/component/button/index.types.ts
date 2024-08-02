@@ -28,5 +28,5 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   fontWeight?: TypographyFontWeight;
   customClassName?: string;
   fit?: boolean;
-  size?: 'large' | 'medium' | 'medium-with-icon'| 'small'| 'moreMedium';
+  size?: 'large' | 'medium' | 'medium-with-icon'| 'small'| 'moreMedium' | "footer";
 }

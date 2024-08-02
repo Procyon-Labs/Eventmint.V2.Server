@@ -24,7 +24,7 @@ const typography = cva("", {
       "body-xs": "text-body-xs mxs:text-body-xxs",
       "body-xxs": "text-body-xxs mxs:text-body-xxxs",
       "body-xxxs":"text-body-xxxs mxs:text-body-xxs",
-      
+      "number":"text-number mxs:text-body-xl",
     },
     font: {
       Ubuntu: "Ubuntu",
@@ -38,7 +38,8 @@ const typography = cva("", {
         fontBodyRGreyishColor:"text-fontBodyRGreyishColor",
         fontAvatarGreyishColor:"text-fontAvatarGreyishColor",
         fontBodyPurpishColor:'text-fontBodyPurpishColor',
-        fontBodyWhiteishColor:"text-fontBodyWhiteishColor",    
+        fontBodyWhiteishColor:"text-fontBodyWhiteishColor", 
+        numberPurple:"text-numberPurple"   
     },
     fontWeight: {
       thin: "font-thin",

@@ -16,7 +16,7 @@ export const variantMapping = {
     "body-xs": "p",
     "body-xxs": "p",
     "body-xxxs": "p",
-    
+    'number':"p",
   };
   
   export type TypographyVariant = keyof typeof variantMapping;
@@ -30,6 +30,7 @@ export const variantMapping = {
     | "fontBodyPurpishColor"
     | "fontBodyWhiteishColor"
     | 'primary'
+    | 'numberPurple'
     ;
   
   export type TypographyAlign =
