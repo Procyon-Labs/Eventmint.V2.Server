@@ -1,20 +1,92 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./asset/**/*.{js,ts,jsx,tsx,mdx}",
+    "./component/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        'gradient-to-b-custom': 'linear-gradient(180deg, #A7FFA7 0%, #00D300 100%)',
+        'custom-gradient': 'linear-gradient(93deg, #97FF98 32.88%, #FB96FF 51.47%, #AB96FF 68.18%)',
+      },
+      textColor: {
+        'transparent': 'transparent',
+      },
+      fontWeight: {
+        thin: "100",
+        "extra-light": "200",
+        light: "300",
+        regular: "400",
+        medium: "500",
+        "semi-bold": "600",
+        bold: "700",
+        "extra-bold": "800",
+        black: "900",
+      },
+      fontFamily: {
+        Ubuntu: ['var(--font-ubuntu)', 'sans-serif'],
+        'open-sans': ['var(--font-open-sans)', 'sans-serif'],
+      },
+      fontSize: {
+        // Header element styles
+        "h-xl": ["4.5rem", { lineHeight: "111.111%", fontWeight: 700 }],
+        "h-l": ["3.75rem", { lineHeight: "120%", fontWeight: 500 }],
+        "h-m":  ["3.75rem", { lineHeight: "120%", fontWeight: 400 }],
+        "h-r": ["2.0625rem", { lineHeight: "121.212%", fontWeight: 500 }],
+        "h-s": ["1.75rem", { lineHeight: "121.429%", fontWeight: 500 }],
+        "h-xs": ["1.75rem", { lineHeight: "121.429%", fontWeight: 400 }],
+        "h-xxs": ["1.4375rem", { lineHeight: "121.739%", fontWeight: 500 }],
+        "h-xxxs": ["1.125rem", { lineHeight: "120%", fontWeight: 500 }],
+        "h-xxxxs": ["0.7875rem", { lineHeight: "121.429%", fontWeight: 600 }],
+        // Body variant styles - [Large, Medium, Regular, Small]
+        "body-xl": ["1.5rem", { lineHeight: "2rem", fontWeight: 700 }],
+        "body-l": ["1.75rem", { lineHeight: "121.429%", fontWeight:400}],
+        "body-m": ["1.4375rem", { lineHeight: "121.739%", fontWeight: 400 }],
+        "body-ms": ["1.4375rem", { lineHeight: "121.739%", fontWeight: 300 }],
+        "body-r": ["1.25rem", { lineHeight: "120%", fontWeight: 400 }],
+        "body-s": ["1.125rem", { lineHeight: "120%", fontWeight: 400 }],
+        "body-xs": ["1.125rem", { lineHeight: "120%", fontWeight: 400 }],
+        "body-xxs": ["1rem", { lineHeight: "118.75%", fontWeight: 600 }],
+        "body-xxxs": ["1.0125rem", { lineHeight: "120%", fontWeight: 500}],
+      },
+      colors: {
+        buttonColor: "#003500",
+        fontgreenishColor: "#A7FFA7",
+        fontBodyMGreyishColor:"#B8C0CC",
+        fontBodyRGreyishColor:"#E7EAEE",
+        fontAvatarGreyishColor: "#A0ABBB",
+        fontBodyPurpishColor:"#CDC0FF",
+        fontBodyWhiteishColor:"#F7F8F9",
+      },
+      screens: {
+        mxl: { max: "1279px" },
+        // => @media (max-width: 1279px){...}
+
+        mlg: { max: "1023px" },
+        // => @media (max-width: 1023px){...}
+
+        mmd: { max: "767px" },
+        // => @media (max-width: 767px){...}
+
+        msm: { max: "639px" },
+        // => @media (max-width: 639px){...}
+
+        mxs: { max: "480px" },
+        // => @media (max-width: 480px){...}
+
+        mxxs: { max: "400px" },
+        // => @media (max-width: 400px){...}
+
+        mxxxs: { max: "320px" },
+        // => @media (max-width: 320px){...}
+
+        "ms-height": { raw: "(max-height: 700px)" },
+
+        "mxl-height": { raw: "(max-height: 850px)" },
       },
     },
   },
   plugins: [],
 };
-export default config;
