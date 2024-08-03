@@ -9,6 +9,18 @@
 .blur-image {
   filter: blur(10px); 
 }
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 24px 12px;
+}
+
+.reasons:nth-child(7) {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
 .text-gradient {
   background: linear-gradient(93deg, #97FF98 32.88%, #FB96FF 51.47%, #AB96FF 68.18%);
   background-clip: text;
