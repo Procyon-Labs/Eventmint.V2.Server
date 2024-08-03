@@ -35,7 +35,7 @@ export default function Home() {
         <div className="relative text-white px-[64px]">
           <div className="mx-auto">
             <div className="mx-auto text-center">
-              <h2 className="text-h-l font-Ubuntu">
+              <h2 className="text-h-l font-Ubuntu mb-4">
                 What we<span className="text-[#A7FFA7]"> Offer</span>
               </h2>
             </div>
@@ -46,8 +46,11 @@ export default function Home() {
                 customClassName="font-Ubuntu text-center"
                 color="fontBodyMGreyishColor"
               >
-                Here are the numerous standout features of EventMint <br /> that
-                set it apart from the competition
+                <p className="mb-2">
+                  {" "}
+                  Here are the numerous standout features of EventMint <br />{" "}
+                  that set it apart from the competition
+                </p>
               </Typography>
             </div>
           </div>
@@ -177,12 +180,17 @@ export default function Home() {
         </div>
       </section>
       <section className="text-white relative h-full w-full pt-[40px] pb-[4rem]">
-        <Image className="absolute mx-auto z-[0]" src={'/fourthdone.png'} alt="fourthImage"fill/>
-          <div className="px-[64px] mx-auto max-w-[1440px]">
+        <Image
+          className="absolute mx-auto z-[0]"
+          src={"/fourthdone.png"}
+          alt="fourthImage"
+          fill
+        />
+        <div className="px-[64px] mx-auto max-w-[1440px]">
           <div className="mx-auto pb-[3rem]">
             <div className="mx-auto text-center">
               <h2 className="text-h-l font-Ubuntu">
-              How it<span className="text-[#A7FFA7]"> Works</span>
+                How it<span className="text-[#A7FFA7]"> Works</span>
               </h2>
             </div>
             <div className="mx-auto text-center">
@@ -192,59 +200,174 @@ export default function Home() {
                 customClassName="font-Ubuntu text-center"
                 color="fontBodyMGreyishColor"
               >
-                Here’s is a detailed explanation of how EventMint works,<br/>with a detailed guide to its processes and functionalities<br/>for seamless event planning
+                Here’s is a detailed explanation of how EventMint works,
+                <br />
+                with a detailed guide to its processes and functionalities
+                <br />
+                for seamless event planning
               </Typography>
             </div>
           </div>
           <div className="grid grid-cols-3 gap-x-6 gap-y-3">
-            <Guide header="Sign Up" icon="/signUp.svg" body="Participate in event activities, join group chats, and interact with sponsors" number="1" />
-            <Guide header="Browse Events" icon="/browseEvent.svg" body="Explore upcoming events and select the ones you’re interested in." number="2" /> 
-            <Guide header="Puchase Tickets" icon="/purchaseTickets.svg" body="Buy your tickets with ease and have them sent to your wallet." number="3" />
-            <Guide header="Engage & Interact" icon="/engage.svg" body="Participate in event activities, join group chats, and interact with sponsors" number="4" />
-            <Guide header="Earn Rewards" icon="/earn.svg" body="Collect points and rewards for your engagement and activities" number="5" />
-            <Guide header="Plan Budgets" icon="/planBudget.svg" body="Use our budget planning protocol to efficiently manage and allocate event funds" number="6" />
+            <Guide
+              header="Sign Up"
+              icon="/signUp.svg"
+              body="Participate in event activities, join group chats, and interact with sponsors"
+              number="1"
+            />
+            <Guide
+              header="Browse Events"
+              icon="/browseEvent.svg"
+              body="Explore upcoming events and select the ones you’re interested in."
+              number="2"
+            />
+            <Guide
+              header="Puchase Tickets"
+              icon="/purchaseTickets.svg"
+              body="Buy your tickets with ease and have them sent to your wallet."
+              number="3"
+            />
+            <Guide
+              header="Engage & Interact"
+              icon="/engage.svg"
+              body="Participate in event activities, join group chats, and interact with sponsors"
+              number="4"
+            />
+            <Guide
+              header="Earn Rewards"
+              icon="/earn.svg"
+              body="Collect points and rewards for your engagement and activities"
+              number="5"
+            />
+            <Guide
+              header="Plan Budgets"
+              icon="/planBudget.svg"
+              body="Use our budget planning protocol to efficiently manage and allocate event funds"
+              number="6"
+            />
           </div>
-          </div>
-        </section>
+        </div>
+      </section>
       <section className="relative h-full w-full pb-[72px]">
-        <Image className="absolute left-[35%]" src={'/fifthblurImagedone.png'} alt="fifthBlurImage" width={400} height={400}/>
+        <Image
+          className="absolute left-[35%]"
+          src={"/fifthblurImagedone.png"}
+          alt="fifthBlurImage"
+          width={400}
+          height={400}
+        />
         <div className="px-[64px] w-full flex items-center gap-[3rem] mx-auto max-w-[1440px]">
           <div className="flex flex-col gap-[48px]  w-1/2">
             <div className="flex flex-col gap-4">
-            <Image src={"/logo.png"} alt="logo" width={50} height={50} />
-            <div className="flex items-center gap-4">
-              <Image src={"/Instagram.svg"} alt="logo" width={56} height={56}/>
-              <Image src={"/twitter.svg"} alt="logo" width={56} height={56}/>
-              <Image src={"/Github.svg"} alt="logo" width={56} height={56}/>
-              <Image src={"/Linkedin.svg"} alt="logo" width={56} height={56}/>
-            </div>
+              <Image src={"/logo.png"} alt="logo" width={50} height={50} />
+              <div className="flex items-center gap-4">
+                <Image
+                  src={"/Instagram.svg"}
+                  alt="logo"
+                  width={56}
+                  height={56}
+                />
+                <Image src={"/twitter.svg"} alt="logo" width={56} height={56} />
+                <Image src={"/Github.svg"} alt="logo" width={56} height={56} />
+                <Image
+                  src={"/Linkedin.svg"}
+                  alt="logo"
+                  width={56}
+                  height={56}
+                />
+              </div>
             </div>
             <div className="flex justify-between  w-full">
               <div className="flex flex-col gap-4">
-                <Typography variant="h6" color="fontBodyWhiteishColor" customClassName="font-Ubuntu">Quick Links</Typography>
-                <Typography variant="body-s" color="fontAvatarGreyishColor" customClassName="font-open-sas">Home</Typography>
-                <Typography variant="body-s" color="fontAvatarGreyishColor" customClassName="font-open-sas">Features</Typography>
-                <Typography variant="body-s" color="fontAvatarGreyishColor" customClassName="font-open-sas">Benefits</Typography>
-                <Typography variant="body-s" color="fontAvatarGreyishColor" customClassName="font-open-sas">Events</Typography>
-
+                <Typography
+                  variant="h6"
+                  color="fontBodyWhiteishColor"
+                  customClassName="font-Ubuntu"
+                >
+                  Quick Links
+                </Typography>
+                <Typography
+                  variant="body-s"
+                  color="fontAvatarGreyishColor"
+                  customClassName="font-open-sas"
+                >
+                  Home
+                </Typography>
+                <Typography
+                  variant="body-s"
+                  color="fontAvatarGreyishColor"
+                  customClassName="font-open-sas"
+                >
+                  Features
+                </Typography>
+                <Typography
+                  variant="body-s"
+                  color="fontAvatarGreyishColor"
+                  customClassName="font-open-sas"
+                >
+                  Benefits
+                </Typography>
+                <Typography
+                  variant="body-s"
+                  color="fontAvatarGreyishColor"
+                  customClassName="font-open-sas"
+                >
+                  Events
+                </Typography>
               </div>
               <div className="flex flex-col gap-4">
-                <Typography variant="h6" color="fontBodyWhiteishColor" customClassName="font-Ubuntu">Legal</Typography>
-                <Typography variant="body-s" color="fontAvatarGreyishColor" customClassName="font-open-sas">Terms of Use</Typography>
-                <Typography variant="body-s" color="fontAvatarGreyishColor" customClassName="font-open-sas">Privacy Policy</Typography>
+                <Typography
+                  variant="h6"
+                  color="fontBodyWhiteishColor"
+                  customClassName="font-Ubuntu"
+                >
+                  Legal
+                </Typography>
+                <Typography
+                  variant="body-s"
+                  color="fontAvatarGreyishColor"
+                  customClassName="font-open-sas"
+                >
+                  Terms of Use
+                </Typography>
+                <Typography
+                  variant="body-s"
+                  color="fontAvatarGreyishColor"
+                  customClassName="font-open-sas"
+                >
+                  Privacy Policy
+                </Typography>
               </div>
               <div className="flex flex-col gap-4">
-              <Typography variant="h6" color="fontBodyWhiteishColor" customClassName="font-Ubuntu">Need Help?</Typography>
-              <Typography variant="body-s" color="fontAvatarGreyishColor" customClassName="font-open-sas">Contact Support</Typography>
-              <Typography variant="body-s" color="fontAvatarGreyishColor" customClassName="font-open-sas">Help Center</Typography>
+                <Typography
+                  variant="h6"
+                  color="fontBodyWhiteishColor"
+                  customClassName="font-Ubuntu"
+                >
+                  Need Help?
+                </Typography>
+                <Typography
+                  variant="body-s"
+                  color="fontAvatarGreyishColor"
+                  customClassName="font-open-sas"
+                >
+                  Contact Support
+                </Typography>
+                <Typography
+                  variant="body-s"
+                  color="fontAvatarGreyishColor"
+                  customClassName="font-open-sas"
+                >
+                  Help Center
+                </Typography>
               </div>
             </div>
           </div>
           <div className="w-1/2">
-          <Subscribe/>
+            <Subscribe />
           </div>
         </div>
-        </section>
+      </section>
     </main>
   );
 }
