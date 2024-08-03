@@ -13,16 +13,14 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main className="relative  bg-[var(--Shades-Black,#000)]">
-      <section className=" h-[912px] relative">
-        <div className=" py-[16px] ">
+      <section className="mx-auto h-full relative">
+        <div className="py-[16px] ">
           <NavBar />
         </div>
-        <div>
+        <div className="p-[64px]  mx-auto max-w-[1440px]">
           <FirstHero />
         </div>
-        <div>
-          <SecondHero />
-        </div>
+
       </section>
       <section className="relative w-full h-full pb-[2rem]">
         <Image

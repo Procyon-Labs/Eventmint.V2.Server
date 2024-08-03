@@ -8,6 +8,7 @@ export const variantMapping = {
     h7: "h1",
     h8: "h1",
     h9: "h1",
+    h10:'h1',
     "body-xl": "p",
     "body-l": "p",
     "body-m": "p",
@@ -17,6 +18,7 @@ export const variantMapping = {
     "body-xxs": "p",
     "body-xxxs": "p",
     'number':"p",
+    
   };
   
   export type TypographyVariant = keyof typeof variantMapping;

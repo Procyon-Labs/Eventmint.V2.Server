@@ -67,11 +67,12 @@ module.exports = {
         "body-m": ["1.4375rem", { lineHeight: "121.739%", fontWeight: 400 }],
         "body-ms": ["1.4375rem", { lineHeight: "121.739%", fontWeight: 300 }],
         "body-r": ["1.25rem", { lineHeight: "120%", fontWeight: 400 }],
-        "body-s": ["1.125rem", { lineHeight: "120%", fontWeight: 400 }],
+        "body-s": ["1.125rem", { lineHeight: "120%", fontWeight: 500 }],
         "body-xs": ["1.125rem", { lineHeight: "120%", fontWeight: 400 }],
         "body-xxs": ["1rem", { lineHeight: "118.75%", fontWeight: 600 }],
         "body-xxxs": ["1.0125rem", { lineHeight: "120%", fontWeight: 500}],
           'number' : ["6rem", { lineHeight: "83.333%", fontWeight: 700}],
+          'eventMint':  ["0.75rem", { lineHeight: "125%", fontWeight: 500}],
       },
       colors: {
         buttonColor: "#003500",
