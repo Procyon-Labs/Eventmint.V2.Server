@@ -13,16 +13,14 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main className="relative  bg-[var(--Shades-Black,#000)]">
-      <section className=" h-[912px] relative">
-        <div className=" py-[16px] ">
+      <section className="mx-auto h-full relative">
+        <div className="py-[16px] ">
           <NavBar />
         </div>
-        <div>
+        <div className="p-[64px]  mx-auto max-w-[1440px]">
           <FirstHero />
         </div>
-        <div>
-          <SecondHero />
-        </div>
+
       </section>
       <section className="relative w-full h-full pb-[2rem]">
         <Image
@@ -208,43 +206,13 @@ export default function Home() {
               </Typography>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-x-6 gap-y-3">
-            <Guide
-              header="Sign Up"
-              icon="/signUp.svg"
-              body="Participate in event activities, join group chats, and interact with sponsors"
-              number="1"
-            />
-            <Guide
-              header="Browse Events"
-              icon="/browseEvent.svg"
-              body="Explore upcoming events and select the ones you’re interested in."
-              number="2"
-            />
-            <Guide
-              header="Puchase Tickets"
-              icon="/purchaseTickets.svg"
-              body="Buy your tickets with ease and have them sent to your wallet."
-              number="3"
-            />
-            <Guide
-              header="Engage & Interact"
-              icon="/engage.svg"
-              body="Participate in event activities, join group chats, and interact with sponsors"
-              number="4"
-            />
-            <Guide
-              header="Earn Rewards"
-              icon="/earn.svg"
-              body="Collect points and rewards for your engagement and activities"
-              number="5"
-            />
-            <Guide
-              header="Plan Budgets"
-              icon="/planBudget.svg"
-              body="Use our budget planning protocol to efficiently manage and allocate event funds"
-              number="6"
-            />
+          <div className="grid grid-cols-3 gap-x-3 gap-y-3">
+            <Guide header="Sign Up" icon="/signUp.svg" body="Participate in event activities, join group chats, and interact with sponsors" number="1" />
+            <Guide header="Browse Events" icon="/browseEvent.svg" body="Explore upcoming events and select the ones you’re interested in." number="2" /> 
+            <Guide header="Puchase Tickets" icon="/purchaseTickets.svg" body="Buy your tickets with ease and have them sent to your wallet." number="3" />
+            <Guide header="Engage & Interact" icon="/engage.svg" body="Participate in event activities, join group chats, and interact with sponsors" number="4" />
+            <Guide header="Earn Rewards" icon="/earn.svg" body="Collect points and rewards for your engagement and activities" number="5" />
+            <Guide header="Plan Budgets" icon="/planBudget.svg" body="Use our budget planning protocol to efficiently manage and allocate event funds" number="6" />
           </div>
         </div>
       </section>

@@ -15,6 +15,7 @@ const typography = cva("", {
       h7: "text-h-xxs mxs:text-h-xxxs",
       h8: "text-h-xxxs mxs:text-h-xxxxs",
       h9: "text-h-xxxxs mxs:text-h-xxs",
+      h10: "text-eventMint mxs:text-h-xxs",
       //body variant
       "body-xl": "text-body-xl mxs:text-body-l",
       "body-l": "text-body-l mxs:text-body-m",
