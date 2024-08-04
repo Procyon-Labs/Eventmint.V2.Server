@@ -194,7 +194,7 @@ export default function Home() {
               </Typography>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-x-6 gap-y-3">
+          <div className="grid grid-cols-3 gap-x-3 gap-y-3">
             <Guide header="Sign Up" icon="/signUp.svg" body="Participate in event activities, join group chats, and interact with sponsors" number="1" />
             <Guide header="Browse Events" icon="/browseEvent.svg" body="Explore upcoming events and select the ones you’re interested in." number="2" /> 
             <Guide header="Puchase Tickets" icon="/purchaseTickets.svg" body="Buy your tickets with ease and have them sent to your wallet." number="3" />

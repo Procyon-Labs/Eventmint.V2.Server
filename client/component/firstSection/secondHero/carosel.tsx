@@ -22,12 +22,13 @@ const Carousel = () => {
       secondBody: 'South',
       thirdHeader: 'VENUE',
       thirdBody: 'Main Hall',
-      lastText: 'EVENTMINT'
+      lastText: 'EVENTMINT',
+      Noise:"/Noisepng.png"
     },
     {
       image: '/avatarBubble2.svg',
       QRcode: 'QRcode.svg',
-      largeHeader: 'WEB3 Watch Party',
+      largeHeader: 'Talk about Crypto',
       smallHeader: 'STARTS',
       body: '12:00 23 Jul 2024',
       firstHeader: 'ROW/SEAT',
@@ -36,26 +37,28 @@ const Carousel = () => {
       secondBody: 'South',
       thirdHeader: 'VENUE',
       thirdBody: 'Main Hall',
-      lastText: 'EVENTMINT'
+      lastText: 'EVENTMINT',
+      Noise:"/Noisepng.png"
     },
     {
       image: '/AvatarGuy2.svg',
       QRcode: 'QRcode.svg',
-      largeHeader: 'WEB3 Watch Party',
+      largeHeader: 'Joshua’s Space',
       smallHeader: 'STARTS',
-      body: '12:00 23 Jul 2024',
+      body: '01:00 23 Jul 2024',
       firstHeader: 'ROW/SEAT',
-      firstBody: 'A/12',
+      firstBody: 'C/09',
       secondHeader: 'GATE',
-      secondBody: 'South',
+      secondBody: 'North',
       thirdHeader: 'VENUE',
-      thirdBody: 'Main Hall',
-      lastText: 'EVENTMINT'
+      thirdBody: 'Event Hall',
+      lastText: 'EVENTMINT',
+      Noise:"/Noisepng.png"
     },
     {
         image: '/avatarBubble2.svg',
         QRcode: 'QRcode.svg',
-        largeHeader: 'WEB3 Watch Party',
+        largeHeader: 'Talk about Crypto',
         smallHeader: 'STARTS',
         body: '12:00 23 Jul 2024',
         firstHeader: 'ROW/SEAT',
@@ -64,7 +67,8 @@ const Carousel = () => {
         secondBody: 'South',
         thirdHeader: 'VENUE',
         thirdBody: 'Main Hall',
-        lastText: 'EVENTMINT'
+        lastText: 'EVENTMINT',
+        Noise:"/Noisepng.png"
       },
       {
         image: 'originalAvatarGirl.svg',
@@ -78,12 +82,13 @@ const Carousel = () => {
         secondBody: 'South',
         thirdHeader: 'VENUE',
         thirdBody: 'Main Hall',
-        lastText: 'EVENTMINT'
+        lastText: 'EVENTMINT',
+        Noise:"/Noisepng.png"
       },
       {
         image: '/avatarBubble2.svg',
         QRcode: 'QRcode.svg',
-        largeHeader: 'WEB3 Watch Party',
+        largeHeader: 'Talk about Crypto',
         smallHeader: 'STARTS',
         body: '12:00 23 Jul 2024',
         firstHeader: 'ROW/SEAT',
@@ -92,10 +97,26 @@ const Carousel = () => {
         secondBody: 'South',
         thirdHeader: 'VENUE',
         thirdBody: 'Main Hall',
-        lastText: 'EVENTMINT'
+        lastText: 'EVENTMINT',
+        Noise:"/Noisepng.png"
       },
       {
         image: '/AvatarGuy2.svg',
+        QRcode: 'QRcode.svg',
+        largeHeader: 'Joshua’s Space',
+        smallHeader: 'STARTS',
+        body: '01:00 23 Jul 2024',
+        firstHeader: 'ROW/SEAT',
+        firstBody: 'C/09',
+        secondHeader: 'GATE',
+        secondBody: 'North',
+        thirdHeader: 'VENUE',
+        thirdBody: 'Event Hall',
+        lastText: 'EVENTMINT',
+        Noise:"/Noisepng.png"
+      },
+      {
+        image: 'originalAvatarGirl.svg',
         QRcode: 'QRcode.svg',
         largeHeader: 'WEB3 Watch Party',
         smallHeader: 'STARTS',
@@ -106,12 +127,58 @@ const Carousel = () => {
         secondBody: 'South',
         thirdHeader: 'VENUE',
         thirdBody: 'Main Hall',
-        lastText: 'EVENTMINT'
+        lastText: 'EVENTMINT',
+        Noise:"/Noisepng.png"
+      },
+      {
+        image: '/avatarBubble2.svg',
+        QRcode: 'QRcode.svg',
+        largeHeader: 'Talk about Crypto',
+        smallHeader: 'STARTS',
+        body: '12:00 23 Jul 2024',
+        firstHeader: 'ROW/SEAT',
+        firstBody: 'A/12',
+        secondHeader: 'GATE',
+        secondBody: 'South',
+        thirdHeader: 'VENUE',
+        thirdBody: 'Main Hall',
+        lastText: 'EVENTMINT',
+        Noise:"/Noisepng.png"
+      },
+      {
+        image: '/AvatarGuy2.svg',
+        QRcode: 'QRcode.svg',
+        largeHeader: 'Joshua’s Space',
+        smallHeader: 'STARTS',
+        body: '01:00 23 Jul 2024',
+        firstHeader: 'ROW/SEAT',
+        firstBody: 'C/09',
+        secondHeader: 'GATE',
+        secondBody: 'North',
+        thirdHeader: 'VENUE',
+        thirdBody: 'Event Hall',
+        lastText: 'EVENTMINT',
+        Noise:"/Noisepng.png"
+      },
+      {
+        image: 'originalAvatarGirl.svg',
+        QRcode: 'QRcode.svg',
+        largeHeader: 'WEB3 Watch Party',
+        smallHeader: 'STARTS',
+        body: '12:00 23 Jul 2024',
+        firstHeader: 'ROW/SEAT',
+        firstBody: 'A/12',
+        secondHeader: 'GATE',
+        secondBody: 'South',
+        thirdHeader: 'VENUE',
+        thirdBody: 'Main Hall',
+        lastText: 'EVENTMINT',
+        Noise:"/Noisepng.png"
       },
   ];
 
   return (
-    <div className='relavatarBubble2.svgflex items-center justify-center overflow-hidden'>
+    <div className='flex items-center justify-center overflow-hidden'>
       <Image
         className='absolute left-0 transform -translate-y-1/2'
         src={'/avatarBlur.png'}
@@ -142,8 +209,8 @@ const Carousel = () => {
         grabCursor={true}
         centeredSlides={true}
         loop={true}
-        slidesPerView={4}
-        spaceBetween={10}
+        slidesPerView={7}
+        spaceBetween={2}
         coverflowEffect={{
           rotate: 0,
           stretch: -100,
@@ -179,6 +246,7 @@ const Carousel = () => {
                 thirdHeader={item.thirdHeader}
                 thirdBody={item.thirdBody}
                 lastText={item.lastText}
+                Noise={item.Noise}
               />
             </div>
           </SwiperSlide>

@@ -16,6 +16,7 @@ type AvatarGirlProps = {
   thirdHeader: string;
   thirdBody: string;
   lastText: string;
+  Noise:string,
 };
 export default function AvatarGirl(prop: AvatarGirlProps) {
   const {
@@ -30,14 +31,15 @@ export default function AvatarGirl(prop: AvatarGirlProps) {
     thirdHeader,
     lastText,
     thirdBody,
-    secondBody
+    secondBody,
+    Noise
   } = prop;
   return (
     <div
-      className="relative rounded-[24px] w-[316px] opacity-1 border flex flex-col gap-4"
+      className="relative rounded-[24px] w-[316px] opacity-[90%] border flex flex-col gap-4"
       style={{
         // background:
-        //   `url(${image}) lightgray 0% 0% / 100px 100px repeat`,
+        //   `url(${Noise}) lightgray 0% 0% / 90.00000357627869px 90.00000357627869px repeat`,
         // backgroundBlendMode: "overlay",
       }}
     >
@@ -84,7 +86,7 @@ export default function AvatarGirl(prop: AvatarGirlProps) {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center px-[4px] py-[10px]">
+      <div className="flex items-center justify-center px-[4px] py-[10px] border-t-[0.9px] border-dashed border-neutral-500">
         <Typography variant="h10" color="fontAvatarGreyishColor" customClassName="font-open-sas">{lastText}</Typography>
       </div>
     </div>

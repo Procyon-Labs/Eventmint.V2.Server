@@ -83,6 +83,7 @@ module.exports = {
         fontBodyPurpishColor:"#CDC0FF",
         fontBodyWhiteishColor:"#F7F8F9",
         numberPurple: '#643dff3d',
+        'Neutral-Neutral-500': '#64748B',
       },
       screens: {
         mxl: { max: "1279px" },
