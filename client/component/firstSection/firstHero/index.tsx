@@ -1,9 +1,24 @@
-import React from 'react'
-import { Typography } from '@/component/typogrphy'
-import Image from 'next/image'
-import { Button } from '@/component/button'
+"use client";
 import SecondHero from '../secondHero'
+import React, { useState, useEffect } from "react";
+import { Typography } from "@/component/typogrphy";
+import Image from "next/image";
+import { Button } from "@/component/button";
+
+const capitalizeFirstLetter = (word: string): string => {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+};
 export default function FirstHero() {
+  const words: string[] = ["love", "dream", "imagine"];
+  const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
   return (
     <div className="mx-auto w-full h-[848px] z-[0] relative">
     <Image
@@ -25,7 +40,7 @@ export default function FirstHero() {
           customClassName="text-gradient font-Ubuntu text-center"
           variant="h1"
         >
-          Imagine
+          <span>{capitalizeFirstLetter(words[currentWordIndex])}</span>
         </Typography>
       </div>
       <div>
