@@ -15,7 +15,7 @@ export default function FirstHero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 3000); // Change every 3 seconds
+    }, 2000); // Change every 3 seconds
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
