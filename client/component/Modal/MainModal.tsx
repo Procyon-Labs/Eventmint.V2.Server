@@ -5,6 +5,7 @@ import SecondModal from "@/component/svgs/NewImages/secongModal.png";
 import { Button } from "../button";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -61,14 +62,15 @@ export default function MainModal({ closeModal }: MainModalProps) {
             </Typography>
           </div>
           <div className="flex justify-center mt-4 space-x-4">
-            <WalletMultiButton className="!bg-[#c2c2cccb] hover:!bg-black transition-all duration-200 !rounded-lg  " />
+            <WalletMultiButton className="bg-[#c2c2cccb] hover:bg-black transition-all duration-200 rounded-lg  " />
 
-            <Button
-              label="In-event"
-              customClassName="text-body-xxs font-open-sans bg-custom-purple-gradient rounded-[12px]"
-              size="moreMedium"
-              onClick={closeModal}
-            />
+            <Link href="/event">
+              <Button
+                label="In-event"
+                customClassName="text-body-xxs font-open-sans bg-custom-purple-gradient rounded-[12px]"
+                size="moreMedium"
+              />
+            </Link>
           </div>
         </div>
       </div>
