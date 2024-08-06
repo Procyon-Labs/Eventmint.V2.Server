@@ -1,6 +1,4 @@
 'use client'
-
-import { Button } from "@/component/button";
 import Subscribe from "@/component/fifthSection/subscribe";
 import FirstHero from "@/component/firstSection/firstHero";
 import Guide from "@/component/fourthSection/guide";
@@ -50,7 +48,6 @@ export default function Home() {
 
       </section>
       <section className="w-full h-full pb-[2rem] mt-[40px]">
-       
         <div className=" mx-auto relative text-white px-[64px] mmd:px-[32px] w-fit">
         <Image
           className="absolute top-[-100px] left-0 xl:left-[-100px] "

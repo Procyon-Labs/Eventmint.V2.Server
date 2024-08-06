@@ -5,9 +5,14 @@ import SecondModal from "@/component/svgs/NewImages/secongModal.png";
 import { Button } from "../button";
 import { Typography } from "../typogrphy";
 
-export default function MainModal({ closeModal }) {
+
+type MainModalProps ={
+    closeModal:() => void;
+}
+export default function MainModal({ closeModal }:MainModalProps) {
+
   return (
-    <div className="backdrop">
+    <div className="backdrop" onClick={closeModal}>
       <div className="modal-content">
         <div className="relative">
           <Image
