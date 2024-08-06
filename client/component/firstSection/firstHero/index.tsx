@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Typography } from "@/component/typogrphy";
 import Image from "next/image";
 import { Button } from "@/component/button";
+import HeroSection from '@/component/svgs/NewImages/Desktop-Hero-Section-Blur.png'
+
 
 const capitalizeFirstLetter = (word: string): string => {
   return word.charAt(0).toUpperCase() + word.slice(1);
@@ -20,13 +22,14 @@ export default function FirstHero() {
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
   return (
-    <div className="mx-auto w-full h-[848px] z-[0] relative">
+    <div className="mx-auto w-full h-[848px] z-[0]">
     <Image
-      className="z-[0]  absolute backdrop-blur-lg"
-      src={"/firstBlurImagedone.png"}
+      className="  z-[0] top-[-100px] left-[200px] mxl:w-[700px] mxl:left-[150px] 2xl:top-[-5%] 2xl:left-[32%] mmd:left-0 absolute backdrop-blur-lg"
+      src={HeroSection}
       alt="first"
-      fill
-    />
+      width={884}
+        height={884}
+/>
     <div className=" mx-auto max-w-[740px] flex flex-col gap-8  relative mb-[32px]">
       <div>
         <Typography

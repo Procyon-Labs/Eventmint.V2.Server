@@ -14,11 +14,11 @@ export default function Subscribe() {
             Join our newsletter
             </Typography>
         </div>
-        <div className='flex gap-4 '>
+        <div className='flex gap-4 mmd:flex-col'>
             <input className='w-full px-[16px] py-[8px] h-[72px] bg-[rgba(255,255,255,0.15)] rounded-[12px] border border-[#F7F8F9]' placeholder='Enter your email address' type='text'/>
         <Button
               label="subscribe"
-              customClassName="text-body-xxs font-open-sans bg-gradient-to-b-custom rounded-[12px]"
+              customClassName="text-body-xxs font-open-sans bg-gradient-to-b-custom rounded-[12px] mmd:w-full"
               size="footer"
               leftIcon={<SubscribeIcon/>}
               fit

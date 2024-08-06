@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       backgroundColor: {
         'custom-purple-transparent': 'rgba(100, 61, 255, 0.05)',
+        'white-opacity-20': 'rgba(255, 255, 255, 0.20)',
       },
       backgroundImage: {
         'gradient-to-b-custom': 'linear-gradient(180deg, #A7FFA7 0%, #00D300 100%)',
@@ -16,12 +17,14 @@ module.exports = {
         'custom-radial': 'radial-gradient(158.82% 374.34% at -5.86% -11.65%, rgba(100, 61, 255, 0.50) 5%, rgba(100, 61, 255, 0.00) 50%)',
         'custom-radial-reverse': 'radial-gradient(158.82% 374.34% at -5.86% -11.65%, rgba(100, 61, 255, 0.00) 0%, rgba(100, 61, 255, 0.00) 30%, rgba(100, 61, 255, 0.50) 100%)',
         'subscribe-radial': 'radial-gradient(104.87% 148.3% at -4.26% -5.46%, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.00) 100%)',
+        'custom-purple-gradient': 'linear-gradient(180deg, #B7A5FF 0%, #643DFF 100%)',
       },
-
+   
       backdropBlur: {
         'custom': '50px',
         'reason':"60px",
           'subscribe': '32px',
+          '75': '75px',
       },
       borderRadius: {
         'custom': '40px',
@@ -54,6 +57,7 @@ module.exports = {
         // Header element styles
         "h-xl": ["4.5rem", { lineHeight: "111.111%", fontWeight: 700 }],
         "h-l": ["3.75rem", { lineHeight: "120%", fontWeight: 500 }],
+        "h-ls": ["3.5rem", { lineHeight: "120%", fontWeight: 500 }],
         "h-m":  ["3.75rem", { lineHeight: "120%", fontWeight: 400 }],
         "h-r": ["2.0625rem", { lineHeight: "121.212%", fontWeight: 500 }],
         "h-s": ["1.75rem", { lineHeight: "121.429%", fontWeight: 500 }],
@@ -73,6 +77,8 @@ module.exports = {
         "body-xxxs": ["1.0125rem", { lineHeight: "120%", fontWeight: 500}],
           'number' : ["6rem", { lineHeight: "83.333%", fontWeight: 700}],
           'eventMint':  ["0.75rem", { lineHeight: "125%", fontWeight: 500}],
+          'modal-head':["2.4375rem", { lineHeight: "120.513%", fontWeight: 500}],
+        
       },
       colors: {
         buttonColor: "#003500",
@@ -92,7 +98,7 @@ module.exports = {
         mlg: { max: "1023px" },
         // => @media (max-width: 1023px){...}
 
-        mmd: { max: "767px" },
+        mmd: { max: "769px" },
         // => @media (max-width: 767px){...}
 
         msm: { max: "639px" },
