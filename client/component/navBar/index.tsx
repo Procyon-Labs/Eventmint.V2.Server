@@ -3,9 +3,14 @@ import React from "react";
 import { Button } from "../button";
 import Link from "next/link";
 
-export default function NavBar() {
+type NavBarProps ={
+    openModal : ()=> void
+}
+
+export default function NavBar(prop:NavBarProps) {
+    const {openModal} = prop
   return (
-    <div className="max-w-[1440px] h-[64px] px-[64px] mx-auto">
+    <div className="max-w-[1440px] h-[64px] px-[64px] mmd:px-[32px] mx-auto relative z-10">
       <div className="flex justify-between items-center">
         <div className="">
           <Image src={"/logo.png"} alt="logo" width={50} height={50} />
@@ -30,6 +35,7 @@ export default function NavBar() {
               label="Get started"
               customClassName="text-body-xxs font-open-sans bg-gradient-to-b-custom rounded-[12px]"
               size="moreMedium"
+              onClick={openModal}
             />
           </div>
         </div>
