@@ -1,15 +1,39 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import smiley from "@/component/svgs/NewImages/smiling-face-with-smiling-eyes.png";
 import SecondModal from "@/component/svgs/NewImages/secongModal.png";
 import { Button } from "../button";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { useRouter } from "next/navigation";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Typography } from "../typogrphy";
 
+type MainModalProps = {
+  closeModal: () => void;
+};
+export default function MainModal({ closeModal }: MainModalProps) {
+  const { connected } = useWallet();
+  const router = useRouter();
 
-type MainModalProps ={
-    closeModal:() => void;
-}
-export default function MainModal({ closeModal }:MainModalProps) {
+  useEffect(() => {
+    if (connected) {
+      toast.success("Wallet Connected Successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 3000);
+    }
+  }, [connected, router]);
 
   return (
     <div className="backdrop" onClick={closeModal}>
@@ -37,14 +61,10 @@ export default function MainModal({ closeModal }:MainModalProps) {
             </Typography>
           </div>
           <div className="flex justify-center mt-4 space-x-4">
+            <WalletMultiButton className="!bg-[#c2c2cccb] hover:!bg-black transition-all duration-200 !rounded-lg  " />
+
             <Button
-              label="Connect Wallet"
-              customClassName="text-body-xxs font-open-sans bg-gradient-to-b-custom rounded-[12px]"
-              size="moreMedium"
-              onClick={closeModal}
-            />
-            <Button
-              label="Leave"
+              label="In-event"
               customClassName="text-body-xxs font-open-sans bg-custom-purple-gradient rounded-[12px]"
               size="moreMedium"
               onClick={closeModal}
