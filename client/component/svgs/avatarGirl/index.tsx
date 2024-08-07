@@ -2,6 +2,7 @@ import { Typography } from "@/component/typogrphy";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import React from "react";
+import TicketContainer from "@/component/svgs/NewImages/Ticket-Container.png"
 
 type AvatarGirlProps = {
   image: String | any;
@@ -36,11 +37,10 @@ export default function AvatarGirl(prop: AvatarGirlProps) {
   } = prop;
   return (
     <div
-      className="relative rounded-[24px] border w-full opacity-[90%] flex flex-col gap-4"
-      style={{
-       
-      }}
+      className="relative rounded-[24px] w-full opacity-[90%] flex flex-col gap-4"
+     
     >
+        <Image className="absolute z-0" src={TicketContainer} alt="" fill/>
       <div className="px-[16px] pt-[16px]">
         <Image
             className="rounded-t-[16px]"
