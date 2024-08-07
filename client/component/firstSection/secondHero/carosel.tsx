@@ -209,30 +209,63 @@ const Carousel = () => {
         grabCursor={true}
         centeredSlides={true}
         loop={true}
-        slidesPerView={7}
-        spaceBetween={2}
+        slidesPerView={5}
+        spaceBetween={0}
         coverflowEffect={{
           rotate: 0,
-          stretch: -100,
+          stretch: -20,
           depth: 100,
           modifier: 2.5,
           slideShadows: false,
         }}
         autoplay={{
-          delay: 2000,
+          delay: 2500,
           disableOnInteraction: false,
         }}
         navigation={{
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
-          clickable: true,
         }}
+        // breakpoints={
+        //             {
+        //     1350:{
+        //         slidesPerView:5,
+        //         centeredSlides:true,
+        //         coverflowEffect: {
+        //             stretch: -20,
+        //         },
+        //         },
+        //     1200: {
+        //       slidesPerView:5,
+        //       spaceBetween:30,
+        //       centeredSlides:true,
+        //       coverflowEffect: {
+        //         stretch: -20,
+        //       },
+        //     },
+           
+        //     668: {
+        //       slidesPerView:3,
+        //       spaceBetween:30,
+        //       centeredSlides:true,
+        //       coverflowEffect: {
+        //         stretch: -20,
+        //       },
+        //     },
+            
+        //     0: {
+        //       slidesPerView: 5,
+        //       coverflowEffect: {
+        //         stretch: 0,
+        //       },
+        //     },
+        //   }}
         modules={[EffectCoverflow, Navigation, Autoplay]}
-        className="swiper_container"
+        className="flex justify-center items-center"
       >
         {items.map((item, index) => (
-          <SwiperSlide key={index} className="flex justify-center items-center">
-            <div className="flex-shrink-0 transition-transform duration-500 ease-in-out">
+          <SwiperSlide key={index} className="w-full bg-center bg-cover min-w-[300px]">
+            <div className="flex-shrink-0 w-full transition-transform duration-500 ease-in-out">
               <AvatarGirl
                 image={item.image}
                 QRcode={item.QRcode}

@@ -42,8 +42,8 @@ export default function Home() {
         <div className="py-[16px] relative">
           <NavBar openModal={openHandler} />
         </div>
-        <div className="p-[64px]  mx-auto max-w-[1440px]">
-          <FirstHero />
+        <div className="p-[64px] mx-auto max-w-[1440px]">
+          <FirstHero openModal={openHandler} />
         </div>
 
       </section>
@@ -126,7 +126,7 @@ export default function Home() {
       <Image
           className="absolute right-0 2xl:right-[-120px]"
           src={WhyChoose}
-          alt="thirdBlurImsge"
+          alt="thirdBlurImage"
           width={400}
           height={400}
         />

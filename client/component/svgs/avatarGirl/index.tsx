@@ -36,7 +36,7 @@ export default function AvatarGirl(prop: AvatarGirlProps) {
   } = prop;
   return (
     <div
-      className="relative rounded-[24px] w-[316px] opacity-[90%] border flex flex-col gap-4"
+      className="relative rounded-[24px] border w-full opacity-[90%] flex flex-col gap-4"
       style={{
         // background:
         //   `url(${Noise}) lightgray 0% 0% / 90.00000357627869px 90.00000357627869px repeat`,
