@@ -4,8 +4,8 @@ import Image from "next/image";
 import React from "react";
 
 type AvatarGirlProps = {
-  image: String | StaticImport;
-  QRcode: String | StaticImport;
+  image: String | any;
+  QRcode: String | any;
   largeHeader: string;
   smallHeader: string;
   body: string;
@@ -38,9 +38,7 @@ export default function AvatarGirl(prop: AvatarGirlProps) {
     <div
       className="relative rounded-[24px] border w-full opacity-[90%] flex flex-col gap-4"
       style={{
-        // background:
-        //   `url(${Noise}) lightgray 0% 0% / 90.00000357627869px 90.00000357627869px repeat`,
-        // backgroundBlendMode: "overlay",
+       
       }}
     >
       <div className="px-[16px] pt-[16px]">

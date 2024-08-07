@@ -4,181 +4,18 @@ import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
-
+import Lightening from '@/component/svgs/NewImages/Desktop-Lightning-avatar.png';
 import AvatarGirl from '@/component/svgs/avatarGirl';
 import Image from 'next/image';
+import { MainItemsProps } from './data';
 
-const Carousel = () => {
-  const items = [
-    {
-      image: 'originalAvatarGirl.svg',
-      QRcode: 'QRcode.svg',
-      largeHeader: 'WEB3 Watch Party',
-      smallHeader: 'STARTS',
-      body: '12:00 23 Jul 2024',
-      firstHeader: 'ROW/SEAT',
-      firstBody: 'A/12',
-      secondHeader: 'GATE',
-      secondBody: 'South',
-      thirdHeader: 'VENUE',
-      thirdBody: 'Main Hall',
-      lastText: 'EVENTMINT',
-      Noise:"/Noisepng.png"
-    },
-    {
-      image: '/avatarBubble2.svg',
-      QRcode: 'QRcode.svg',
-      largeHeader: 'Talk about Crypto',
-      smallHeader: 'STARTS',
-      body: '12:00 23 Jul 2024',
-      firstHeader: 'ROW/SEAT',
-      firstBody: 'A/12',
-      secondHeader: 'GATE',
-      secondBody: 'South',
-      thirdHeader: 'VENUE',
-      thirdBody: 'Main Hall',
-      lastText: 'EVENTMINT',
-      Noise:"/Noisepng.png"
-    },
-    {
-      image: '/AvatarGuy2.svg',
-      QRcode: 'QRcode.svg',
-      largeHeader: 'Joshua’s Space',
-      smallHeader: 'STARTS',
-      body: '01:00 23 Jul 2024',
-      firstHeader: 'ROW/SEAT',
-      firstBody: 'C/09',
-      secondHeader: 'GATE',
-      secondBody: 'North',
-      thirdHeader: 'VENUE',
-      thirdBody: 'Event Hall',
-      lastText: 'EVENTMINT',
-      Noise:"/Noisepng.png"
-    },
-    {
-        image: '/avatarBubble2.svg',
-        QRcode: 'QRcode.svg',
-        largeHeader: 'Talk about Crypto',
-        smallHeader: 'STARTS',
-        body: '12:00 23 Jul 2024',
-        firstHeader: 'ROW/SEAT',
-        firstBody: 'A/12',
-        secondHeader: 'GATE',
-        secondBody: 'South',
-        thirdHeader: 'VENUE',
-        thirdBody: 'Main Hall',
-        lastText: 'EVENTMINT',
-        Noise:"/Noisepng.png"
-      },
-      {
-        image: 'originalAvatarGirl.svg',
-        QRcode: 'QRcode.svg',
-        largeHeader: 'WEB3 Watch Party',
-        smallHeader: 'STARTS',
-        body: '12:00 23 Jul 2024',
-        firstHeader: 'ROW/SEAT',
-        firstBody: 'A/12',
-        secondHeader: 'GATE',
-        secondBody: 'South',
-        thirdHeader: 'VENUE',
-        thirdBody: 'Main Hall',
-        lastText: 'EVENTMINT',
-        Noise:"/Noisepng.png"
-      },
-      {
-        image: '/avatarBubble2.svg',
-        QRcode: 'QRcode.svg',
-        largeHeader: 'Talk about Crypto',
-        smallHeader: 'STARTS',
-        body: '12:00 23 Jul 2024',
-        firstHeader: 'ROW/SEAT',
-        firstBody: 'A/12',
-        secondHeader: 'GATE',
-        secondBody: 'South',
-        thirdHeader: 'VENUE',
-        thirdBody: 'Main Hall',
-        lastText: 'EVENTMINT',
-        Noise:"/Noisepng.png"
-      },
-      {
-        image: '/AvatarGuy2.svg',
-        QRcode: 'QRcode.svg',
-        largeHeader: 'Joshua’s Space',
-        smallHeader: 'STARTS',
-        body: '01:00 23 Jul 2024',
-        firstHeader: 'ROW/SEAT',
-        firstBody: 'C/09',
-        secondHeader: 'GATE',
-        secondBody: 'North',
-        thirdHeader: 'VENUE',
-        thirdBody: 'Event Hall',
-        lastText: 'EVENTMINT',
-        Noise:"/Noisepng.png"
-      },
-      {
-        image: 'originalAvatarGirl.svg',
-        QRcode: 'QRcode.svg',
-        largeHeader: 'WEB3 Watch Party',
-        smallHeader: 'STARTS',
-        body: '12:00 23 Jul 2024',
-        firstHeader: 'ROW/SEAT',
-        firstBody: 'A/12',
-        secondHeader: 'GATE',
-        secondBody: 'South',
-        thirdHeader: 'VENUE',
-        thirdBody: 'Main Hall',
-        lastText: 'EVENTMINT',
-        Noise:"/Noisepng.png"
-      },
-      {
-        image: '/avatarBubble2.svg',
-        QRcode: 'QRcode.svg',
-        largeHeader: 'Talk about Crypto',
-        smallHeader: 'STARTS',
-        body: '12:00 23 Jul 2024',
-        firstHeader: 'ROW/SEAT',
-        firstBody: 'A/12',
-        secondHeader: 'GATE',
-        secondBody: 'South',
-        thirdHeader: 'VENUE',
-        thirdBody: 'Main Hall',
-        lastText: 'EVENTMINT',
-        Noise:"/Noisepng.png"
-      },
-      {
-        image: '/AvatarGuy2.svg',
-        QRcode: 'QRcode.svg',
-        largeHeader: 'Joshua’s Space',
-        smallHeader: 'STARTS',
-        body: '01:00 23 Jul 2024',
-        firstHeader: 'ROW/SEAT',
-        firstBody: 'C/09',
-        secondHeader: 'GATE',
-        secondBody: 'North',
-        thirdHeader: 'VENUE',
-        thirdBody: 'Event Hall',
-        lastText: 'EVENTMINT',
-        Noise:"/Noisepng.png"
-      },
-      {
-        image: 'originalAvatarGirl.svg',
-        QRcode: 'QRcode.svg',
-        largeHeader: 'WEB3 Watch Party',
-        smallHeader: 'STARTS',
-        body: '12:00 23 Jul 2024',
-        firstHeader: 'ROW/SEAT',
-        firstBody: 'A/12',
-        secondHeader: 'GATE',
-        secondBody: 'South',
-        thirdHeader: 'VENUE',
-        thirdBody: 'Main Hall',
-        lastText: 'EVENTMINT',
-        Noise:"/Noisepng.png"
-      },
-  ];
+
+const Carousel = (itemprops:MainItemsProps) => {
+  const {items} = itemprops
 
   return (
     <div className='flex items-center justify-center overflow-hidden'>
+        <Image className='absolute top-0 left-0 right-0 z-[0]' src={Lightening} alt='lightening' fill/>
       <Image
         className='absolute left-0 transform -translate-y-1/2'
         src={'/avatarBlur.png'}
