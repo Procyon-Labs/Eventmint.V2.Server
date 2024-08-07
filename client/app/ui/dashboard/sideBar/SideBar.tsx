@@ -1,6 +1,7 @@
 import Image from "next/image";
-import MenuLink from "./menuLink/menuLink";
+import MenuLink from "./menuLInk/menuLink";
 import styles from "./sidebar.module.css";
+import { HiTicket } from "react-icons/hi2";
 import {
   MdDashboard,
   MdSupervisedUserCircle,
@@ -40,32 +41,32 @@ const menuItems: MenuCategory[] = [
         icon: <MdSupervisedUserCircle />,
       },
       {
-        title: "Create Ticket",
+        title: "Create Event",
         path: "/dashboard/create-ticket",
         icon: <MdShoppingBag />,
       },
       {
         title: "Tickets",
         path: "/dashboard/tickets",
-        icon: <MdAttachMoney />,
+        icon: <HiTicket />,
       },
     ],
   },
   {
-    title: "Analytics",
+    title: "Premium",
     list: [
       {
-        title: "Revenue",
+        title: "Event Analytics",
         path: "/dashboard/revenue",
         icon: <MdWork />,
       },
       {
-        title: "Reports",
+        title: "Smart Fundraising",
         path: "/dashboard/reports",
         icon: <MdAnalytics />,
       },
       {
-        title: "Teams",
+        title: "Budget Planning Protocol",
         path: "/dashboard/teams",
         icon: <MdPeople />,
       },
