@@ -1,0 +1,15 @@
+.container {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0px;
+  border-radius: 10px;
+  color: var(--Neutral-Neutral-600, #4b5768);
+}
+
+.container:hover,
+.active {
+  border-right: 3px solid var(--Primary-Primary-600, #3eff3e);
+  background: rgba(62, 255, 62, 0.05);
+}
