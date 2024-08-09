@@ -10,7 +10,8 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Typography } from "../typogrphy";
-import ModalBlur from '@/component/svgs/NewImages/Modal-Blur.png'
+import { MdCancel } from "react-icons/md";
+import ModalBlur from "@/component/svgs/NewImages/Modal-Blur.png";
 
 type MainModalProps = {
   closeModal: () => void;
@@ -38,7 +39,7 @@ export default function MainModal({ closeModal }: MainModalProps) {
   }, [connected, router]);
 
   return (
-    <div className="backdrop" onClick={closeModal}>
+    <div className="backdrop">
       <div className="modal-content">
         <div className="relative">
           <Image
@@ -50,9 +51,26 @@ export default function MainModal({ closeModal }: MainModalProps) {
           />
         </div>
         <div className="relative px-[32px] py-[24px] flex flex-col gap-[24px] items-center justify-center bg-white-opacity-20 backdrop-blur-75 rounded-r-[12px]">
-            <Image className="absolute rounded-r-[12px]" src={ModalBlur} alt="modal-blur" fill/>
+          <Image
+            className="absolute rounded-r-[12px]"
+            src={ModalBlur}
+            alt="modal-blur"
+            fill
+          />
+          <div
+            className="flex justify-center relative ml-96  py-[10px]"
+            onClick={closeModal}
+          >
+            <MdCancel />
+          </div>
           <div className="flex justify-center relative">
-            <Image className="relaive " src={smiley} alt="smiley" width={120} height={120} />
+            <Image
+              className="relaive "
+              src={smiley}
+              alt="smiley"
+              width={120}
+              height={120}
+            />
           </div>
           <div className=" relative text-center mt-4 text-white flex flex-col gap-4">
             <Typography customClassName="font-Ubuntu text-modal-head text-[#150069] text-center">
