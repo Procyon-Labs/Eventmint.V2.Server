@@ -1,6 +1,11 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import styles from "./order.module.css";
 const Orders = () => {
+  const [activeButton, setActiveButton] = useState("Month");
+  const handleButtonClick = (buttonName: string) => {
+    setActiveButton(buttonName);
+  };
   return (
     <section className={styles.orderContainer}>
       <div className="flex items-center gap-20">
@@ -51,9 +56,30 @@ const Orders = () => {
         </div>
       </div>
       <div className="flex items-center justify-between mt-4">
-        <button className={styles.button1}>Day</button>
-        <button className={styles.button2}>Month</button>
-        <button className={styles.button1}>Year</button>
+        <button
+          className={`${styles.button1} ${
+            activeButton === "Day" ? styles.activeButton : ""
+          }`}
+          onClick={() => handleButtonClick("Day")}
+        >
+          Day
+        </button>
+        <button
+          className={`${styles.button2} ${
+            activeButton === "Month" ? styles.activeButton : ""
+          }`}
+          onClick={() => handleButtonClick("Month")}
+        >
+          Month
+        </button>
+        <button
+          className={`${styles.button1} ${
+            activeButton === "Year" ? styles.activeButton : ""
+          }`}
+          onClick={() => handleButtonClick("Year")}
+        >
+          Year
+        </button>
       </div>
     </section>
   );
