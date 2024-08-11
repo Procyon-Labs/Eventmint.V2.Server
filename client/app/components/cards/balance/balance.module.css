@@ -71,7 +71,8 @@
   align-items: center;
   gap: 4px;
   border-radius: 8px;
-  background: var(--Primary-Primary-500, #a7ffa7);
+  color: var(--Neutral-Neutral-500, #64748b);
+  background: var(--Neutral-Neutral-900, #0d0f11);
 }
 
 .svgcover {
@@ -83,4 +84,13 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+}
+
+/* New active button style */
+.activeButton {
+  background: var(--Primary-Primary-500, #a7ffa7);
+  color: var(
+    --Neutral-Neutral-900,
+    #0d0f11
+  ); /* Optional: adjust text color when active */
 }

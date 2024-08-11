@@ -1,6 +1,11 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import styles from "./balance.module.css";
 const Balance = () => {
+  const [activeButton, setActiveButton] = useState("Day");
+  const handleButtonClick = (buttonName: string) => {
+    setActiveButton(buttonName);
+  };
   return (
     <section className={styles.balanceContainer}>
       <div className="flex items-center gap-20">
@@ -30,7 +35,7 @@ const Balance = () => {
         <div className={styles.balanceamt}>
           <p>$25,897</p>
         </div>
-        <div className="flex mt-3 items-center gap-4">
+        <div className="flex mt-3 items-center gap-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -50,9 +55,30 @@ const Balance = () => {
         </div>
       </div>
       <div className="flex items-center justify-between mt-4">
-        <button className={styles.button1}>Day</button>
-        <button className={styles.button2}>Month</button>
-        <button className={styles.button1}>Year</button>
+        <button
+          className={`${styles.button1} ${
+            activeButton === "Day" ? styles.activeButton : ""
+          }`}
+          onClick={() => handleButtonClick("Day")}
+        >
+          Day
+        </button>
+        <button
+          className={`${styles.button2} ${
+            activeButton === "Month" ? styles.activeButton : ""
+          }`}
+          onClick={() => handleButtonClick("Month")}
+        >
+          Month
+        </button>
+        <button
+          className={`${styles.button1} ${
+            activeButton === "Year" ? styles.activeButton : ""
+          }`}
+          onClick={() => handleButtonClick("Year")}
+        >
+          Year
+        </button>
       </div>
     </section>
   );

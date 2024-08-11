@@ -10,6 +10,7 @@ import Orders from "../components/cards/orders/Orders";
 import Earning from "../components/cards/Earnings/Earning";
 import Customers from "../components/cards/customers/Customers";
 import Revenue from "../components/cards/revenue/Revenue";
+import Chart from "../components/chart/Chart";
 import TransactionCard from "../components/cards/Transaction/TransactionCard";
 const Page = () => {
   const [isLoading, setLoading] = useState(true);
@@ -40,7 +41,7 @@ const Page = () => {
           <Grid item xs={12}>
             <Grid container spacing={gridSpacing}>
               <Grid item xs={12} md={8}>
-                {/* <TotalGrowthBarChart isLoading={isLoading} /> */}
+                <Chart />
               </Grid>
               <Grid item xs={12} md={4}>
                 <Grid container direction="row" spacing={2}>

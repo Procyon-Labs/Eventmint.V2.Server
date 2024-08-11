@@ -1,0 +1,50 @@
+.bodychart {
+  border-radius: 24px;
+  background: rgba(25, 29, 35, 0.5);
+
+  height: 536px;
+  align-items: center;
+}
+.charthead {
+  display: flex;
+  height: 88px;
+  padding: 8px 8px 16px 24px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-bottom: 1px solid var(--Neutral-Neutral-700, #323a46);
+}
+
+.activeButton {
+  background-color: var(--Primary-Primary-500, #a7ffa7) !important;
+  color: var(--Neutral-Neutral-900, #0d0f11) !important;
+}
+
+.button1,
+.button2 {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21.6px; /* 120% */
+  color: var(--Neutral-Neutral-500, #64748b);
+  border-radius: 8px;
+  background-color: var(--Neutral-Neutral-900, #0d0f11);
+  padding: 4px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  border: none;
+  cursor: pointer;
+}
+
+.button1 {
+  margin-right: 8px;
+}
+
+.overviewtext {
+  color: var(--Neutral-Neutral-300, #b8c0cc);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px; /* 121.739% */
+}
