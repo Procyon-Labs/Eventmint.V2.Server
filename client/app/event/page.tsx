@@ -2,13 +2,15 @@
 import React, { useState } from "react";
 import { Button } from "@/component/button";
 import Link from "next/link";
+import styles from "./Page.module.css";
 
-const Page = () => {
-  const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
+const Page: React.FC = () => {
+  const [name, setName] = useState<string>("");
+  const [room, setRoom] = useState<string>("");
+
   return (
-    <section>
-      <div className="min-h-screen flex items-center justify-center bg-[var(--Shades-Black,#000)]">
+    <section className={styles.backgroundSection}>
+      <div className="min-h-screen flex items-center justify-center relative z-10">
         <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg p-8 max-w-md w-full shadow-custom-light">
           <h2 className="text-center text-2xl font-bold text-white mb-6">
             Join Event Chat Room!😄
@@ -53,7 +55,7 @@ const Page = () => {
                 <Button
                   type="submit"
                   label="Verify Ticket"
-                  customClassName=" rounded-lg border-r-2 border-b-4 border-l-2 border-[#5733E6] bg-gradient-to-b from-[#B7A5FF] to-[#643DFF]"
+                  customClassName="rounded-lg border-r-2 border-b-4 border-l-2 border-[#5733E6] bg-gradient-to-b from-[#B7A5FF] to-[#643DFF]"
                   size="moreMedium"
                 />
               </Link>

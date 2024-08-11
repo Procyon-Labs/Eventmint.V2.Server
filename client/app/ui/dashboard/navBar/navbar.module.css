@@ -1,0 +1,81 @@
+.container {
+  padding: 20px;
+
+  background: var(--Neutral-Neutral-900, #0d0f11);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  color: var(--Neutral-Neutral-400, #a0abbb);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 121.739% */
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search {
+  display: flex;
+  width: 400px;
+  height: 64px;
+  padding: 8px 16px;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px;
+  border-radius: 24px;
+  background: rgba(100, 61, 255, 0.2);
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  color: #ffff;
+  width: 100%;
+  height: 100%;
+}
+.input:focus {
+  outline: none;
+}
+.icons {
+  display: flex;
+  gap: 20px;
+}
+
+.notfication {
+  width: 64px;
+  height: 64px;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  background: rgba(100, 61, 255, 0.2);
+}
+
+.profile {
+  padding: 8px 12px 8px 8px;
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  border-radius: 100px;
+  background: rgba(100, 61, 255, 0.2);
+}
+.picture {
+  width: 48px;
+
+  height: 48px;
+  border-radius: 100px;
+  flex-shrink: 0;
+  background: url("https://res.cloudinary.com/dtfvdjvyr/image/upload/v1723166289/female_3_pk5jwk.png")
+    lightgray 50% / cover no-repeat;
+}

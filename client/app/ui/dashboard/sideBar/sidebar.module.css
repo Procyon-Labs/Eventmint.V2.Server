@@ -34,7 +34,7 @@
 }
 
 .cat {
-  color: var(--textSoft);
+  color: var(--Secondary-Secondary-500, #a0abbb);
   font-weight: bold;
   font-size: 13px;
   margin: 10px 0px;

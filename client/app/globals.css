@@ -137,6 +137,15 @@ body {
 .custom-card {
   background: linear-gradient(180deg, #b7a5ff 0%, #7957ff 100%);
 }
+
+.background-section {
+  background-image: url("https://res.cloudinary.com/dtfvdjvyr/image/upload/v1716802024/Gradient_4_1_tpdi2v.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh; /* 100% of the viewport height */
+}
 @media (min-width: 320px) and (max-width: 480px) {
   .outerContainer {
     height: 100%;

@@ -1,0 +1,45 @@
+.customebody {
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 24px;
+  background: rgba(25, 29, 35, 0.5);
+}
+
+.customericon {
+  border-radius: 16px;
+  background: rgba(62, 255, 62, 0.1);
+  width: 54px;
+  height: 54px;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.customeritems {
+  flex-direction: column;
+}
+
+.customertext {
+  color: var(--Neutral-Neutral-500, #64748b);
+
+  /* Paragraph/P2/Regular */
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px; /* 118.75% */
+}
+
+.customersnumber {
+  color: var(--Primary-Primary-500, #a7ffa7);
+
+  /* Heading/H4/Medium */
+
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 34px; /* 121.429% */
+}
