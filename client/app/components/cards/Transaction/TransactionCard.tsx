@@ -1,237 +1,149 @@
-import React from "react";
-
-// material-ui
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Typography from "@mui/material/Typography";
-import CircularProgress from "@mui/material/CircularProgress";
-import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
-import { gridSpacing } from "../../store/constant";
-import Box from "@mui/material/Box";
-// assets
+"use client";
+import React, { useState } from "react";
+import styles from "./transaction.module.css";
 import ChevronRightOutlinedIcon from "@mui/icons-material/ChevronRightOutlined";
+const TransactionCard = () => {
+  // State to track the active button
+  const [activeButton, setActiveButton] = useState("Day");
 
-import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
-
-type StatusColor = {
-  light: string;
-  dark: string;
-};
-
-// Helper function to determine color and icon based on status text
-const getStatusProps = (statusText: string) => {
-  let statusColor: StatusColor = { light: "", dark: "" };
-  let statusIcon = (
-    <KeyboardArrowUpOutlinedIcon fontSize="small" color="inherit" />
-  );
-
-  switch (statusText.toLowerCase()) {
-    case "Ticket Creation Fee":
-      statusColor = { light: "primary.light", dark: "primary.dark" };
-      break;
-    case "Web3 Fundraising Program":
-      statusColor = { light: "orange.light", dark: "orange.dark" };
-      break;
-    case "Crypto Masterclass Special":
-      statusColor = { light: "warning.light", dark: "#Fffff" };
-      break;
-    case "Network Charges":
-      statusColor = { light: "warning.light", dark: "#FEC26E" };
-      break;
-    default:
-      statusColor = { light: "warning.light", dark: "" };
-  }
-  return { statusColor, statusIcon };
-};
-
-type SalesItemProps = {
-  title: string;
-  amount: string;
-  sol: string;
-  statusText: string;
-};
-
-const SalesItem: React.FC<SalesItemProps> = ({
-  title,
-  amount,
-  sol,
-  statusText,
-}) => {
-  const { statusColor, statusIcon } = getStatusProps(statusText);
-
+  // Handler to set the active button
+  const handleButtonClick = (buttonName: string) => {
+    setActiveButton(buttonName);
+  };
   return (
-    <Grid container direction="column" rowSpacing={1}>
-      <Grid item>
-        <Grid container alignItems="center" justifyContent="space-between">
-          <Grid item>
-            <Avatar
-              variant="rounded"
-              sx={{
-                width: "48px",
-                height: "30px",
-                padding: "11px 12px 13px 12px",
-                alignItems: "center",
-                borderRadius: "12px",
-                bgcolor: "rgba(239, 68, 68, 0.10)",
-              }}
+    <main className={styles.transactionbody}>
+      <section className="py-4 px-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className={styles.transactionhistory}>Transaction History</p>
+          </div>
+          <div className="flex ">
+            <button
+              className={`${styles.button1} ${
+                activeButton === "Day" ? styles.activeButton : ""
+              }`}
+              onClick={() => handleButtonClick("Day")}
             >
-              {statusIcon}
-            </Avatar>
-          </Grid>
-          <Grid item>
-            <Typography variant="subtitle1" color="white">
-              {title}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Grid container alignItems="center" justifyContent="space-between">
-              <Grid item>
-                <Typography variant="subtitle1" color="white">
-                  {amount}
-                </Typography>
-                <Typography variant="subtitle2" color="white">
-                  {sol}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid item>
-        <Typography variant="subtitle2" sx={{ color: statusColor.dark }}>
-          {statusText}
-        </Typography>
-      </Grid>
-      <Divider sx={{ my: 1.5 }} />
-    </Grid>
-  );
-};
-
-type TransactionCardProps = {
-  isLoading?: boolean;
-};
-
-const TransactionCard: React.FC<TransactionCardProps> = ({ isLoading }) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const salesData: SalesItemProps[] = [
-    {
-      title: "Ticket Creation Fee",
-      amount: "$10.637",
-      sol: "≈0.0010 SOL",
-      statusText: "Completed",
-    },
-    {
-      title: "Web3 Fundraising Program",
-      amount: "$210.077",
-      sol: "≈0.0250 SOL",
-      statusText: "Pending",
-    },
-    {
-      title: "Crypto Masterclass Special",
-      amount: "$123.481",
-      sol: "≈0.0300 SOL",
-      statusText: "Completed",
-    },
-
-    {
-      title: "Network Charges",
-      amount: "$06.078",
-      sol: "≈0.0004 SOL",
-      statusText: "Pending",
-    },
-  ];
-
-  return (
-    <>
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <div>
-          <CardContent>
-            <Grid container spacing={gridSpacing}>
-              <Grid item xs={12}>
-                <Grid
-                  container
-                  alignContent="center"
-                  justifyContent="space-between"
-                >
-                  <Grid item>
-                    <MoreHorizOutlinedIcon
-                      component="span"
-                      fontSize="small"
-                      sx={{
-                        color: "primary.200",
-                        cursor: "pointer",
-                      }}
-                      aria-controls="menu-popular-card"
-                      aria-haspopup="true"
-                      onClick={handleClick}
-                    />
-                    <Menu
-                      id="menu-popular-card"
-                      anchorEl={anchorEl}
-                      keepMounted
-                      open={Boolean(anchorEl)}
-                      onClose={handleClose}
-                      variant="selectedMenu"
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "right",
-                      }}
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                    >
-                      <MenuItem onClick={handleClose}>Today</MenuItem>
-                      <MenuItem onClick={handleClose}>This Month</MenuItem>
-                      <MenuItem onClick={handleClose}>This Year</MenuItem>
-                    </Menu>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Box component="section" sx={{ bgcolor: `#121519` }}>
-                <Grid item xs={12}>
-                  {salesData.map((item, index) => (
-                    <SalesItem
-                      key={index}
-                      title={item.title}
-                      amount={item.amount}
-                      sol={item.sol}
-                      statusText={item.statusText}
-                    />
-                  ))}
-                </Grid>
-              </Box>
-            </Grid>
-          </CardContent>
-          <CardActions sx={{ p: 1.25, pt: 0, justifyContent: "end" }}>
-            <Button size="small" disableElevation>
-              See all transactions
-              <ChevronRightOutlinedIcon />
-            </Button>
-          </CardActions>
+              Day
+            </button>
+            <button
+              className={`${styles.button2} ${
+                activeButton === "Month" ? styles.activeButton : ""
+              }`}
+              onClick={() => handleButtonClick("Month")}
+            >
+              Month
+            </button>
+            <button
+              className={`${styles.button1} ${
+                activeButton === "Year" ? styles.activeButton : ""
+              }`}
+              onClick={() => handleButtonClick("Year")}
+            >
+              Year
+            </button>
+          </div>
         </div>
-      )}
-    </>
+      </section>
+
+      <section className="flex py-4 px-4 items-center justify-between border-b border-[#323A46]">
+        <div className="flex gap-2">
+          <div className={styles.svgbody}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M6 18L18 6M18 6H10M18 6V14"
+                stroke="#EF4444"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div className="flex flex-col">
+            <p className={styles.transactionhistory}>Ticket Creation Fee</p>
+            <p className={styles.completedstatus}>Completed</p>
+          </div>
+        </div>
+
+        <div className="flex flex-col ml-10">
+          <p className={styles.transactionsol}>$10.637</p>
+          <p className={styles.priceinssol}> ≈0.0010 SOL</p>
+        </div>
+      </section>
+      <section className="flex py-4 px-4 items-center justify-between border-b border-[#323A46]">
+        <div className="flex gap-2">
+          <div className={styles.svgbody2}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M18 6L6 18M6 18H14M6 18V10"
+                stroke="#10B981"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div className="flex flex-col">
+            <p className={styles.transactionhistory}>Fundraising Program</p>
+            <p className={styles.pendingstatus}>Pending</p>
+          </div>
+        </div>
+
+        <div className="flex flex-col ml-10">
+          <p className={styles.transactionsol}>$210.077</p>
+          <p className={styles.priceinssol}>≈0.0250 SOL</p>
+        </div>
+      </section>
+      <section className="flex py-4 px-4 items-center justify-between">
+        <div className="flex gap-2">
+          <div className={styles.svgbody}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M6 18L18 6M18 6H10M18 6V14"
+                stroke="#EF4444"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div className="flex flex-col">
+            <p className={styles.transactionhistory}>Solana Masterclass</p>
+            <p className={styles.completedstatus}>Completed</p>
+          </div>
+        </div>
+
+        <div className="flex flex-col ml-10">
+          <p className={styles.transactionsol}>$123.481</p>
+          <p className={styles.priceinssol}>≈0.0300 SOL</p>
+        </div>
+      </section>
+      <div className="flex items-center justify-center">
+        <button className="flex items-center ">
+          <p className={styles.viewalltransaction}>View all transactions</p>
+          <ChevronRightOutlinedIcon className="text-[#b8a6ff]" />
+        </button>
+      </div>
+    </main>
   );
 };
-
-TransactionCard.propTypes = {};
 
 export default TransactionCard;
