@@ -6,6 +6,8 @@ import queryString from "query-string";
 import io, { Socket } from "socket.io-client";
 import { useSearchParams } from "next/navigation";
 import InfoBar from "@/component/infobar/Infobar";
+import Messages from "@/component/messages/messages";
+import Input from "@/component/Input/Input";
 interface Message {
   id: string;
   user: string;
@@ -91,6 +93,12 @@ const Page: React.FC = () => {
     <div className="outerContainer">
       <div className="container">
         <InfoBar room={room} />
+        <Messages messages={messages} name={name} socket={socket} />
+        <Input
+          message={message}
+          setMessage={setMessage}
+          sendMessage={sendMessage}
+        />
       </div>
     </div>
   );
