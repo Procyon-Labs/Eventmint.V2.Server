@@ -1,7 +1,13 @@
 import React from "react";
 
 const Page = () => {
-  return <div>create-ticket</div>;
+  return(
+    <main >
+      <div>
+        fjnfjfgnfjlmdalcm;lmclcm;lcmc;lcma;clmac;lcm;ccm;lcmc
+      </div>
+    </main>
+  )
 };
 
 export default Page;
