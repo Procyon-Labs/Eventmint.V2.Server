@@ -15,7 +15,7 @@ interface Message {
   reactions?: { user: string; reaction: string }[];
 }
 
-const EndPoint = `http://localhost:5500`;
+const EndPoint = `https://inevent.onrender.com`;
 
 const Page: React.FC = () => {
   const [name, setName] = useState<string>("");
