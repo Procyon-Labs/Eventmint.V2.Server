@@ -74,10 +74,12 @@ module.exports = {
         "body-s": ["1.125rem", { lineHeight: "120%", fontWeight: 500 }],
         "body-xs": ["1.125rem", { lineHeight: "120%", fontWeight: 400 }],
         "body-xxs": ["1rem", { lineHeight: "118.75%", fontWeight: 600 }],
+        "body-xxsx": ["1rem", { lineHeight: "118.75%", fontWeight: 400 }],
         "body-xxxs": ["1.0125rem", { lineHeight: "120%", fontWeight: 500}],
           'number' : ["6rem", { lineHeight: "83.333%", fontWeight: 700}],
           'eventMint':  ["0.75rem", { lineHeight: "125%", fontWeight: 500}],
           'modal-head':["2.4375rem", { lineHeight: "120.513%", fontWeight: 500}],
+          'small': ["0.875rem", { lineHeight: "121.429%", fontWeight: 400}],
         
       },
       colors: {
