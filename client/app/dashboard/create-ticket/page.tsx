@@ -1,13 +1,7 @@
-import React from "react";
+'use client';
+import { redirect } from 'next/navigation';
 
-const Page = () => {
-  return(
-    <main >
-      <div>
-        fjnfjfgnfjlmdalcm;lmclcm;lcmc;lcma;clmac;lcm;ccm;lcmc
-      </div>
-    </main>
-  )
-};
-
-export default Page;
+export default function Page() {
+  redirect('/dashboard/create-ticket/ticket-details');
+  return null;
+}
