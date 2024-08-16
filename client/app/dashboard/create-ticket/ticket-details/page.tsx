@@ -135,13 +135,13 @@ export default function Page() {
               labelButton='Upload'
               icon={<Picture/>} />
               
-              <TicketComponent
+              {/* <TicketComponent
            first="Ticket File"
             second="Drag and drop your file here to upload"
              third="Supports JPG, JPEG, PNG"
               fourth="Max. upload size 2MB" 
               labelButton='Upload'
-              icon={<Upload/>} />
+              icon={<Upload/>} /> */}
         </div>
       </div>
     </div>
