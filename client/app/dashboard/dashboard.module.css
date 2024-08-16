@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  height: 100%;
+
   background: var(--Neutral-Neutral-900, #0d0f11);
 }
 

@@ -8,17 +8,15 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <main className="flex h-full">
-      <div className={styles.container}>
-        <div className={styles.menu}>
-          <SideBar />
-        </div>
-        <div className={styles.content}>
-          <Navbar />
-          {children}
-        </div>
+    <div className={styles.container}>
+      <div className={styles.menu}>
+        <SideBar />
       </div>
-    </main>
+      <div className={styles.content}>
+        <Navbar />
+        {children}
+      </div>
+    </div>
   );
 };
 
