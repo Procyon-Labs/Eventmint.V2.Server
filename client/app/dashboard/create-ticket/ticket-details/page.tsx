@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import TicketComponent from "@/component/ticketComponent";
 import Picture from "@/component/svgs/picture";
+import Upload from "@/component/svgs/Upload";
 
 export default function Page() {
   const CustomOutlinedInput = styled(OutlinedInput)(() => ({
@@ -140,7 +141,7 @@ export default function Page() {
              third="Supports JPG, JPEG, PNG"
               fourth="Max. upload size 2MB" 
               labelButton='Upload'
-              icon={<Picture/>} />
+              icon={<Upload/>} />
         </div>
       </div>
     </div>

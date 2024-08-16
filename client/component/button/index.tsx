@@ -20,6 +20,7 @@ const button = cva("", {
       large: "py-5 px-12",
       medium: "px-8 py-3.5",
       small: "px-6 py-2",
+      smaller:"py-[10px] px-[32px]",
       moreMedium :"px-12 py-4",
       footer:"py-2 px-10",
       "medium-with-icon": "px-8 py-3.5 pl-5",
