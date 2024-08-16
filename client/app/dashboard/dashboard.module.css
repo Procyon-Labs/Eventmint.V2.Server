@@ -1,5 +1,6 @@
 .container {
   display: flex;
+
   background: var(--Neutral-Neutral-900, #0d0f11);
 }
 
@@ -8,7 +9,6 @@
   background: var(--Neutral-Neutral-800, #191d23);
   padding: 20px;
   min-height: 100vh;
- 
 }
 
 .content {
