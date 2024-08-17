@@ -4,6 +4,8 @@ import "./globals.css";
 import { ReactNode } from "react";
 import AppWalletProvider from "./components/AppWalletProvider";
 import { ToastContainer } from "react-toastify";
+import ReduxProvider from "@/mainStore/provider";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -15,10 +17,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ReduxProvider>
         <AppWalletProvider>
           {children}
           <ToastContainer />
         </AppWalletProvider>
+        </ReduxProvider>
+        
       </body>
     </html>
   );
