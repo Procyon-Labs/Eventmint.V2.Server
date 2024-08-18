@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Image from "next/image";
@@ -17,9 +17,20 @@ const Page: React.FC = () => {
   const [email, setEmail] = useState("");
   const [bio, setBio] = useState("");
   const { publicKey } = useWallet();
+  const status = useSelector((state: RootState) => state.profile.status);
   const router = useRouter();
-
+  const [loading, setLoading] = useState(false);
   const dispatch: ThunkDispatch<RootState, void, AnyAction> = useDispatch();
+
+  useEffect(() => {
+    if (status === "succeeded") {
+      router.push("/dashboard");
+    } else if (status === "failed") {
+      toast.error("An error occurred");
+    }
+    // Reset loading state after status update
+    setLoading(false);
+  }, [status, router]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,12 +40,13 @@ const Page: React.FC = () => {
 
       return;
     }
+    setLoading(true);
     try {
       const _id = publicKey;
 
       const profileData = { _id, firstName, lastName, email, bio };
       dispatch(createProfile({ profileData, publicKey: publicKey.toString() }));
-      router.push("/dashboard");
+
       console.log(publicKey);
     } catch (error) {
       toast.error("An error occurred while creating the profile.");
@@ -126,6 +138,7 @@ const Page: React.FC = () => {
                 label="Create Profile"
                 customClassName="w-full text-body-xxs font-open-sans bg-gradient-to-b-custom rounded-[12px] mx-auto hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 size="moreMedium"
+                loading={loading}
               />
             </div>
           </form>

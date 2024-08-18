@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useRouter } from "next/router";
 
 interface ProfileState {
   id: String;
@@ -22,7 +21,7 @@ const initialState: ProfileState = {
   status: "idle",
   error: null,
 };
-const url = ``;
+
 export const createProfile = createAsyncThunk(
   "profile/createProfile",
   async (
@@ -62,8 +61,6 @@ export const profileSlice = createSlice({
         state.status = "succeeded";
         toast.success("Profile created successfully");
         // Redirect to dashboard
-        const router = useRouter();
-        router.push("/dashboard");
       })
       .addCase(createProfile.rejected, (state, action) => {
         state.status = "failed";
