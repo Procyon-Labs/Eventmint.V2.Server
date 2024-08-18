@@ -34,7 +34,7 @@ const Page: React.FC = () => {
               Create Profile
             </h2>
             <p className="text-[#A0ABBB] text-sm">
-              Create your event and manage your tickets
+              Showcase Your Story, Connect with Events
             </p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-6">
