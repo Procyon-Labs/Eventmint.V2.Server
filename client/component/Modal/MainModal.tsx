@@ -33,7 +33,7 @@ export default function MainModal({ closeModal }: MainModalProps) {
       });
 
       setTimeout(() => {
-        router.push("/dashboard");
+        router.push("/createprofile");
       }, 3000);
     }
   }, [connected, router]);
