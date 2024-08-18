@@ -1,17 +1,44 @@
 "use client";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { useWallet } from "@solana/wallet-adapter-react";
 import Image from "next/image";
+import { createProfile } from "../../component/features/profile/profileslice";
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "../../mainStore/store";
 import { Button } from "@/component/button";
+import { useRouter } from "next/navigation";
+
 const Page: React.FC = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [bio, setBio] = useState("");
+  const { publicKey } = useWallet();
+  const router = useRouter();
+
+  const dispatch: ThunkDispatch<RootState, void, AnyAction> = useDispatch();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log({ firstName, lastName, email, bio });
+
+    if (!publicKey) {
+      toast.error("Please connect your wallet");
+
+      return;
+    }
+    try {
+      const _id = publicKey;
+
+      const profileData = { _id, firstName, lastName, email, bio };
+      dispatch(createProfile({ profileData, publicKey: publicKey.toString() }));
+      router.push("/dashboard");
+      console.log(publicKey);
+    } catch (error) {
+      toast.error("An error occurred while creating the profile.");
+    }
   };
 
   return (
@@ -95,6 +122,7 @@ const Page: React.FC = () => {
 
             <div className="w-full">
               <Button
+                type="submit"
                 label="Create Profile"
                 customClassName="w-full text-body-xxs font-open-sans bg-gradient-to-b-custom rounded-[12px] mx-auto hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 size="moreMedium"

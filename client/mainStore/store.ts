@@ -1,13 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
+import profileReducer from "../component/features/profile/profileslice";
+import { profile } from "console";
 
-
-
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    
+    profile: profileReducer,
+    // other reducers...
   },
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export default store;

@@ -2,6 +2,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
+import store from "@/mainStore/store";
 import AppWalletProvider from "./components/AppWalletProvider";
 import { ToastContainer } from "react-toastify";
 import ReduxProvider from "@/mainStore/provider";
@@ -18,12 +19,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className={inter.className}>
         <ReduxProvider>
-        <AppWalletProvider>
-          {children}
-          <ToastContainer />
-        </AppWalletProvider>
+          <AppWalletProvider>
+            {children}
+            <ToastContainer />
+          </AppWalletProvider>
         </ReduxProvider>
-        
       </body>
     </html>
   );
