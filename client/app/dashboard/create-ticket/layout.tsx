@@ -20,12 +20,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const router = useRouter();
 
    const isActive = (path: string) => pathname === path;
+   
   const isTicketDetailsPage =()=>{
     return isActive('/dashboard/create-ticket/ticket-details')
   }
-  const redirectToPreviewPage = () => {
-    router.push('/dashboard/create-ticket/ticket-preview');
-  };
+  // const redirectToPreviewPage = () => {
+  //   router.push('/dashboard/create-ticket/ticket-preview');
+  // };
 
   const redirectToDetailPage = () => {
     router.push('/dashboard/create-ticket/ticket-details');
@@ -78,39 +79,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </nav>
       <div >{children}</div>
-      <div>
-        <div className="flex items-end justify-end px-[24px] pt-[24px] pb-[32px] gap-[16px]">
-          <Button
-            leftIcon={<ArrowLeft />}
-            label={'Back'}
-            fit
-            customClassName="font-open-sas text-body-s text-[#323A46]"
-            size="smaller"
-            onClick={redirectToDetailPage}
-          />
-          {
-            GetTicketPage ? (
-              <Button
-              rightIcon={<ArrowRight />}
-              label={'Next'}
-              fit
-              customClassName="font-open-sas text-body-s text-fontgreenishColor"
-              size="smaller"
-              onClick={redirectToPreviewPage}
-            />
-
-            ):(
-
-              <Button
-              label={'submit'}
-              customClassName="text-eventMint font-open-sans bg-gradient-to-b-custom rounded-[12px] text-center"
-              size="smaller"
-              fit
-            />
-            )
-          }
-        </div>
-      </div>
     </div>
   );
 };

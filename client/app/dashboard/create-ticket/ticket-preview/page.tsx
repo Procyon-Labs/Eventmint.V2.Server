@@ -1,19 +1,58 @@
+'use client'
+import { Button } from '@/component/button'
+import ArrowLeft from '@/component/svgs/arrowLeft'
+import ArrowRight from '@/component/svgs/arrowRight'
 import { Typography } from '@/component/typogrphy'
 import Image from 'next/image'
 import React from 'react'
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
 
-export default function page() {
+export default function Page() {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const placeholder = '/placeholder.jpg'
+  const ticketState = useSelector((state) => state.ticketDetail);
+  const {
+    ticketName,
+  ticketDescription,
+  category,
+  amount,
+  quantity,
+  image,
+  imageName,
+  } =ticketState;
+  const checkstate =()=>{
+    return ticketName !== '' && ticketDescription !== '' &&  category !== "" &&  amount !== 0 &&  quantity !== 0 &&  image !== "" &&  imageName !== ""
+  }
+  const getState = checkstate();
+
+  const submitEventForm = async()=>{
+
+    if(!getState){
+      return
+    }
+    try{
+      const response = await axios.post("https://eventmint.onrender.com/api/v1/event/G9LoRR64W3N3aVpwbyUwhNXZCqUKef9PRpXCA9CRdbNK", )
+    }catch(err){
+
+    }
+  }
+
+  console.log(ticketState, 'ticketState')
   return (
-    <div className="px-[32px] w-full flex gap-[48px]">
+      <div>
+        <div className="px-[32px] w-full flex gap-[48px]">
       <div className='w-1/2 flex flex-col items-start gap-[24px] py-[16px] flex-[1_0_0%] rounded-[16px] bg-[#191D23]
  '>
        <div className='flex flex-col items-start gap-[16px] self-stretch px-[16px] pb-[16px] border-b border-[#323A46]
 '>
         <Typography customClassName='text-body-xxsx font-open-sans text-[#64748B]'>
-        Ticket Name
+      Ticket Name
         </Typography>
               <Typography customClassName='text-body-s font-open-sans text-[#E7EAEE]'>
-        Web3 Fundraising Event
+          {ticketName}
         </Typography>
        </div>
        <div  className='flex flex-col items-start gap-[16px] self-stretch px-[16px] pb-[16px] border-b border-[#323A46]
@@ -22,7 +61,7 @@ export default function page() {
        Ticket Description
         </Typography>
         <Typography  customClassName='text-body-s font-open-sans text-[#E7EAEE]'>
-        Come join the next big thing in the Web3 space. 
+           {ticketDescription}
         </Typography>
        </div>
        <div  className='flex flex-col items-start gap-[16px] self-stretch px-[16px] pb-[16px] border-b border-[#323A46]
@@ -31,7 +70,7 @@ export default function page() {
        Category
         </Typography>
         <Typography  customClassName='text-body-s font-open-sans text-[#E7EAEE]'>
-        Fundraiser
+        {category}
         </Typography>
        </div>
        <div  className='flex flex-col items-start gap-[16px] self-stretch px-[16px] pb-[16px] border-b border-[#323A46]
@@ -40,43 +79,64 @@ export default function page() {
        Amount
         </Typography>
         <Typography  customClassName='text-body-s font-open-sans text-[#E7EAEE]'>
-        20 SOL
+        {amount} SOL
         </Typography>
        </div>
        <div  className='flex flex-col items-start gap-[16px] self-stretch px-[16px] pb-[16px] 
 '>
        <Typography customClassName='text-body-xxsx font-open-sans text-[#64748B]'>
-       Amount
+       Quantity
         </Typography>
         <Typography  customClassName='text-body-s font-open-sans text-[#E7EAEE]'>
-        100
+        {quantity}
         </Typography>
        </div>
       </div>
       <div className="w-1/2 flex flex-col gap-4 items-start">
       <div>
       <Typography customClassName='text-body-xxsx font-open-sans text-[#64748B]'>
-        Ticket Name
+        Ticket Image
         </Typography>
       </div>
   <div className="relative max-w-[400px] group max-h-[400px]">
     <Image
       className="relative rounded-[16px]"
-      src={'/AvatarGuy2.svg'}
+      src={image ? image : placeholder}
       alt="avatar-guy"
       width={400}
       height={400}
+      
     />
     <div
       className="absolute bottom-0 rounded-b-[16px] w-full h-[56px] px-[16px] py-[8px] justify-end items-center gap-[4px] flex flex-1 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
     >
       <Typography customClassName="text-body-xxsx font-open-sans text-[#E7EAEE]">
-        Ticket-file.jpg
+       {imageName}
       </Typography>
     </div>
   </div>
 </div>
-
-     </div>
+ </div>
+ <div>
+ <div className="flex items-end justify-end px-[24px] pt-[24px] pb-[32px] gap-[16px]">
+         <Button
+            leftIcon={<ArrowLeft />}
+            label={'Back'}
+            fit
+            customClassName="font-open-sas text-body-s text-[#323A46]"
+            size="smaller"
+            onClick={()=> router.push("/dashboard/create-ticket/ticket-details")}
+           />
+           <Button
+              label="submit"
+              customClassName="text-body-xxs font-open-sans bg-gradient-to-b-custom rounded-[12px]"
+              size="smaller"
+              fit 
+            />
+          
+          
+      </div>
+ </div>
+      </div>
   )
 }
