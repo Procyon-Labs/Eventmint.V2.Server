@@ -19,6 +19,10 @@ const Page: React.FC = () => {
   const { publicKey } = useWallet();
   const status = useSelector((state: RootState) => state.profile.status);
   const router = useRouter();
+  const [profilePicturePreview, setProfilePicturePreview] = useState<
+    string | ArrayBuffer | null
+  >(null);
+  const [profilePicture, setProfilePicture] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const dispatch: ThunkDispatch<RootState, void, AnyAction> = useDispatch();
 
@@ -43,13 +47,31 @@ const Page: React.FC = () => {
     setLoading(true);
     try {
       const _id = publicKey;
+      const image = profilePicture;
 
-      const profileData = { _id, firstName, lastName, email, bio };
+      const profileData = { _id, firstName, lastName, email, bio, image };
       dispatch(createProfile({ profileData, publicKey: publicKey.toString() }));
 
       console.log(publicKey);
     } catch (error) {
       toast.error("An error occurred while creating the profile.");
+    }
+  };
+
+  const handleProfilePictureChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = e.target.files?.[0] || null;
+    setProfilePicture(file);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePicturePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setProfilePicturePreview(null);
     }
   };
 
@@ -77,6 +99,22 @@ const Page: React.FC = () => {
             </p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-6">
+            <input
+              type="file"
+              id="profilePicture"
+              accept="image/*"
+              onChange={handleProfilePictureChange}
+              className="bg-black/10 text-white mt-1 p-3 block w-full border border-[#4B5768] rounded-lg shadow-sm focus:ring-[#00D300] focus:border-[#00D300] sm:text-sm"
+            />
+            {profilePicturePreview && (
+              <div className="mt-4">
+                <img
+                  src={profilePicturePreview as string}
+                  alt="Profile Preview"
+                  className="w-32 h-32 object-cover rounded-full border border-[#4B5768]"
+                />
+              </div>
+            )}
             <div className="flex space-x-4">
               <div className="flex-1">
                 <input
