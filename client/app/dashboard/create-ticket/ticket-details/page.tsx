@@ -14,7 +14,6 @@ import { styled } from "@mui/system";
 import TicketComponent from "@/component/ticketComponent";
 import Picture from "@/component/svgs/picture";
 import { Button } from "@/component/button";
-import ArrowLeft from "@/component/svgs/arrowLeft";
 import ArrowRight from "@/component/svgs/arrowRight";
 import { useDispatch } from "react-redux";
 import { ticketAction } from "@/mainStore/reduxSlices/ticketDetailSlice";
