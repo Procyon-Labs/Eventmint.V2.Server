@@ -36,11 +36,10 @@ export default function ThirdSection() {
                 font="Ubuntu"
                 customClassName="font-Ubuntu text-center mmd:text-body-m"
                 color="fontBodyMGreyishColor"
+                className=" text-xl mb-2"
               >
-                <p className="mb-2">
-                  Here’s why EventMint is the Ideal choice for your event <br />
-                  planning needs.
-                </p>
+                Here’s why EventMint is the Ideal choice for your event <br />
+                planning needs.
               </Typography>
             </div>
           </div>
