@@ -37,7 +37,7 @@ const menuItems: MenuCategory[] = [
       },
       {
         title: "Profile",
-        path: "/dashboard/users",
+        path: "/dashboard/profile",
         icon: <MdSupervisedUserCircle />,
       },
       {

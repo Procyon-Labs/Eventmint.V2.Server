@@ -31,6 +31,10 @@ const Page: React.FC = () => {
       router.push("/dashboard");
     } else if (status === "failed") {
       toast.error("An error occurred");
+      const timer = setTimeout(() => {
+        router.push("/");
+      }, 3000);
+      return () => clearTimeout(timer);
     }
     // Reset loading state after status update
     setLoading(false);
