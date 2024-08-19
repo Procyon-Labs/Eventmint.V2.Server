@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-
+import { ticketSlice } from './reduxSlices/ticketDetailSlice';
 
 
 export const store = configureStore({
   reducer: {
-    
+    ticketDetail:ticketSlice.reducer
   },
 });
 

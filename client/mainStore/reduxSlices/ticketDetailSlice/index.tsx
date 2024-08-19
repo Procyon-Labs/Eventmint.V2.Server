@@ -9,9 +9,18 @@
  } 
 
  export const ticketSlice = createSlice({
-    name: "counter",
+    name:"ticketDetails",
     initialState: initailTicketDetailState,
     reducers: {
-        
+        getTicketDetails: (state, payload) => {
+            const newTicketDetailState = {
+               ticketName: payload.payload.ticketName,
+               ticketDescription:payload.payload.ticketDescription,
+               selectCategory:payload.payload.selectCategory,
+               amount : payload.payload.amount,
+               Quantity:payload.payload.quantity,
+            }
+            state = newTicketDetailState;
+        }
     }
 })

@@ -15,6 +15,7 @@ import {
 import TicketComponent from "@/component/ticketComponent";
 import Picture from "@/component/svgs/picture";
 import Upload from "@/component/svgs/Upload";
+import {ChangeEvent} from "react";
 
 export default function Page() {
   const CustomOutlinedInput = styled(OutlinedInput)(() => ({
@@ -67,7 +68,17 @@ export default function Page() {
     },
   }));
   const [age, setAge] = useState<string>("");
+  const [coverImage, setCoverImage] = useState<string | null>(null);
 
+  const handleCoverImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files[0]) {
+      setCoverImage(URL.createObjectURL(files[0]));
+      console.log('he he he')
+    } else {
+      setCoverImage(null);
+    }
+  };
   return (
     <div className="px-[32px] w-full">
       <div className="w-full flex gap-[48px]">
@@ -128,20 +139,16 @@ export default function Page() {
         </div>
         <div className="w-1/2 flex flex-col gap-y-[32px]">
           <TicketComponent
+           id="coverImage"
+           onChange={handleCoverImageChange}
+           image={coverImage}
            first="Ticket Image"
             second="Drag and drop your image here to upload"
              third="Supports JPG, JPEG, PNG"
               fourth="Max. upload size 2MB" 
               labelButton='Upload'
               icon={<Picture/>} />
-              
-              {/* <TicketComponent
-           first="Ticket File"
-            second="Drag and drop your file here to upload"
-             third="Supports JPG, JPEG, PNG"
-              fourth="Max. upload size 2MB" 
-              labelButton='Upload'
-              icon={<Upload/>} /> */}
+
         </div>
       </div>
     </div>
