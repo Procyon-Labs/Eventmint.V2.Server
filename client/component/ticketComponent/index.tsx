@@ -1,82 +1,105 @@
 import React from 'react'
-import { Typography } from '../typogrphy'
+import { Typography } from '../typogrphy';
 import { Button } from '../button'
-import SmallPicture from '../svgs/smallPicture';
+import { ChangeEvent } from "react";
+import Image from 'next/image';
 import Cancel from '../svgs/cancel';
+
 type TicketCompProps = {
     first: string;
     second: string;
-    third:string;
-    fourth:string;
-    labelButton:string;
-    icon : React.ReactNode;
-
+    third: string;
+    fourth: string;
+    labelButton: string;
+    icon: React.ReactNode;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    image: string | null;
+    id: string;
 }
-export default function TicketComponent(prop:TicketCompProps) {
-    const {first,
+
+export default function TicketComponent(props: TicketCompProps) {
+    const {
+        first,
         second,
         third,
         fourth,
         icon,
-        labelButton
-    } = prop;
+        labelButton,
+        image,
+        id,
+        onChange
+    } = props;
 
-  return (
+    return (
         <div className='flex flex-col gap-[1rem]'>
             <div className='flex flex-col gap-y-[16px]'>
-        <div className="">
-        <Typography customClassName='text-body-xxsx font-open-sans ' color="fontBodyMGreyishColor">
-        {first}
-        </Typography>
-        </div>
-        <div className='mx-auto w-full px-[32px] py-[32px] flex flex-col gap-y-[16px] border text-center rounded-[16px] border border-dashed border-[#4B5768] bg-[rgba(0,0,0,0.10)]'>
-           <div className="text-center mx-auto">
-            {icon}
-           </div>
-           <div className="flex flex-col gap-[8px]">
-            <Typography customClassName='text-body-xxs font-open-sans text-center' color="fontBodyRGreyishColor">
-                {second}
-            </Typography>
-            <Typography customClassName='text-small font-open-sans text-center' color="fontBodyMGreyishColor">
-                {third}
-            </Typography>
-           </div>
-           <div className="mx-auto">
-           <Button
-              label={labelButton}
-              customClassName="text-eventMint font-open-sans bg-gradient-to-b-custom rounded-[12px] text-center"
-              size="smaller"
-              fit
-            />
-           </div>
-           <div>
-            <Typography customClassName='text-eventMint font-open-sans text-center' color="fontBodyMGreyishColor">
-                {fourth}
-            </Typography>
-           </div>
-        </div>
-    </div>
-            {/* <div className='rounded-[16px] bg-[rgba(100,61,255,0.2)] p-[16px] items-start'>
-               <div className='flex justify-between items-center self-stretch'>
-                    <div className='flex items-center gap-[8px]'>
-                        <div>
-                            <SmallPicture/>
+                <div>
+                    <Typography customClassName='text-body-xxsx font-open-sans' color="fontBodyMGreyishColor">
+                        {first}
+                    </Typography>
+                </div>
+                <div
+                    className='mx-auto w-full px-[32px] py-[32px] flex flex-col gap-y-[16px] text-center rounded-[16px] border border-dashed border-[#4B5768] bg-[rgba(0,0,0,0.10)] cursor-pointer'
+                    onClick={() => {
+                        const inputElement = document.getElementById(id) as HTMLInputElement;
+                        if (inputElement && !image) {
+                            inputElement.click();
+                        }
+                    }}
+                >
+                    <input
+                        type="file"
+                        id={id}
+                        className="input-field"
+                        accept="image/*"
+                        hidden
+                        onChange={onChange}
+                    />
+                    {image ? (
+                        <div className="relative w-full h-full">
+                            <Image  src={image} alt="Uploaded" className="w-full h-full object-cover rounded-[10.23px] " width={400}height={400}/>
+                            <div className="absolute  inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 hover:bg-black hover:bg-opacity-20">
+                                <div
+                                    className="cursor-pointer rounded-full p-2"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        onChange({ target: { files: null } } as any);
+                                    }}
+                                >
+                                    <Cancel/>
+                                </div>
+                            </div>
                         </div>
-                        <div className='flex flex-col gap-[8px] items-start'>
-                            <Typography customClassName='text-body-xxss font-open-sans text-[#B8A6FF]'>
-                            Uploading
-                            </Typography>
-                            <Typography customClassName='text-small font-open-sans text-[#D0D5DD]'>
-                            Ticket-img.jpg 4.5 MB
-                            </Typography>
+                    ) : (
+                        <div className='mx-auto text-center w-full flex flex-col gap-y-[16px]'>
+                            <div className="text-center mx-auto">
+                                {icon}
+                            </div>
+                            <div className="flex flex-col gap-[8px]">
+                                <Typography customClassName='text-body-xxs font-open-sans text-center' color="fontBodyRGreyishColor">
+                                    {second}
+                                </Typography>
+                                <Typography customClassName='text-small font-open-sans text-center' color="fontBodyMGreyishColor">
+                                    {third}
+                                </Typography>
+                            </div>
+                            <div className="mx-auto">
+                                <Button
+                                    label={labelButton}
+                                    customClassName="text-eventMint font-open-sans bg-gradient-to-b-custom rounded-[12px] text-center"
+                                    size="smaller"
+                                    fit
+                                />
+                            </div>
+                            <div>
+                                <Typography customClassName='text-eventMint font-open-sans text-center' color="fontBodyMGreyishColor">
+                                    {fourth}
+                                </Typography>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <Cancel/>
-                    </div>
-               </div>
-               <div></div>
-            </div> */}
+                    )}
+                </div>
+            </div>
         </div>
-  )
+    )
 }
