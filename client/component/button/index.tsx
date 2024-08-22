@@ -21,6 +21,7 @@ const button = cva("", {
       footer: "py-2 px-10",
       "medium-with-icon": "px-8 py-3.5 pl-5",
       none: "px-[16px] py-[12px]",
+      total: 'p-[12px]'
     },
     color: {
       primary: "bg-primary-main",
