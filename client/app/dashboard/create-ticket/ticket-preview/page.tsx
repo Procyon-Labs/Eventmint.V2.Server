@@ -92,7 +92,7 @@ export default function Page() {
         position: "top-right",
         autoClose: 1000,
       });
-    } catch (err) {
+    } catch (err: any) {
       const errorMessage = err?.message;
 
       toast.error(errorMessage, {
@@ -201,7 +201,7 @@ export default function Page() {
           size="smaller"
           fit
           onClick={submitEventForm}
-          loading={loading}
+          loading={Boolean(loading)}
         />
       </div>
     </div>

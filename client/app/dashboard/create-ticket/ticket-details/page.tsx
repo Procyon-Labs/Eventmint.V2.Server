@@ -18,7 +18,7 @@ import ArrowRight from "@/component/svgs/arrowRight";
 import { useDispatch } from "react-redux";
 import { ticketAction } from "@/mainStore/reduxSlices/ticketDetailSlice";
 import { useRouter } from "next/navigation";
-import DatePicker from 'react-date-picker';
+import DatePicker from "react-date-picker";
 
 export default function Page() {
   const dispatch = useDispatch();
@@ -33,8 +33,8 @@ export default function Page() {
     amount: "",
     quantity: "",
     coverImage: null as string | null,
-    coverImageName: '',
-    location : '',
+    coverImageName: "",
+    location: "",
   });
 
   const CustomOutlinedInput = styled(OutlinedInput)(() => ({
@@ -58,9 +58,7 @@ export default function Page() {
     },
   }));
 
-
-  
-    // console.log(formDetails);
+  // console.log(formDetails);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -87,7 +85,7 @@ export default function Page() {
     const files = e.target.files;
     if (files && files[0]) {
       const getNameObject = files[0];
-      const {name} = getNameObject;
+      const { name } = getNameObject;
       const imageUrl = URL.createObjectURL(files[0]);
 
       setFormDetails((prevDetails) => ({
@@ -99,7 +97,7 @@ export default function Page() {
       setFormDetails((prevDetails) => ({
         ...prevDetails,
         coverImage: null,
-        coverImageName:'',
+        coverImageName: "",
       }));
     }
   };
@@ -118,43 +116,41 @@ export default function Page() {
         <div className="w-full flex gap-[48px]">
           <div className="w-1/2 flex flex-col gap-y-[32px]">
             <Box>
-             
-            <TextField
-  id="ticketName"
-  label="Ticket Name"
-  variant="outlined"
-  fullWidth
-  value={formDetails.ticketName}
-  onChange={handleInputChange}
-  required
-  sx={{
-    '& .MuiInputLabel-root': {
-      color: '#4B5768',
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#4B5768',
-        borderRadius: '16px',
-      },
-      '&:hover fieldset': {
-        borderColor: '#64748B',
-      },
-    },
-    '& .MuiInputLabel-root.Mui-focused': {
-      color: '#00D300',
-    },
-    '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-      borderColor: '#00D300',
-    },
-    '& .MuiOutlinedInput-input': {
-      color: '#E0FFE0',
-    },
-  }}
-/>
-
+              <TextField
+                id="ticketName"
+                label="Ticket Name"
+                variant="outlined"
+                fullWidth
+                value={formDetails.ticketName}
+                onChange={handleInputChange}
+                required
+                sx={{
+                  "& .MuiInputLabel-root": {
+                    color: "#4B5768",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#4B5768",
+                      borderRadius: "16px",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#64748B",
+                    },
+                  },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "#00D300",
+                  },
+                  "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                    borderColor: "#00D300",
+                  },
+                  "& .MuiOutlinedInput-input": {
+                    color: "#E0FFE0",
+                  },
+                }}
+              />
             </Box>
             <Box>
-            <TextField
+              <TextField
                 id="ticketDescription"
                 label="Ticket Description"
                 multiline
@@ -164,31 +160,29 @@ export default function Page() {
                 onChange={handleInputChange}
                 required
                 sx={{
-                  '& .MuiInputLabel-root': {
-                    color: '#4B5768',
+                  "& .MuiInputLabel-root": {
+                    color: "#4B5768",
                   },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#4B5768',
-                      borderRadius: '16px',
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#4B5768",
+                      borderRadius: "16px",
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#64748B',
+                    "&:hover fieldset": {
+                      borderColor: "#64748B",
                     },
                   },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#00D300',
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "#00D300",
                   },
-                  '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                    borderColor: '#00D300',
+                  "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                    borderColor: "#00D300",
                   },
-                  '& .MuiOutlinedInput-input': {
-                    color: '#E0FFE0',
+                  "& .MuiOutlinedInput-input": {
+                    color: "#E0FFE0",
                   },
                 }}
               />
-
-              
             </Box>
             <Box>
               <FormControl fullWidth>
@@ -210,7 +204,7 @@ export default function Page() {
               </FormControl>
             </Box>
             <Box>
-            <TextField
+              <TextField
                 id="amount"
                 label="Enter Amount (SOL)"
                 variant="outlined"
@@ -219,33 +213,32 @@ export default function Page() {
                 onChange={handleInputChange}
                 required
                 sx={{
-                  '& .MuiInputLabel-root': {
-                    color: '#4B5768',
+                  "& .MuiInputLabel-root": {
+                    color: "#4B5768",
                   },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#4B5768',
-                      borderRadius: '16px',
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#4B5768",
+                      borderRadius: "16px",
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#64748B',
+                    "&:hover fieldset": {
+                      borderColor: "#64748B",
                     },
                   },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#00D300',
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "#00D300",
                   },
-                  '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                    borderColor: '#00D300',
+                  "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                    borderColor: "#00D300",
                   },
-                  '& .MuiOutlinedInput-input': {
-                    color: '#E0FFE0',
+                  "& .MuiOutlinedInput-input": {
+                    color: "#E0FFE0",
                   },
                 }}
               />
-              
             </Box>
             <Box>
-            <TextField
+              <TextField
                 id="quantity"
                 label="Quantity"
                 variant="outlined"
@@ -254,33 +247,32 @@ export default function Page() {
                 onChange={handleInputChange}
                 required
                 sx={{
-                  '& .MuiInputLabel-root': {
-                    color: '#4B5768',
+                  "& .MuiInputLabel-root": {
+                    color: "#4B5768",
                   },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#4B5768',
-                      borderRadius: '16px',
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#4B5768",
+                      borderRadius: "16px",
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#64748B',
+                    "&:hover fieldset": {
+                      borderColor: "#64748B",
                     },
                   },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#00D300',
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "#00D300",
                   },
-                  '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                    borderColor: '#00D300',
+                  "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                    borderColor: "#00D300",
                   },
-                  '& .MuiOutlinedInput-input': {
-                    color: '#E0FFE0',
+                  "& .MuiOutlinedInput-input": {
+                    color: "#E0FFE0",
                   },
                 }}
               />
-             
             </Box>
             <Box>
-            <TextField
+              <TextField
                 id="location"
                 label="Location"
                 variant="outlined"
@@ -289,33 +281,37 @@ export default function Page() {
                 onChange={handleInputChange}
                 required
                 sx={{
-                  '& .MuiInputLabel-root': {
-                    color: '#4B5768',
+                  "& .MuiInputLabel-root": {
+                    color: "#4B5768",
                   },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#4B5768',
-                      borderRadius: '16px',
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#4B5768",
+                      borderRadius: "16px",
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#64748B',
+                    "&:hover fieldset": {
+                      borderColor: "#64748B",
                     },
                   },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#00D300',
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "#00D300",
                   },
-                  '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                    borderColor: '#00D300',
+                  "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                    borderColor: "#00D300",
                   },
-                  '& .MuiOutlinedInput-input': {
-                    color: '#E0FFE0',
+                  "& .MuiOutlinedInput-input": {
+                    color: "#E0FFE0",
                   },
                 }}
               />
-            
             </Box>
             <Box>
-                <input type='date' onChange={handleDateChange} />
+              <input
+                type="date"
+                placeholder="Date"
+                onChange={handleDateChange}
+                className="bg-black/10 text-white mt-1 p-3 block w-full border border-[#4B5768]  rounded-lg shadow-sm focus:ring-[#00D300] focus:border-[#00D300] sm:text-sm"
+              />
             </Box>
           </div>
           <div className="w-1/2 flex flex-col gap-y-[32px]">

@@ -83,7 +83,9 @@ const Page: React.FC = () => {
     <section className="flex h-screen">
       {/* Left Side: Image */}
       <div className="w-1/2 bg-gray-200">
-        <img
+        <Image
+          width={500}
+          height={500}
           src="https://res.cloudinary.com/dtfvdjvyr/image/upload/v1723983495/Container_orb6ks.png"
           alt="Profile"
           className="object-cover h-full w-full"
@@ -112,7 +114,9 @@ const Page: React.FC = () => {
             />
             {profilePicturePreview && (
               <div className="mt-4">
-                <img
+                <Image
+                  width={500}
+                  height={500}
                   src={profilePicturePreview as string}
                   alt="Profile Preview"
                   className="w-32 h-32 object-cover rounded-full border border-[#4B5768]"

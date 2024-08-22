@@ -1,11 +1,15 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/component/button";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/mainStore/store";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Page = () => {
+  const notify = () => toast("Coming Soon");
   const profile = useSelector((state: RootState) => state.profile);
   return (
     <section className="flex gap-4 mt-2">
@@ -22,6 +26,7 @@ const Page = () => {
         />
 
         <Button
+          onClick={notify}
           type="submit"
           label="Change Profile Photo"
           customClassName="w-full mt-4 text-body-xxs font-open-sans bg-gradient-to-b-custom rounded-[12px] mx-auto hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -55,6 +60,7 @@ const Page = () => {
           <p className="text-[#64748B]">Bio</p>
         </div>
         <Button
+          onClick={notify}
           type="submit"
           label="Edit Profile"
           customClassName="mt-4 text-body-xxs font-open-sans bg-gradient-to-b-custom rounded-[12px] mx-auto hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
