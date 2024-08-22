@@ -57,17 +57,17 @@ const menuItems: MenuCategory[] = [
     list: [
       {
         title: "Event Analytics",
-        path: "/dashboard/revenue",
+        path: "/dashboard/event-analytics",
         icon: <MdWork />,
       },
       {
         title: "Smart Fundraising",
-        path: "/dashboard/reports",
+        path: "/dashboard/smart-fundraising",
         icon: <MdAnalytics />,
       },
       {
         title: "Budget Planning Protocol",
-        path: "/dashboard/teams",
+        path: "/dashboard/budget-protocol",
         icon: <MdPeople />,
       },
     ],
