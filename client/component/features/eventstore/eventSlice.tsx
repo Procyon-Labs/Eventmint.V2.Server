@@ -20,4 +20,4 @@ const eventSlice = createSlice({
   },
 });
 export const { addEvent, clearEvents } = eventSlice.actions;
-export default eventSlice.reducer;
+export {eventSlice};

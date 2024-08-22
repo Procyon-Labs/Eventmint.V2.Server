@@ -1,10 +1,10 @@
 export interface ticketDummyProps {
         image:string;
-        ticketName:string;
+        name:string;
         category:string;
         location:string;
         quantity:number;
-        Amount: number;
+        price: number;
         date:string;
         link:string;
 }

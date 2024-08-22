@@ -6,17 +6,33 @@ import { Button } from "../button";
 import CopyIcon from "../svgs/copyIcon";
 import { mainTicketDummyProps ,ticketDummyProps} from "./ticketDataResult";
 export default function TicketResult(prop:ticketDummyProps) {
-  const {
-    image,
-    ticketName,
-    category,
-    location,
-    quantity,
-    Amount,
+   
+    function formatDate(dateString:string) {
+        const date = new Date(dateString);
+        
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        
+        return `${year}-${month}-${day}`;
+      }
+      const {
+          image,
+          name,
+          category,
+          location,
+          quantity,
+          price,
     date,
     link
 } = prop
-  return (
+const copyToClipboard = () => {
+    navigator.clipboard.writeText(link);
+    alert('URL copied to clipboard!');
+  };
+
+const shortenedUrl = `${link.slice(0, 20)}...`;
+return (
     <div className="text-white flex w-fit flex-col items-start gap-2 border border-[#323A46] rounded-[24px] bg-[#0D0F11]">
       <div className=" relative flex h-[168px] justify-end items-end gap-1 self-stretch">
         <Image
@@ -39,7 +55,7 @@ export default function TicketResult(prop:ticketDummyProps) {
             Ticket Name
           </Typography>
           <Typography customClassName="text-body-xxsx" font="open-sans">
-           {ticketName}
+           {name}
           </Typography>
         </div>
         <div className=" flex flex-col items-start gap-2 self-stretch">
@@ -88,7 +104,7 @@ export default function TicketResult(prop:ticketDummyProps) {
                 Amount
                 </Typography>
                 <Typography customClassName="text-body-xxsx" font="open-sans">
-                {Amount} SOL
+                {price} SOL
                 </Typography>
           </div>
           <div className="flex flex-col items-start gap-2 flex-[1_0_0%]">
@@ -100,7 +116,7 @@ export default function TicketResult(prop:ticketDummyProps) {
                 Date
                 </Typography>
                 <Typography customClassName="text-body-xxsx" font="open-sans">
-            {date}
+            {formatDate(date)}
             </Typography>
           </div>
         </div>
@@ -112,9 +128,9 @@ export default function TicketResult(prop:ticketDummyProps) {
           >
             Blink URL
           </Typography>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center gap-2">
             <Typography customClassName="text-body-xxsx" font="open-sans">
-             {link}
+             {shortenedUrl}
             </Typography>
             <Button 
             rightIcon={<CopyIcon />}
@@ -122,6 +138,7 @@ export default function TicketResult(prop:ticketDummyProps) {
               fit 
               size="total" 
               customClassName="text-[#A7FFA7] border border-[#A7FFA7] rounded-[24px] text-small "
+              onClick={copyToClipboard}
               />
           </div>
         </div>

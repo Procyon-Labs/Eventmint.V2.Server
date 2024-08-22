@@ -5,16 +5,25 @@ import TicketResult from '@/component/ticketResult'
 import React, { useState } from 'react'
 import { ticketDummy } from '@/component/ticketResult/ticketDataResult'
 import Pagination from '@mui/material/Pagination';
+import { useSelector } from 'react-redux';
 
 export default function Page() {
+    const events = useSelector((state) => state.event.events);
+
     const [currentPage, setCurrentPage] = useState(1);  
     const [postPerPage] = useState(6);  
-
-   
     const lastPostIndex = currentPage * postPerPage;
     const firstPostIndex = lastPostIndex - postPerPage;
-    const ticketSli = ticketDummy.slice(firstPostIndex, lastPostIndex);
 
+    const ticketSli = events.slice(firstPostIndex, lastPostIndex);
+
+
+      console.log(events,'events');
+
+    if (events.length === 0) {
+        return <div>No events created yet.</div>;
+    }
+    
    
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
@@ -30,13 +39,13 @@ export default function Page() {
                     <TicketResult 
                         key={index}
                         image={item.image}
-                        ticketName={item.ticketName}
+                        name={item.name}
                         category={item.category}
                         location={item.location}
                         quantity={item.quantity}
-                        Amount={item.Amount}
+                        price={item.price}
                         date={item.date}
-                        link={item.link}
+                        link={item.blink}
                     />
                 ))}
             </div>
