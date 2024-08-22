@@ -11,7 +11,7 @@ import { nanoid } from "nanoid";
 import { ticketAction } from "@/mainStore/reduxSlices/ticketDetailSlice";
 import { toast } from "react-toastify";
 import { useWallet } from "@solana/wallet-adapter-react";
-
+import { addEvent } from "@/component/features/eventstore/eventSlice";
 export default function Page() {
   const router = useRouter();
   const { publicKey } = useWallet();
@@ -84,7 +84,10 @@ export default function Page() {
           },
         }
       );
+
       console.log("Response:", response.data);
+      const { event, blink } = response.data;
+      dispatch(addEvent({ event, blink }));
       dispatch(ticketAction.resetTicketDetails());
       router.push("/dashboard/tickets");
       setLoading(false);
