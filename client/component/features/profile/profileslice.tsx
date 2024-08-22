@@ -8,6 +8,7 @@ interface ProfileState {
   lastName: string;
   email: string;
   bio: string;
+  image: string;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
@@ -18,6 +19,7 @@ const initialState: ProfileState = {
   lastName: "",
   email: "",
   bio: "",
+  image: "",
   status: "idle",
   error: null,
 };

@@ -2,14 +2,21 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "@/component/button";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/mainStore/store";
 
 const Page = () => {
+  const profile = useSelector((state: RootState) => state.profile);
   return (
     <section className="flex gap-4 mt-2">
       <div className="flex flex-col p-6 w-2/6 items-center gap-1 rounded-[24px] justify-center bg-[rgba(25,29,35,0.5)]">
         <Image
           alt="profile-picture"
-          src={`https://res.cloudinary.com/dtfvdjvyr/image/upload/v1724090383/Profile_Picture_dykec6.png`}
+          src={
+            profile.image
+              ? profile.image
+              : `https://res.cloudinary.com/dtfvdjvyr/image/upload/v1724090383/Profile_Picture_dykec6.png`
+          }
           width={320}
           height={320}
         />
@@ -23,24 +30,27 @@ const Page = () => {
       </div>
       <div className="flex flex-col w-4/6 items-start gap-4 p-2 px-4 self-stretch justify-center rounded-[24px] bg-[rgba(25,29,35,0.5)]">
         <div>
-          <h2 className="text-[#E7EAEE]">#019900</h2>
+          <h2 className="text-[#E7EAEE]">{profile.id || `#019900`}</h2>
           <p className="text-[#64748B]">User ID</p>
         </div>
         <div>
-          <h2 className="text-[#E7EAEE]">Luke</h2>
+          <h2 className="text-[#E7EAEE]">{profile.firstName || `Luke`}</h2>
           <p className="text-[#64748B]">First Name</p>
         </div>
         <div>
-          <h2 className="text-[#E7EAEE]">Skywalker</h2>
+          <h2 className="text-[#E7EAEE]">{profile.lastName || `Skywalker`}</h2>
           <p className="text-[#64748B]">Last Name</p>
         </div>
         <div>
-          <h2 className="text-[#E7EAEE]">luke.skywalker@mail.com</h2>
+          <h2 className="text-[#E7EAEE]">
+            {profile.email || `luke.skywalker@mail.com`}
+          </h2>
           <p className="text-[#64748B]">Email address</p>
         </div>
         <div>
           <h2 className="text-[#E7EAEE]">
-            Keeping the universe safe from Darth Vader is a personal hobby 😁☺️
+            {profile.bio ||
+              `Keeping the universe safe from Darth Vader is a personal hobby 😁☺️`}
           </h2>
           <p className="text-[#64748B]">Bio</p>
         </div>

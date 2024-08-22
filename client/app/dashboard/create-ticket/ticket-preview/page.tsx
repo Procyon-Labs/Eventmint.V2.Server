@@ -1,24 +1,24 @@
-'use client';
-import { Button } from '@/component/button';
-import ArrowLeft from '@/component/svgs/arrowLeft';
-import { Typography } from '@/component/typogrphy';
-import Image from 'next/image';
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { nanoid } from 'nanoid';
-import { ticketAction } from '@/mainStore/reduxSlices/ticketDetailSlice';
+"use client";
+import { Button } from "@/component/button";
+import ArrowLeft from "@/component/svgs/arrowLeft";
+import { Typography } from "@/component/typogrphy";
+import Image from "next/image";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { nanoid } from "nanoid";
+import { ticketAction } from "@/mainStore/reduxSlices/ticketDetailSlice";
 import { toast } from "react-toastify";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function Page() {
   const router = useRouter();
-  const {publicKey} = useWallet();
+  const { publicKey } = useWallet();
   const dispatch = useDispatch();
-  const [loading , setLoading]= useState<Boolean | undefined>(false);
-  const placeholder = '/placeholder.jpg';
-  const ticketState = useSelector((state) => state.ticketDetail);
+  const [loading, setLoading] = useState<Boolean | undefined>(false);
+  const placeholder = "/placeholder.jpg";
+  const ticketState = useSelector((state: any) => state.ticketDetail);
 
   const {
     ticketName,
@@ -29,7 +29,7 @@ export default function Page() {
     image,
     imageName,
     location,
-    date
+    date,
   } = ticketState;
 
   const checkstate = () => {
@@ -40,7 +40,7 @@ export default function Page() {
       amount > 0 &&
       quantity > 0 &&
       image &&
-      imageName && 
+      imageName &&
       location &&
       date
     );
@@ -49,11 +49,11 @@ export default function Page() {
   const getState = checkstate();
 
   const submitEventForm = async () => {
-    setLoading(true)
+    setLoading(true);
     if (!getState) {
-      console.error('Validation failed');
-      setLoading(false)
-      toast.error("nothing to send")
+      console.error("Validation failed");
+      setLoading(false);
+      toast.error("nothing to send");
       return;
     }
     const _id = publicKey;
@@ -66,10 +66,10 @@ export default function Page() {
       quantity: quantity,
       category: category,
       price: amount,
-      productFile: 'https://example.com/file.pdf',
+      productFile: "https://example.com/file.pdf",
       unlimited: false,
       payAnyPrice: false,
-      type: 'Conference',
+      type: "Conference",
       location: location,
       date: date,
     };
@@ -84,10 +84,10 @@ export default function Page() {
           },
         }
       );
-      console.log('Response:', response.data);
+      console.log("Response:", response.data);
       dispatch(ticketAction.resetTicketDetails());
-      router.push('/dashboard/tickets')
-      setLoading(false)
+      router.push("/dashboard/tickets");
+      setLoading(false);
       toast.success(response?.data?.message, {
         position: "top-right",
         autoClose: 1000,
@@ -99,11 +99,9 @@ export default function Page() {
         position: "top-right",
         autoClose: 5000,
       });
-      setLoading(false)
+      setLoading(false);
     }
   };
-
-
 
   return (
     <div>
@@ -195,7 +193,7 @@ export default function Page() {
           fit
           customClassName="font-open-sas text-body-s text-[#323A46]"
           size="smaller"
-          onClick={() => router.push('/dashboard/create-ticket/ticket-details')}
+          onClick={() => router.push("/dashboard/create-ticket/ticket-details")}
         />
         <Button
           label="Submit"
