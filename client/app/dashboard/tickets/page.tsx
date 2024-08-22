@@ -2,6 +2,16 @@ import React from 'react'
 
 export default function Page() {
   return (
-    <div className='text-white'>this is tickets page</div>
+    <div className="border">
+        <div>
+            search
+        </div>
+        <div>
+            body 
+        </div>
+        <div>
+            pagination
+        </div>
+    </div>
   )
 }

@@ -18,6 +18,8 @@ import ArrowRight from "@/component/svgs/arrowRight";
 import { useDispatch } from "react-redux";
 import { ticketAction } from "@/mainStore/reduxSlices/ticketDetailSlice";
 import { useRouter } from "next/navigation";
+import DatePicker from 'react-date-picker';
+
 export default function Page() {
   const dispatch = useDispatch();
 
@@ -32,6 +34,7 @@ export default function Page() {
     quantity: "",
     coverImage: null as string | null,
     coverImageName: '',
+    location : '',
   });
 
   const CustomOutlinedInput = styled(OutlinedInput)(() => ({
@@ -67,6 +70,12 @@ export default function Page() {
     }));
   };
 
+  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormDetails((prevDetails) => ({
+      ...prevDetails,
+      date: e.target.value,
+    }));
+  };
   const handleSelectChange = (e: any) => {
     setFormDetails((prevDetails) => ({
       ...prevDetails,
@@ -269,6 +278,44 @@ export default function Page() {
                 }}
               />
              
+            </Box>
+            <Box>
+            <TextField
+                id="location"
+                label="Location"
+                variant="outlined"
+                fullWidth
+                value={formDetails.location}
+                onChange={handleInputChange}
+                required
+                sx={{
+                  '& .MuiInputLabel-root': {
+                    color: '#4B5768',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#4B5768',
+                      borderRadius: '16px',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#64748B',
+                    },
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#00D300',
+                  },
+                  '& .MuiOutlinedInput-root.Mui-focused fieldset': {
+                    borderColor: '#00D300',
+                  },
+                  '& .MuiOutlinedInput-input': {
+                    color: '#E0FFE0',
+                  },
+                }}
+              />
+            
+            </Box>
+            <Box>
+                <input type='date' onChange={handleDateChange} />
             </Box>
           </div>
           <div className="w-1/2 flex flex-col gap-y-[32px]">

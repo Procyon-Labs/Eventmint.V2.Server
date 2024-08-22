@@ -7,7 +7,9 @@ export const initialTicketDetailState = {
   amount: 0,
   quantity: 0, 
   image: "",
-  imageName: ""
+  imageName: "",
+  location: '',
+  date:''
 };
 
 export const ticketSlice = createSlice({
@@ -22,6 +24,8 @@ export const ticketSlice = createSlice({
       state.quantity = payload.quantity; 
       state.image = payload.coverImage;
       state.imageName = payload.coverImageName;
+      state.location = payload.location;
+      state.date = payload.date
     },
     resetTicketDetails: () => initialTicketDetailState,
   },

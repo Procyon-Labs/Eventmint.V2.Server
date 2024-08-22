@@ -1,7 +1,6 @@
 'use client';
 import { Button } from '@/component/button';
 import ArrowLeft from '@/component/svgs/arrowLeft';
-import ArrowRight from '@/component/svgs/arrowRight';
 import { Typography } from '@/component/typogrphy';
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -11,12 +10,13 @@ import axios from 'axios';
 import { nanoid } from 'nanoid';
 import { ticketAction } from '@/mainStore/reduxSlices/ticketDetailSlice';
 import { toast } from "react-toastify";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function Page() {
   const router = useRouter();
+  const {publicKey} = useWallet();
   const dispatch = useDispatch();
-  const [loading , setLoading]= useState<Boolean>(false);
-
+  const [loading , setLoading]= useState<Boolean | undefined>(false);
   const placeholder = '/placeholder.jpg';
   const ticketState = useSelector((state) => state.ticketDetail);
 
@@ -28,6 +28,8 @@ export default function Page() {
     quantity,
     image,
     imageName,
+    location,
+    date
   } = ticketState;
 
   const checkstate = () => {
@@ -38,7 +40,9 @@ export default function Page() {
       amount > 0 &&
       quantity > 0 &&
       image &&
-      imageName
+      imageName && 
+      location &&
+      date
     );
   };
 
@@ -48,11 +52,14 @@ export default function Page() {
     setLoading(true)
     if (!getState) {
       console.error('Validation failed');
+      setLoading(false)
+      toast.error("nothing to send")
       return;
     }
+    const _id = publicKey;
 
     const formObject = {
-      id: nanoid(),
+      id: _id,
       name: ticketName,
       image: image,
       description: ticketDescription,
@@ -63,8 +70,8 @@ export default function Page() {
       unlimited: false,
       payAnyPrice: false,
       type: 'Conference',
-      location: '123 Main St, Anytown, USA',
-      date: '2024-12-01T00:00:00.000Z',
+      location: location,
+      date: date,
     };
 
     try {
@@ -83,7 +90,7 @@ export default function Page() {
       setLoading(false)
       toast.success(response?.data?.message, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
       });
     } catch (err) {
       const errorMessage = err?.message;
@@ -134,12 +141,28 @@ export default function Page() {
               {amount} SOL
             </Typography>
           </div>
-          <div className="flex flex-col items-start gap-[16px] self-stretch px-[16px] pb-[16px]">
+          <div className="flex flex-col items-start gap-[16px] self-stretch px-[16px] pb-[16px] border-b border-[#323A46]">
             <Typography customClassName="text-body-xxsx font-open-sans text-[#64748B]">
               Quantity
             </Typography>
             <Typography customClassName="text-body-s font-open-sans text-[#E7EAEE]">
               {quantity}
+            </Typography>
+          </div>
+          <div className="flex flex-col items-start gap-[16px] self-stretch px-[16px] pb-[16px] border-b border-[#323A46]">
+            <Typography customClassName="text-body-xxsx font-open-sans text-[#64748B]">
+              Location
+            </Typography>
+            <Typography customClassName="text-body-s font-open-sans text-[#E7EAEE]">
+              {location}
+            </Typography>
+          </div>
+          <div className="flex flex-col items-start gap-[16px] self-stretch px-[16px] pb-[16px]">
+            <Typography customClassName="text-body-xxsx font-open-sans text-[#64748B]">
+              Date
+            </Typography>
+            <Typography customClassName="text-body-s font-open-sans text-[#E7EAEE]">
+              {date}
             </Typography>
           </div>
         </div>
@@ -180,6 +203,7 @@ export default function Page() {
           size="smaller"
           fit
           onClick={submitEventForm}
+          loading={loading}
         />
       </div>
     </div>
