@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Page = () => {
   const notify = () => toast("Coming Soon");
   const profile = useSelector((state: RootState) => state.profile);
+
   return (
     <section className="flex gap-4 mt-2">
       <div className="flex flex-col p-6 w-2/6 items-center gap-1 rounded-[24px] justify-center bg-[rgba(25,29,35,0.5)]">

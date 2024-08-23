@@ -32,7 +32,7 @@ const Page: React.FC = () => {
     } else if (status === "failed") {
       toast.error("An error occurred");
       const timer = setTimeout((): void => {
-        router.push("/");
+        router.push("/dashboard");
       }, 3000);
       return (): void => clearTimeout(timer);
     }

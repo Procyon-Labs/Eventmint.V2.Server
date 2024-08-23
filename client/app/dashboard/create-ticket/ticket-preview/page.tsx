@@ -10,15 +10,32 @@ import axios from "axios";
 import { nanoid } from "nanoid";
 import { ticketAction } from "@/mainStore/reduxSlices/ticketDetailSlice";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { addEvent } from "@/component/features/eventstore/eventSlice";
 export default function Page() {
+  const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/dtfvdjvyr/image/upload`;
+  const UPLOAD_PRESET = "ml_default"; // Replace with your Cloudinary upload preset
   const router = useRouter();
   const { publicKey } = useWallet();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<Boolean | undefined>(false);
   const placeholder = "/placeholder.jpg";
   const ticketState = useSelector((state: any) => state.ticketDetail);
+
+  const uploadFileToCloudinary = async (file: File) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+
+      const response = await axios.post(CLOUDINARY_UPLOAD_URL, formData);
+      return response.data.secure_url; // URL of the uploaded image
+    } catch (error) {
+      console.error("Error uploading image", error);
+      return undefined;
+    }
+  };
 
   const {
     ticketName,
@@ -57,11 +74,15 @@ export default function Page() {
       return;
     }
     const _id = publicKey;
+    let uploadedImageUrl = image;
+    if (typeof image === "object") {
+      uploadedImageUrl = await uploadFileToCloudinary(image as File);
+    }
 
     const formObject = {
       id: _id,
       name: ticketName,
-      image: image,
+      image: uploadedImageUrl,
       description: ticketDescription,
       quantity: quantity,
       category: category,
@@ -84,6 +105,7 @@ export default function Page() {
           },
         }
       );
+      console.log(formObject);
 
       console.log("Response:", response.data);
       const { event, blink } = response.data;
@@ -91,10 +113,7 @@ export default function Page() {
       dispatch(ticketAction.resetTicketDetails());
       router.push("/dashboard/tickets");
       setLoading(false);
-      toast.success(response?.data?.message, {
-        position: "top-right",
-        autoClose: 1000,
-      });
+      toast.success("Event Created!");
     } catch (err: any) {
       const errorMessage = err?.message;
 
