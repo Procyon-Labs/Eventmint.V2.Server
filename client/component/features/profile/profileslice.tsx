@@ -59,16 +59,10 @@ export const profileSlice = createSlice({
       .addCase(createProfile.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(createProfile.fulfilled, (state, action) => {
+      .addCase(createProfile.fulfilled, (state) => {
         state.status = "succeeded";
-        const { _id, firstName, lastName, email, bio, image } = action.payload;
-        state.id = _id;
-        state.firstName = firstName;
-        state.lastName = lastName;
-        state.email = email;
-        state.bio = bio;
-        state.image = image;
         toast.success("Profile created successfully");
+        // Redirect to dashboard
       })
       .addCase(createProfile.rejected, (state, action) => {
         state.status = "failed";

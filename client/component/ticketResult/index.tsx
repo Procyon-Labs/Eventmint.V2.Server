@@ -20,7 +20,7 @@ export default function TicketResult(prop: ticketDummyProps) {
   const { image, name, category, location, quantity, price, date, link } = prop;
   const copyToClipboard = () => {
     navigator.clipboard.writeText(link);
-    toast("Coming Soon");
+    toast("Copied");
   };
 
   const shortenedUrl = `${link.slice(0, 20)}...`;
