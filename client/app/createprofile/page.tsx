@@ -53,7 +53,16 @@ const Page: React.FC = () => {
       const _id = publicKey;
       const image = profilePicture;
         console.log(image,"profileImage")
-      const profileData = { _id, firstName, lastName, email, bio, image };
+      // const profileData = { _id, firstName, lastName, email, bio, image };
+
+      const profileData: any = {
+        id: publicKey.toString(),
+        firstName,
+        lastName,
+        email,
+        bio,
+        image,
+      };
       dispatch(createProfile({ profileData, publicKey: publicKey.toString() }));
 
       console.log(publicKey);

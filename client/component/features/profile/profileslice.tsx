@@ -12,7 +12,7 @@ interface ProfileData {
 }
 
 interface ProfileState {
-  id: String;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
