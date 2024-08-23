@@ -1,16 +1,20 @@
-import IUser from "../interface/user.interface";
-import User from "../models/user.model";
+import IUser from '../interface/user.interface';
+import User from '../models/user.model';
 
 export default class UserService {
   async create(user: Partial<IUser>) {
     return await User.create(user);
   }
 
+  async checkUserExistence(id: string) {
+    return await User.exists({ _id: id })? true : false;
+  }
+
   async getUserById(id: string) {
     return await User.findById(id);
   }
   async findOne(param: {}) {
-    return await User.findOne(param, "-__v");
+    return await User.findOne(param, '-__v');
   }
   async getUserByEmail(email: string) {
     return await User.findOne({ email });

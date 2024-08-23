@@ -15,6 +15,7 @@ const router = Router();
 const userController = new UserController();
 
 router.post("/:id", upload.single("image"), userController.createUser);
+router.get("/exists/:id", userController.checkUserExistence)
 router.get("/:id", userController.getUserById);
 router.get("/users", userController.getUsers);
 router.post("/upload", upload.single("file"), userController.uploadImage);
