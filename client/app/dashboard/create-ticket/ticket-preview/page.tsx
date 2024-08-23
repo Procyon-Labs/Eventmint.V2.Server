@@ -28,7 +28,7 @@ export default function Page() {
   const uploadFileToCloudinary = async (path: string) => {
     try {
       const imageUpload = await cloudinaryInstance.upload(path, {
-        'upload'
+        folder:'upload'
         // resource_type: 'raw',
       });
 
