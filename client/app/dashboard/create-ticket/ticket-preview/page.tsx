@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { addEvent } from "@/component/features/eventstore/eventSlice";
+import cloudinaryInstance from "../../../../lib/cloudinary.configs";
 export default function Page() {
   const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/dtfvdjvyr/image/upload`;
   const UPLOAD_PRESET = "ml_default"; // Replace with your Cloudinary upload preset
@@ -23,19 +24,29 @@ export default function Page() {
   const placeholder = "/placeholder.jpg";
   const ticketState = useSelector((state: any) => state.ticketDetail);
 
-  const uploadFileToCloudinary = async (file: File) => {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", UPLOAD_PRESET);
+  interface cloudinaryInstance {
+    CLOUD_NAME: string;
+    API_KEY_CLOUD: Number;
+    API_KEY_SECRET: any;
+    upload: any;
+  }
 
-      const response = await axios.post(CLOUDINARY_UPLOAD_URL, formData);
-      return response.data.secure_url; // URL of the uploaded image
-    } catch (error) {
-      console.error("Error uploading image", error);
-      return undefined;
-    }
-  };
+  // const uploadFileToCloudinary = async (
+  //   path: string,
+  //   cloudinaryInstance: cloudinaryInstance
+  // ) => {
+  //   try {
+  //     const imageUpload = await cloudinaryInstance.upload(path, {
+  //       folder: "upload",
+  //       // resource_type: 'raw',
+  //     });
+
+  //     return imageUpload.secure_url; // URL of the uploaded image
+  //   } catch (error) {
+  //     console.error("Error uploading image", error);
+  //     return undefined;
+  //   }
+  // };
 
   const {
     ticketName,
@@ -73,16 +84,19 @@ export default function Page() {
       toast.error("nothing to send");
       return;
     }
-    const _id = publicKey;
+    const _id = publicKey?.toBase58();
     let uploadedImageUrl = image;
-    if (typeof image === "object") {
-      uploadedImageUrl = await uploadFileToCloudinary(image as File);
-    }
+    // if (typeof image === "object") {
+    //   const tempURL = URL.createObjectURL(image as File);
+    //   // uploadedImageUrl = await uploadFileToCloudinary(tempURL);
+    //   console.log("help me ", tempURL);
+    //   URL.revokeObjectURL(tempURL);
+    // }
 
     const formObject = {
       id: _id,
       name: ticketName,
-      image: uploadedImageUrl,
+      image: image,
       description: ticketDescription,
       quantity: quantity,
       category: category,
@@ -105,6 +119,7 @@ export default function Page() {
           },
         }
       );
+      console.log("God abeg", image);
       console.log(formObject);
 
       console.log("Response:", response.data);
