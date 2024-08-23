@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { addEvent } from "@/component/features/eventstore/eventSlice";
+import cloudinaryInstance from '../../../../lib/cloudinary.configs';
 export default function Page() {
   const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/dtfvdjvyr/image/upload`;
   const UPLOAD_PRESET = "ml_default"; // Replace with your Cloudinary upload preset
@@ -22,15 +23,16 @@ export default function Page() {
   const [loading, setLoading] = useState<Boolean | undefined>(false);
   const placeholder = "/placeholder.jpg";
   const ticketState = useSelector((state: any) => state.ticketDetail);
+  
 
-  const uploadFileToCloudinary = async (file: File) => {
+  const uploadFileToCloudinary = async (path: string) => {
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", UPLOAD_PRESET);
+      const imageUpload = await cloudinaryInstance.upload(path, {
+        'upload'
+        // resource_type: 'raw',
+      });
 
-      const response = await axios.post(CLOUDINARY_UPLOAD_URL, formData);
-      return response.data.secure_url; // URL of the uploaded image
+      return imageUpload.secure_url; // URL of the uploaded image
     } catch (error) {
       console.error("Error uploading image", error);
       return undefined;
@@ -76,7 +78,10 @@ export default function Page() {
     const _id = publicKey?.toBase58();
     let uploadedImageUrl = image;
     if (typeof image === "object") {
-      uploadedImageUrl = await uploadFileToCloudinary(image as File);
+      const tempURL = URL.createObjectURL(image as File)
+      uploadedImageUrl = await uploadFileToCloudinary(tempURL);
+
+      URL.revokeObjectURL(tempURL);
     }
 
     const formObject = {
