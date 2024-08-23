@@ -19,8 +19,11 @@ import { useDispatch } from "react-redux";
 import { ticketAction } from "@/mainStore/reduxSlices/ticketDetailSlice";
 import { useRouter } from "next/navigation";
 import DatePicker from "react-date-picker";
+import axios from "axios";
 
 export default function Page() {
+  const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/dtfvdjvyr/image/upload`;
+  const UPLOAD_PRESET = "ml_default"; 
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,7 +39,22 @@ export default function Page() {
     coverImageName: "",
     location: "",
   });
-
+  const uploadFileToCloudinary = async (base64Image: string) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", base64Image);
+      formData.append("upload_preset", UPLOAD_PRESET);
+  
+      const response = await axios.post(CLOUDINARY_UPLOAD_URL, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+        console.log(response.data.secure_url,'WHAT I AM LOOKING FOR')
+      return( response.data.secure_url); // URL of the uploaded image
+    } catch (error) {
+      console.error("Error uploading image", error);
+      return undefined;
+    }
+  };
   const CustomOutlinedInput = styled(OutlinedInput)(() => ({
     "& .MuiOutlinedInput-notchedOutline": {
       borderRadius: 16,
@@ -85,17 +103,26 @@ export default function Page() {
   };
 
   const handleCoverImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
     const files = e.target.files;
+  
     if (files && files[0]) {
-      const getNameObject = files[0];
-      const { name } = getNameObject;
-      const imageUrl = URL.createObjectURL(files[0]);
-
-      setFormDetails((prevDetails) => ({
-        ...prevDetails,
-        coverImage: imageUrl,
-        coverImageName: name,
-      }));
+      const file = files[0];
+      const { name } = file;
+      
+      reader.onload = (event) => {
+        const dataURL = event?.target?.result as string;
+          const getPicture = uploadFileToCloudinary(dataURL);
+          
+          console.log(getPicture)
+        setFormDetails((prevDetails) => ({
+          ...prevDetails,
+          coverImage: dataURL,
+          coverImageName: name, // Set both coverImage and coverImageName here
+        }));
+      };
+  
+      reader.readAsDataURL(file);
     } else {
       setFormDetails((prevDetails) => ({
         ...prevDetails,
@@ -104,6 +131,7 @@ export default function Page() {
       }));
     }
   };
+  
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault(); // Prevent the default form submission behavior
     setIsLoading(true);
