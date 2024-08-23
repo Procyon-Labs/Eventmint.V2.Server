@@ -8,9 +8,11 @@ export const store = configureStore({
   reducer: {
     ticketDetail: ticketSlice.reducer,
     profile: profileReducer,
-    event:eventSlice.reducer,
+    event: eventSlice.reducer,
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
 export default store;

@@ -2,6 +2,15 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+interface ProfileData {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  bio: string;
+  image: string;
+}
+
 interface ProfileState {
   id: String;
   firstName: string;
@@ -27,7 +36,7 @@ const initialState: ProfileState = {
 export const createProfile = createAsyncThunk(
   "profile/createProfile",
   async (
-    { profileData, publicKey }: { profileData: any; publicKey: string },
+    { profileData, publicKey }: { profileData: ProfileData; publicKey: string },
     { rejectWithValue }
   ) => {
     try {
@@ -59,13 +68,23 @@ export const profileSlice = createSlice({
       .addCase(createProfile.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(createProfile.fulfilled, (state) => {
-        state.status = "succeeded";
-        toast.success("Profile created successfully");
-        // Redirect to dashboard
-      })
-      .addCase(createProfile.rejected, (state, action) => {
+      .addCase(
+        createProfile.fulfilled,
+        (state, action: PayloadAction<ProfileData>) => {
+          state.status = "succeeded";
+          state.id = action.payload.id;
+          state.firstName = action.payload.firstName;
+          state.lastName = action.payload.lastName;
+          state.email = action.payload.email;
+          state.bio = action.payload.bio;
+          state.image = action.payload.image;
+          state.error = null;
+          toast.success("Profile created successfully");
+        }
+      )
+      .addCase(createProfile.rejected, (state, action: PayloadAction<any>) => {
         state.status = "failed";
+        state.error = action.payload;
         toast.error(`Error: ${action.payload}`);
       });
   },
