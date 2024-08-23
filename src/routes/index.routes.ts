@@ -5,7 +5,7 @@ import { Express } from "express";
 import { basePath } from "../config/constants.configs";
 import { Request, Response } from "express";
 
-export default (app: Express) => {
+export default (app: any) => {
   app.get("/", (req: Request, res: Response) => {
     return res.send({ success: true, message: "API is Live!!!" });
   });
