@@ -73,7 +73,7 @@ export default function Page() {
       toast.error("nothing to send");
       return;
     }
-    const _id = publicKey;
+    const _id = publicKey?.toBase58();
     let uploadedImageUrl = image;
     if (typeof image === "object") {
       uploadedImageUrl = await uploadFileToCloudinary(image as File);
