@@ -45,6 +45,9 @@ export default function Page() {
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
       borderColor: "#00D300",
     },
+    "& .MuiOutlinedInput-input": {
+      color: "#E0FFE0",
+    },
   }));
 
   const CustomInputLabel = styled(InputLabel)(() => ({
@@ -310,7 +313,7 @@ export default function Page() {
                 type="date"
                 placeholder="Date"
                 onChange={handleDateChange}
-                className="bg-black/10 text-white mt-1 p-3 block w-full border border-[#4B5768]  rounded-lg shadow-sm focus:ring-[#00D300] focus:border-[#00D300] sm:text-sm"
+                className="bg-[#191d2380] text-[#4B5768] mt-1 p-4 block w-full border border-[#4B5768] rounded-[12px] shadow-sm focus:outline-none focus:ring-[#00D300] focus:border-[#00D300] sm:text-sm"
               />
             </Box>
           </div>
