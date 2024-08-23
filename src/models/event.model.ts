@@ -17,9 +17,7 @@ const eventSchema = new Schema<IEvent>(
     },
     image: {
       type: String,
-      // required: true,
-      default:
-        "https://res.cloudinary.com/dtfvdjvyr/image/upload/v1719802304/event-logo_iyl1ec.png",
+      required: true,
       trim: true,
     },
     date: {
