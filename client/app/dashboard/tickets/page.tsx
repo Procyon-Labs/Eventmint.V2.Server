@@ -33,7 +33,7 @@ export default function Page() {
         <SearchTickets />
       </div>
       <div className="flex px-8 items-center content-center gap-6 self-stretch flex-wrap">
-        {ticketSli.map((item, index) => (
+        {ticketSli.map((item: any, index: any) => (
           <TicketResult
             key={index}
             image={item.image}
