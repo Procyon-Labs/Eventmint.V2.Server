@@ -30,11 +30,10 @@ const Page: React.FC = () => {
     if (status === "succeeded") {
       router.push("/dashboard");
     } else if (status === "failed") {
-      toast.error("An error occurred");
-      const timer = setTimeout((): void => {
-        router.push("/");
-      }, 3000);
-      return (): void => clearTimeout(timer);
+      // const timer = setTimeout((): void => {
+      //   router.push("/");
+      // }, 3000);
+      // return (): void => clearTimeout(timer);
     }
     // Reset loading state after status update
     setLoading(false);
@@ -50,13 +49,13 @@ const Page: React.FC = () => {
     }
     setLoading(true);
     try {
-      const _id = publicKey;
+      const _id = publicKey.toString();
       const image = profilePicture;
         console.log(image,"profileImage")
       // const profileData = { _id, firstName, lastName, email, bio, image };
 
       const profileData: any = {
-        id: publicKey.toString(),
+        _id,
         firstName,
         lastName,
         email,

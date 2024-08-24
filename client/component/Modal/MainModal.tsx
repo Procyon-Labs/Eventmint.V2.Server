@@ -12,31 +12,83 @@ import "react-toastify/dist/ReactToastify.css";
 import { Typography } from "../typogrphy";
 import { MdCancel } from "react-icons/md";
 import ModalBlur from "@/component/svgs/NewImages/Modal-Blur.png";
+import axios from "axios";
 
 type MainModalProps = {
   closeModal: () => void;
 };
+
 export default function MainModal({ closeModal }: MainModalProps) {
-  const { connected } = useWallet();
+  const { connected, publicKey } = useWallet();
   const router = useRouter();
 
   useEffect(() => {
-    if (connected) {
-      toast.success("Wallet Connected Successfully!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+    const checkIfUserExists = async () => {
+      if (connected && publicKey) {
+        try {
+          const response = await axios.get(
+            `https://eventmint.onrender.com/api/v1/user/exists/${publicKey.toString()}`
+          );
 
-      setTimeout(() => {
-        router.push("/createprofile");
-      }, 3000);
-    }
-  }, [connected, router]);
+          if (response.data.data) {
+            toast.success("Welcome back! Redirecting to your dashboard...", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setTimeout(() => {
+              router.push(`/dashboard`);
+            }, 3000);
+          } else {
+            toast.error("No profile found. Please create one.", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setTimeout(() => {
+              router.push(`/createprofile`);
+            }, 3000);
+          }
+        } catch (error) {
+          if (error.response && error.response.status === 404) {
+            toast.error("No profile found. Redirecting to create profile...", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setTimeout(() => {
+              router.push(`/createprofile`);
+            }, 3000);
+          } else {
+            console.error("Error checking user existence:", error);
+            toast.error("An error occurred. Please try again.", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+        }
+      }
+    };
+
+    checkIfUserExists();
+  }, [connected, publicKey, router]);
 
   return (
     <div className="backdrop">
