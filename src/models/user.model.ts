@@ -27,8 +27,6 @@ const userSchema = new Schema<IUser>(
     imageUrl: {
       type: String,
       trim: true,
-      default:
-        "https://res.cloudinary.com/dtfvdjvyr/image/upload/v1719802304/event-logo_iyl1ec.png",
     },
     bio: {
       type: String,
