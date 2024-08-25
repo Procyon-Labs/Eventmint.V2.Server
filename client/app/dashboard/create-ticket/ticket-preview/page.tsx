@@ -89,15 +89,10 @@ export default function Page() {
     }
     const _id = publicKey?.toBase58();
 
-  let uploadedImageUrl = image;
-  if (image && image.startsWith("data:image")) {
-    uploadedImageUrl = await uploadFileToCloudinary(image);
-  }
-
     const formObject = {
       id: _id,
       name: ticketName,
-      image: uploadedImageUrl,
+      image: image,
       description: ticketDescription,
       quantity: quantity,
       category: category,

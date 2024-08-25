@@ -114,7 +114,6 @@ export default function Page() {
         const dataURL = event?.target?.result as string;
           // const getPicture = uploadFileToCloudinary(dataURL);
           
-          console.log(getPicture)
         setFormDetails((prevDetails) => ({
           ...prevDetails,
           coverImage: dataURL,
@@ -223,27 +222,25 @@ export default function Page() {
                 <Select
                   labelId="Select Category"
                   id="category"
-                  className="text-white "
+                  className="text-white bg-[#191d2380]"
                   value={formDetails.category}
                   input={<CustomOutlinedInput />}
                   onChange={handleSelectChange}
                 >
-                  <MenuItem className="text-white" value={"category1"}>
-                    <p className="text-white"> 🎉 Parties & Socials</p>
-                    🎉 Parties & Socials
+                  <MenuItem className="text-white bg-[#191d2380]" value={"Parties & Socials"}>
+                    <p className="text-[#E0FFE0]"> 🎉 Parties & Socials</p>
                   </MenuItem>
-                  <MenuItem className="text-white bg-white" value={"category2"}>
-                    <p className="text-white"> 🍴 Food & Drink</p>
+                  <MenuItem className="text-white bg-[#191d2380]" value={"Food & Drink"}>
+                    <p className="text-[#E0FFE0]"> 🍴 Food & Drink</p>
                   </MenuItem>
-                  <MenuItem className="text-white" value={"category3"}>
-                    <p className="text-white"> 🌟 Charity & Causes</p>
+                  <MenuItem className="text-white bg-[#191d2380]" value={"Charity & Causes"}>
+                    <p className="text-[#E0FFE0]"> 🌟 Charity & Causes</p>
                   </MenuItem>
-                  <MenuItem className="text-white" value={"category4"}>
-                    <p className="text-white"> 💻 Tech & Innovation</p>
+                  <MenuItem className="text-white bg-[#191d2380]" value={"Tech & Innovation"}>
+                    <p className="text-[#E0FFE0]"> 💻 Tech & Innovation</p>
                   </MenuItem>
-                  <MenuItem className="text-white" value={"category4"}>
-                    🎓 Education & Workshops
-                    <p className="text-white"> 🎓 Education & Workshops</p>
+                  <MenuItem className="text-white bg-[#191d2380]" value={"Education & Workshops"}>
+                    <p className="text-[#E0FFE0]"> 🎓 Education & Workshops</p>
                   </MenuItem>
                 </Select>
               </FormControl>
