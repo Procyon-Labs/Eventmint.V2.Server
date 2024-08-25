@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import Select, { components, StylesConfig } from "react-select";
-import {
-  MainSelectProps,
-  SelectOption,
-
-} from "./index.types";
+import { MainSelectProps, SelectOption } from "./index.types";
 // import { useNavigate } from "react-router-dom";
 
 const SelectComp: React.FC<MainSelectProps> = (props) => {
-//   const Navigate = useNavigate();
+  //   const Navigate = useNavigate();
 
   type StylesType = StylesConfig<SelectOption, false>;
 
   const styles: StylesType = {
-
     control: (styles, { isFocused }) => ({
       ...styles,
       height: "64px",
@@ -24,11 +19,11 @@ const SelectComp: React.FC<MainSelectProps> = (props) => {
       fontSize: "16px",
       textAlign: "start",
       color: "#654EF2",
-      backgroundColor:'##0000001a',
-      boxShadow: isFocused ? '0 0 0 1px #00D300' : '0 0 0 1px #4B5768',
-    //   "&:hover": {
-    //     borderColor: isFocused ? "#00D300" : "0",
-    //   },
+      backgroundColor: "##0000001a",
+      boxShadow: isFocused ? "0 0 0 1px #00D300" : "0 0 0 1px #4B5768",
+      //   "&:hover": {
+      //     borderColor: isFocused ? "#00D300" : "0",
+      //   },
     }),
 
     singleValue: (styles: any) => ({
@@ -36,7 +31,7 @@ const SelectComp: React.FC<MainSelectProps> = (props) => {
       color: "#654EF2", // Apply text color for the selected value
     }),
 
-    option: (styles, {isDisabled, isFocused, isSelected }) => {
+    option: (styles, { isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
         width: "100%",
@@ -69,13 +64,10 @@ const SelectComp: React.FC<MainSelectProps> = (props) => {
     null
   );
 
-  const handleChange = (
-    e: SelectOption | null,
-
-  ) => {
+  const handleChange = (e: SelectOption | null) => {
     setSelectedOption(e);
     if (e && e.value) {
-     console.log('fuzzy is great')
+      console.log("fuzzy is great");
     }
     console.log(e?.value, "event");
   };
@@ -124,7 +116,7 @@ const SelectComp: React.FC<MainSelectProps> = (props) => {
                 <path
                   d="M12.8333 1.5L7 7.33333L1.16667 1.5"
                   stroke="#654EF2"
-                  stroke-width="2"
+                  strokeWidth="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 />

@@ -14,7 +14,7 @@ export default function ArrowLeft() {
           id="Icon"
           d="M20 12H4M4 12L10 18M4 12L10 6"
           stroke="#323A46"
-          stroke-width="2"
+          strokeWidth="2"
           stroke-linecap="round"
           stroke-linejoin="round"
         />
