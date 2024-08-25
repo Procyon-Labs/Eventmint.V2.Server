@@ -10,6 +10,8 @@ import { ThunkDispatch } from "redux-thunk";
 import { RootState } from "../../mainStore/store";
 import { Button } from "@/component/button";
 import { useRouter } from "next/navigation";
+import { headers } from "next/headers";
+import axios from "axios";
 
 const Page: React.FC = () => {
   const [firstName, setFirstName] = useState("");
@@ -39,7 +41,29 @@ const Page: React.FC = () => {
     setLoading(false);
   }, [status, router]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const uploadImage = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await axios.post(
+        `https://eventmint.onrender.com/api/v1/user/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data.imageUrl;
+    } catch (error) {
+      console.error("image upload failed", error);
+      toast.error("failed to upload image");
+      return null;
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!publicKey) {
@@ -49,6 +73,15 @@ const Page: React.FC = () => {
     }
     setLoading(true);
     try {
+      let imageUrl = "";
+      if (profilePicture) {
+        imageUrl = await uploadImage(profilePicture);
+        if (!imageUrl) {
+          setLoading(false);
+          return;
+        }
+      }
+
       const _id = publicKey.toString();
       const image = profilePicture;
         console.log(image,"profileImage")
@@ -60,13 +93,15 @@ const Page: React.FC = () => {
         lastName,
         email,
         bio,
-        image,
+        image: imageUrl,
       };
       dispatch(createProfile({ profileData, publicKey: publicKey.toString() }));
 
       console.log(publicKey);
     } catch (error) {
       toast.error("An error occurred while creating the profile.");
+    } finally {
+      setLoading(false);
     }
   };
 
