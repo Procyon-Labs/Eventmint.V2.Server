@@ -84,6 +84,8 @@ const Page: React.FC = () => {
 
       const _id = publicKey.toString();
       const image = profilePicture;
+        console.log(image,"profileImage")
+      // const profileData = { _id, firstName, lastName, email, bio, image };
 
       const profileData: any = {
         _id,

@@ -19,8 +19,11 @@ import { useDispatch } from "react-redux";
 import { ticketAction } from "@/mainStore/reduxSlices/ticketDetailSlice";
 import { useRouter } from "next/navigation";
 import DatePicker from "react-date-picker";
+import axios from "axios";
 
 export default function Page() {
+  const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/dtfvdjvyr/image/upload`;
+  const UPLOAD_PRESET = "ml_default"; 
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,7 +39,22 @@ export default function Page() {
     coverImageName: "",
     location: "",
   });
-
+  // const uploadFileToCloudinary = async (base64Image: string) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("file", base64Image);
+  //     formData.append("upload_preset", UPLOAD_PRESET);
+  
+  //     const response = await axios.post(CLOUDINARY_UPLOAD_URL, formData, {
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //     });
+  //       console.log(response.data.secure_url,'WHAT I AM LOOKING FOR')
+  //     return( response.data.secure_url); // URL of the uploaded image
+  //   } catch (error) {
+  //     console.error("Error uploading image", error);
+  //     return undefined;
+  //   }
+  // };
   const CustomOutlinedInput = styled(OutlinedInput)(() => ({
     "& .MuiOutlinedInput-notchedOutline": {
       borderRadius: 16,
@@ -44,6 +62,9 @@ export default function Page() {
     },
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
       borderColor: "#00D300",
+    },
+    "& .MuiOutlinedInput-input": {
+      color: "#E0FFE0",
     },
   }));
 
@@ -82,17 +103,25 @@ export default function Page() {
   };
 
   const handleCoverImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
     const files = e.target.files;
+  
     if (files && files[0]) {
-      const getNameObject = files[0];
-      const { name } = getNameObject;
-      const imageUrl = URL.createObjectURL(files[0]);
-
-      setFormDetails((prevDetails) => ({
-        ...prevDetails,
-        coverImage: imageUrl,
-        coverImageName: name,
-      }));
+      const file = files[0];
+      const { name } = file;
+      
+      reader.onload = (event) => {
+        const dataURL = event?.target?.result as string;
+          // const getPicture = uploadFileToCloudinary(dataURL);
+          
+        setFormDetails((prevDetails) => ({
+          ...prevDetails,
+          coverImage: dataURL,
+          coverImageName: name, // Set both coverImage and coverImageName here
+        }));
+      };
+  
+      reader.readAsDataURL(file);
     } else {
       setFormDetails((prevDetails) => ({
         ...prevDetails,
@@ -101,6 +130,7 @@ export default function Page() {
       }));
     }
   };
+  
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault(); // Prevent the default form submission behavior
     setIsLoading(true);
@@ -192,27 +222,25 @@ export default function Page() {
                 <Select
                   labelId="Select Category"
                   id="category"
-                  className="text-white "
+                  className="text-white bg-[#191d2380]"
                   value={formDetails.category}
                   input={<CustomOutlinedInput />}
                   onChange={handleSelectChange}
                 >
-                  <MenuItem className="text-white" value={"category1"}>
-                    <p className="text-white"> 🎉 Parties & Socials</p>
-                    🎉 Parties & Socials
+                  <MenuItem className="text-white bg-[#191d2380]" value={"Parties & Socials"}>
+                    <p className="text-[#E0FFE0]"> 🎉 Parties & Socials</p>
                   </MenuItem>
-                  <MenuItem className="text-white bg-white" value={"category2"}>
-                    <p className="text-white"> 🍴 Food & Drink</p>
+                  <MenuItem className="text-white bg-[#191d2380]" value={"Food & Drink"}>
+                    <p className="text-[#E0FFE0]"> 🍴 Food & Drink</p>
                   </MenuItem>
-                  <MenuItem className="text-white" value={"category3"}>
-                    <p className="text-white"> 🌟 Charity & Causes</p>
+                  <MenuItem className="text-white bg-[#191d2380]" value={"Charity & Causes"}>
+                    <p className="text-[#E0FFE0]"> 🌟 Charity & Causes</p>
                   </MenuItem>
-                  <MenuItem className="text-white" value={"category4"}>
-                    <p className="text-white"> 💻 Tech & Innovation</p>
+                  <MenuItem className="text-white bg-[#191d2380]" value={"Tech & Innovation"}>
+                    <p className="text-[#E0FFE0]"> 💻 Tech & Innovation</p>
                   </MenuItem>
-                  <MenuItem className="text-white" value={"category4"}>
-                    🎓 Education & Workshops
-                    <p className="text-white"> 🎓 Education & Workshops</p>
+                  <MenuItem className="text-white bg-[#191d2380]" value={"Education & Workshops"}>
+                    <p className="text-[#E0FFE0]"> 🎓 Education & Workshops</p>
                   </MenuItem>
                 </Select>
               </FormControl>
@@ -324,7 +352,7 @@ export default function Page() {
                 type="date"
                 placeholder="Date"
                 onChange={handleDateChange}
-                className="bg-black/10 text-white mt-1 p-3 block w-full border border-[#4B5768]  rounded-lg shadow-sm focus:ring-[#00D300] focus:border-[#00D300] sm:text-sm"
+                className="bg-[#191d2380] text-[#4B5768] mt-1 p-4 block w-full border border-[#4B5768] rounded-[12px] shadow-sm focus:outline-none focus:ring-[#00D300] focus:border-[#00D300] sm:text-sm"
               />
             </Box>
           </div>
