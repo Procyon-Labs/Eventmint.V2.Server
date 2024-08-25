@@ -192,16 +192,27 @@ export default function Page() {
                 <Select
                   labelId="Select Category"
                   id="category"
+                  className="text-white "
                   value={formDetails.category}
                   input={<CustomOutlinedInput />}
                   onChange={handleSelectChange}
                 >
-                  <MenuItem value={"category1"}>🎉 Parties & Socials</MenuItem>
-                  <MenuItem value={"category2"}>🍴 Food & Drink</MenuItem>
-                  <MenuItem value={"category3"}>🌟 Charity & Causes</MenuItem>
-                  <MenuItem value={"category4"}>💻 Tech & Innovation</MenuItem>
-                  <MenuItem value={"category4"}>
+                  <MenuItem className="text-white" value={"category1"}>
+                    <p className="text-white"> 🎉 Parties & Socials</p>
+                    🎉 Parties & Socials
+                  </MenuItem>
+                  <MenuItem className="text-white bg-white" value={"category2"}>
+                    <p className="text-white"> 🍴 Food & Drink</p>
+                  </MenuItem>
+                  <MenuItem className="text-white" value={"category3"}>
+                    <p className="text-white"> 🌟 Charity & Causes</p>
+                  </MenuItem>
+                  <MenuItem className="text-white" value={"category4"}>
+                    <p className="text-white"> 💻 Tech & Innovation</p>
+                  </MenuItem>
+                  <MenuItem className="text-white" value={"category4"}>
                     🎓 Education & Workshops
+                    <p className="text-white"> 🎓 Education & Workshops</p>
                   </MenuItem>
                 </Select>
               </FormControl>
