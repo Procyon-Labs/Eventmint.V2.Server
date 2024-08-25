@@ -15,14 +15,14 @@ export default function EyeIcon() {
         stroke="#A7FFA7"
         strokeWidth="2.66667"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M24.0005 28C26.2097 28 28.0005 26.2091 28.0005 24C28.0005 21.7908 26.2097 20 24.0005 20C21.7914 20 20.0005 21.7908 20.0005 24C20.0005 26.2091 21.7914 28 24.0005 28Z"
         stroke="#A7FFA7"
         strokeWidth="2.66667"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

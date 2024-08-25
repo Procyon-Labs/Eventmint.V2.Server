@@ -61,7 +61,7 @@ const TransactionCard = () => {
                 stroke="#EF4444"
                 strokeWidth="2"
                 strokeLinecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
@@ -91,7 +91,7 @@ const TransactionCard = () => {
                 stroke="#10B981"
                 strokeWidth="2"
                 strokeLinecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
@@ -121,7 +121,7 @@ const TransactionCard = () => {
                 stroke="#10B981"
                 strokeWidth="2"
                 strokeLinecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
@@ -151,7 +151,7 @@ const TransactionCard = () => {
                 stroke="#EF4444"
                 strokeWidth="2"
                 strokeLinecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>

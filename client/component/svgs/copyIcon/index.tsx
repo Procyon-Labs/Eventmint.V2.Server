@@ -16,7 +16,7 @@ export default function CopyIcon() {
           stroke="#A7FFA7"
           strokeWidth="1.33333"
           strokeLinecap="round"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

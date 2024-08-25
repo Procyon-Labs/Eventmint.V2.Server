@@ -16,7 +16,7 @@ export default function SmallPicture() {
           stroke="#B8A6FF"
           strokeWidth="2"
           strokeLinecap="round"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

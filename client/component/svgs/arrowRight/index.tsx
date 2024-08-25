@@ -16,7 +16,7 @@ export default function ArrowRight() {
           stroke="#A7FFA7"
           strokeWidth="2"
           strokeLinecap="round"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

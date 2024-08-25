@@ -25,7 +25,7 @@ const Balance = () => {
               stroke="#A7FFA7"
               strokeWidth="2"
               strokeLinecap="round"
-              stroke-linejoin="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>
@@ -48,7 +48,7 @@ const Balance = () => {
               stroke="#34D399"
               strokeWidth="2"
               strokeLinecap="round"
-              stroke-linejoin="round"
+              strokeLinejoin="round"
             />
           </svg>
           <p className={styles.priceIndex}>1.02%</p>

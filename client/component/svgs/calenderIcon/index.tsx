@@ -16,7 +16,7 @@ export default function CalenderIcon() {
           stroke="#64748B"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

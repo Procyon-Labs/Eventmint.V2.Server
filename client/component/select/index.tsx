@@ -118,7 +118,7 @@ const SelectComp: React.FC<MainSelectProps> = (props) => {
                   stroke="#654EF2"
                   strokeWidth="2"
                   strokeLinecap="round"
-                  stroke-linejoin="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </components.DropdownIndicator>

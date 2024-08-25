@@ -16,7 +16,7 @@ export default function Picture() {
           stroke="#D0D5DD"
           strokeWidth="2.5"
           strokeLinecap="round"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

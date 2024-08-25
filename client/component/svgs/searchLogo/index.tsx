@@ -16,7 +16,7 @@ export default function SearchLogo() {
           stroke="#A7FFA7"
           strokeWidth="2.66667"
           strokeLinecap="round"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

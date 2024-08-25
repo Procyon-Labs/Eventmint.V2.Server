@@ -16,7 +16,7 @@ export default function SubscribeIcon() {
           stroke="#003500"
           strokeWidth="2"
           strokeLinecap="round"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

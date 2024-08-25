@@ -32,7 +32,7 @@ const Navbar = () => {
             stroke="#B8A6FF"
             strokeWidth="2.66667"
             strokeLinecap="round"
-            stroke-linejoin="round"
+            strokeLinejoin="round"
           />
         </svg>
         {pathname.split("/").pop()}
@@ -52,7 +52,7 @@ const Navbar = () => {
               stroke="#B8A6FF"
               strokeWidth="2.66667"
               strokeLinecap="round"
-              stroke-linejoin="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>
@@ -70,7 +70,7 @@ const Navbar = () => {
                 stroke="#B8A6FF"
                 strokeWidth="2.66667"
                 strokeLinecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
@@ -88,7 +88,7 @@ const Navbar = () => {
                 stroke="#B8A6FF"
                 strokeWidth="2.66667"
                 strokeLinecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>

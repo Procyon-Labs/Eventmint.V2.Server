@@ -25,7 +25,7 @@ const Earning = () => {
               stroke="#B8A6FF"
               strokeWidth="2"
               strokeLinecap="round"
-              stroke-linejoin="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>
@@ -48,7 +48,7 @@ const Earning = () => {
               stroke="#F87171"
               strokeWidth="2"
               strokeLinecap="round"
-              stroke-linejoin="round"
+              strokeLinejoin="round"
             />
           </svg>
 
