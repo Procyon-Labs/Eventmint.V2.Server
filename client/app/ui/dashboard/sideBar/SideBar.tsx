@@ -42,7 +42,7 @@ const menuItems: MenuCategory[] = [
       },
       {
         title: "Create Event",
-        path: "/dashboard/create-ticket",
+        path: "/dashboard/create-ticket/ticket-details",
         icon: <MdShoppingBag />,
       },
       {
