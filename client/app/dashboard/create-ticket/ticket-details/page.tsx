@@ -39,22 +39,22 @@ export default function Page() {
     coverImageName: "",
     location: "",
   });
-  const uploadFileToCloudinary = async (base64Image: string) => {
-    try {
-      const formData = new FormData();
-      formData.append("file", base64Image);
-      formData.append("upload_preset", UPLOAD_PRESET);
+  // const uploadFileToCloudinary = async (base64Image: string) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("file", base64Image);
+  //     formData.append("upload_preset", UPLOAD_PRESET);
   
-      const response = await axios.post(CLOUDINARY_UPLOAD_URL, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-        console.log(response.data.secure_url,'WHAT I AM LOOKING FOR')
-      return( response.data.secure_url); // URL of the uploaded image
-    } catch (error) {
-      console.error("Error uploading image", error);
-      return undefined;
-    }
-  };
+  //     const response = await axios.post(CLOUDINARY_UPLOAD_URL, formData, {
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //     });
+  //       console.log(response.data.secure_url,'WHAT I AM LOOKING FOR')
+  //     return( response.data.secure_url); // URL of the uploaded image
+  //   } catch (error) {
+  //     console.error("Error uploading image", error);
+  //     return undefined;
+  //   }
+  // };
   const CustomOutlinedInput = styled(OutlinedInput)(() => ({
     "& .MuiOutlinedInput-notchedOutline": {
       borderRadius: 16,
@@ -112,7 +112,7 @@ export default function Page() {
       
       reader.onload = (event) => {
         const dataURL = event?.target?.result as string;
-          const getPicture = uploadFileToCloudinary(dataURL);
+          // const getPicture = uploadFileToCloudinary(dataURL);
           
           console.log(getPicture)
         setFormDetails((prevDetails) => ({
