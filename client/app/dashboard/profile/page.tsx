@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Page = () => {
   const { publicKey } = useWallet();
+
   const notify = () => toast("Coming Soon");
   const [profile, setProfile] = useState({
     _id: "",
@@ -23,6 +24,7 @@ const Page = () => {
 
   useEffect(() => {
     if (publicKey) {
+      localStorage.setItem("publicKey", publicKey.toString());
       const fetchData = async () => {
         try {
           const response = await fetch(
@@ -38,6 +40,7 @@ const Page = () => {
               bio: data.user.bio,
               image: data.user.image || data.user.imageUrl,
             });
+            localStorage.setItem("profile", JSON.stringify(data.user));
           } else {
             toast.error("failed to fetch user data");
           }
@@ -46,6 +49,11 @@ const Page = () => {
         }
       };
       fetchData();
+    } else {
+      const storedProfile = localStorage.getItem("profile");
+      if (storedProfile) {
+        setProfile(JSON.parse(storedProfile));
+      }
     }
   }, [publicKey]);
 
