@@ -45,7 +45,7 @@
   color: var(--Error-Error-500, #ef4444);
 
   /* Paragraph/P2/Medium */
-  -webkit-text-stroke-width: 1;
+  -webkit-text-strokewidth: 1;
   -webkit-text-stroke-color: #000;
 
   font-size: 16px;

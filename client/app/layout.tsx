@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     title: "Eventmint",
     description: "Enhancing Events with interactions",
-    images: "/twitter-image.png",
+
     creator: "@eventmint_",
   },
 };

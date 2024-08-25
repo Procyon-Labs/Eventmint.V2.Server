@@ -1,16 +1,61 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/component/button";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/mainStore/store";
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Page = () => {
+  const { publicKey } = useWallet();
+
   const notify = () => toast("Coming Soon");
-  const profile = useSelector((state: RootState) => state.profile);
+  const [profile, setProfile] = useState({
+    _id: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    bio: "",
+    image: "",
+  });
+
+  useEffect(() => {
+    if (publicKey) {
+      localStorage.setItem("publicKey", publicKey.toString());
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            `https://eventmint.onrender.com/api/v1/user/${publicKey.toString()}`
+          );
+          const data = await response.json();
+          if (data.success) {
+            setProfile({
+              _id: data.user._id,
+              firstName: data.user.firstName,
+              lastName: data.user.lastName,
+              email: data.user.email,
+              bio: data.user.bio,
+              image: data.user.image || data.user.imageUrl,
+            });
+            localStorage.setItem("profile", JSON.stringify(data.user));
+          } else {
+            toast.error("failed to fetch user data");
+          }
+        } catch (error) {
+          toast.error("An error occurred while fetching user data.");
+        }
+      };
+      fetchData();
+    } else {
+      const storedProfile = localStorage.getItem("profile");
+      if (storedProfile) {
+        setProfile(JSON.parse(storedProfile));
+      }
+    }
+  }, [publicKey]);
 
   return (
     <section className="flex gap-4 mt-2">
@@ -36,7 +81,7 @@ const Page = () => {
       </div>
       <div className="flex flex-col w-4/6 items-start gap-4 p-2 px-4 self-stretch justify-center rounded-[24px] bg-[rgba(25,29,35,0.5)]">
         <div>
-          <h2 className="text-[#E7EAEE]">{profile.id || `#019900`}</h2>
+          <h2 className="text-[#E7EAEE]">{profile._id || `#019900`}</h2>
           <p className="text-[#64748B]">User ID</p>
         </div>
         <div>
