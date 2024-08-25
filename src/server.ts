@@ -1,9 +1,9 @@
-import 'express-async-errors';
-import app from './app';
-import { logger } from '../src/middleware/errors.middlewares';
+import "express-async-errors";
+import app from "./app";
+import { logger } from "../src/middleware/errors.middlewares";
 
-import connectToMongo from '../src/config/database.configs';
-import { pingSelf } from './utils/ping.util';
+import connectToMongo from "../src/config/database.configs";
+import { pingSelf } from "./utils/ping.util";
 
 const PORT = process.env.PORT || 3000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
@@ -19,5 +19,5 @@ const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
   // (for render services) Keep the API awake by pinging it periodically
   setInterval(() => {
     pingSelf(BASE_URL);
-  }, 10 * 60 * 1000); //ping every 10 minutes
+  }, 7 * 60 * 1000); //ping every 7 minutes
 })();
