@@ -23,7 +23,7 @@ import axios from "axios";
 
 export default function Page() {
   const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/dtfvdjvyr/image/upload`;
-  const UPLOAD_PRESET = "ml_default"; 
+  const UPLOAD_PRESET = "ml_default";
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -44,7 +44,7 @@ export default function Page() {
   //     const formData = new FormData();
   //     formData.append("file", base64Image);
   //     formData.append("upload_preset", UPLOAD_PRESET);
-  
+
   //     const response = await axios.post(CLOUDINARY_UPLOAD_URL, formData, {
   //       headers: { "Content-Type": "multipart/form-data" },
   //     });
@@ -105,22 +105,22 @@ export default function Page() {
   const handleCoverImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
     const files = e.target.files;
-  
+
     if (files && files[0]) {
       const file = files[0];
       const { name } = file;
-      
+
       reader.onload = (event) => {
         const dataURL = event?.target?.result as string;
-          // const getPicture = uploadFileToCloudinary(dataURL);
-          
+        // const getPicture = uploadFileToCloudinary(dataURL);
+
         setFormDetails((prevDetails) => ({
           ...prevDetails,
           coverImage: dataURL,
           coverImageName: name, // Set both coverImage and coverImageName here
         }));
       };
-  
+
       reader.readAsDataURL(file);
     } else {
       setFormDetails((prevDetails) => ({
@@ -130,7 +130,7 @@ export default function Page() {
       }));
     }
   };
-  
+
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault(); // Prevent the default form submission behavior
     setIsLoading(true);
@@ -222,25 +222,24 @@ export default function Page() {
                 <Select
                   labelId="Select Category"
                   id="category"
-                  className="text-white bg-[#191d2380]"
                   value={formDetails.category}
                   input={<CustomOutlinedInput />}
                   onChange={handleSelectChange}
                 >
-                  <MenuItem className="text-white bg-[#191d2380]" value={"Parties & Socials"}>
-                    <p className="text-[#E0FFE0]"> 🎉 Parties & Socials</p>
+                  <MenuItem value={"category1"}>
+                    <p className="text-purpletwo"> 🎉 Parties & Socials</p>
                   </MenuItem>
-                  <MenuItem className="text-white bg-[#191d2380]" value={"Food & Drink"}>
-                    <p className="text-[#E0FFE0]"> 🍴 Food & Drink</p>
+                  <MenuItem value={"category2"}>
+                    <p className="text-purpletwo"> 🍴 Food & Drink</p>
                   </MenuItem>
-                  <MenuItem className="text-white bg-[#191d2380]" value={"Charity & Causes"}>
-                    <p className="text-[#E0FFE0]"> 🌟 Charity & Causes</p>
+                  <MenuItem value={"category3"}>
+                    <p className="text-purpletwo"> 🌟 Charity & Causes</p>
                   </MenuItem>
-                  <MenuItem className="text-white bg-[#191d2380]" value={"Tech & Innovation"}>
-                    <p className="text-[#E0FFE0]"> 💻 Tech & Innovation</p>
+                  <MenuItem value={"category4"}>
+                    <p className="text-purpletwo"> 💻 Tech & Innovation</p>
                   </MenuItem>
-                  <MenuItem className="text-white bg-[#191d2380]" value={"Education & Workshops"}>
-                    <p className="text-[#E0FFE0]"> 🎓 Education & Workshops</p>
+                  <MenuItem value={"category4"}>
+                    <p className="text-purpletwo"> 🎓 Education & Workshops</p>
                   </MenuItem>
                 </Select>
               </FormControl>
