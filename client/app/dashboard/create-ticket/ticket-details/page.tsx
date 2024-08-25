@@ -196,10 +196,13 @@ export default function Page() {
                   input={<CustomOutlinedInput />}
                   onChange={handleSelectChange}
                 >
-                  <MenuItem value={"category1"}>Category 1</MenuItem>
-                  <MenuItem value={"category2"}>Category 2</MenuItem>
-                  <MenuItem value={"category3"}>Category 3</MenuItem>
-                  <MenuItem value={"category4"}>Category 4</MenuItem>
+                  <MenuItem value={"category1"}>🎉 Parties & Socials</MenuItem>
+                  <MenuItem value={"category2"}>🍴 Food & Drink</MenuItem>
+                  <MenuItem value={"category3"}>🌟 Charity & Causes</MenuItem>
+                  <MenuItem value={"category4"}>💻 Tech & Innovation</MenuItem>
+                  <MenuItem value={"category4"}>
+                    🎓 Education & Workshops
+                  </MenuItem>
                 </Select>
               </FormControl>
             </Box>
