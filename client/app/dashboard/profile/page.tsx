@@ -81,7 +81,7 @@ const Page = () => {
       </div>
       <div className="flex flex-col w-4/6 items-start gap-4 p-2 px-4 self-stretch justify-center rounded-[24px] bg-[rgba(25,29,35,0.5)]">
         <div>
-          <h2 className="text-[#E7EAEE]">{profile.id || `#019900`}</h2>
+          <h2 className="text-[#E7EAEE]">{profile._id || `#019900`}</h2>
           <p className="text-[#64748B]">User ID</p>
         </div>
         <div>
