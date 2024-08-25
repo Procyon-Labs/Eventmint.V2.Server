@@ -117,7 +117,7 @@ const SelectComp: React.FC<MainSelectProps> = (props) => {
                   d="M12.8333 1.5L7 7.33333L1.16667 1.5"
                   stroke="#654EF2"
                   strokeWidth="2"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                   stroke-linejoin="round"
                 />
               </svg>

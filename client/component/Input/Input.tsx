@@ -29,7 +29,7 @@ const Input: React.FC<InputProps> = ({ message, setMessage, sendMessage }) => (
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
-        stroke-linecap="round"
+        strokeLinecap="round"
         stroke-linejoin="round"
         className="feather feather-send"
         viewBox="0 0 24 24"

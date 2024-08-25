@@ -15,7 +15,7 @@ export default function ArrowRight() {
           d="M5 12H19M19 12L12 5M19 12L12 19"
           stroke="#A7FFA7"
           strokeWidth="2"
-          stroke-linecap="round"
+          strokeLinecap="round"
           stroke-linejoin="round"
         />
       </g>

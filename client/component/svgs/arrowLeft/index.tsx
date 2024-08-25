@@ -15,7 +15,7 @@ export default function ArrowLeft() {
           d="M20 12H4M4 12L10 18M4 12L10 6"
           stroke="#323A46"
           strokeWidth="2"
-          stroke-linecap="round"
+          strokeLinecap="round"
           stroke-linejoin="round"
         />
       </g>

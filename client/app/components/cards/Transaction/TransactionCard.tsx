@@ -60,7 +60,7 @@ const TransactionCard = () => {
                 d="M6 18L18 6M18 6H10M18 6V14"
                 stroke="#EF4444"
                 strokeWidth="2"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
               />
             </svg>
@@ -90,7 +90,7 @@ const TransactionCard = () => {
                 d="M18 6L6 18M6 18H14M6 18V10"
                 stroke="#10B981"
                 strokeWidth="2"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
               />
             </svg>
@@ -120,7 +120,7 @@ const TransactionCard = () => {
                 d="M18 6L6 18M6 18H14M6 18V10"
                 stroke="#10B981"
                 strokeWidth="2"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
               />
             </svg>
@@ -150,7 +150,7 @@ const TransactionCard = () => {
                 d="M6 18L18 6M18 6H10M18 6V14"
                 stroke="#EF4444"
                 strokeWidth="2"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
               />
             </svg>
