@@ -14,6 +14,7 @@
   "dependencies": {
     "@solana/actions": "^1.0.3",
     "axios": "^1.7.2",
+    "blinksights-sdk": "^1.0.9",
     "cloudinary": "^2.0.3",
     "cors": "^2.8.5",
     "create-solana-dapp": "^3.0.1",

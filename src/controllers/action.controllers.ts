@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import EventService from "../services/event.service";
 import TransactionService from "../services/transaction.service";
+import { BlinksightsClient } from "blinksights-sdk";
 import { StatusCodes } from "http-status-codes";
 import BadRequestError from "../errors/bad-request";
 import {
@@ -18,9 +19,11 @@ import {
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
-import { DEFAULT_SOL_ADDRESS } from "./const";
+import { DEFAULT_SOL_ADDRESS, BlinkSights } from "./const";
 
 const { getEventByQuery } = new EventService();
+\
+const client = new BlinksightsClient(BlinkSights);
 
 export default class ActionController {
   async getAction(req: Request, res: Response) {
@@ -44,7 +47,7 @@ export default class ActionController {
         description: `${event?.description}`,
         title: `${event?.name}`,
       };
-
+      client.createActionGetResponseV1(req.url,payload)
       res.set(ACTIONS_CORS_HEADERS);
       res.status(StatusCodes.OK).json(payload);
       return res.json(payload);
@@ -143,6 +146,7 @@ export default class ActionController {
       console.log("Transaction:", transaction);
 
       res.set(ACTIONS_CORS_HEADERS);
+      client.trackActionV2(body.account, req.url);
       return res.status(200).json(payload);
     } catch (error: any) {
       return res.status(500).send({
