@@ -57,7 +57,7 @@ export default function MainModal({ closeModal }: MainModalProps) {
               router.push(`/createprofile`);
             }, 3000);
           }
-        } catch (error) {
+        } catch (error: any) {
           if (error.response && error.response.status === 404) {
             toast.error("No profile found. Redirecting to create profile...", {
               position: "top-right",
