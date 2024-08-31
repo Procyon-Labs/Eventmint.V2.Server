@@ -1,4 +1,13 @@
 import { Request, Response } from "express";
+import { create, fetchCollection } from "@metaplex-foundation/mpl-core";
+import {
+  createNoopSigner,
+  createSignerFromKeypair,
+  generateSigner,
+  publicKey,
+  signerIdentity,
+} from "@metaplex-foundation/umi";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import EventService from "../services/event.service";
 import TransactionService from "../services/transaction.service";
 import { BlinksightsClient } from "blinksights-sdk";
@@ -20,10 +29,15 @@ import {
   Transaction,
 } from "@solana/web3.js";
 import { DEFAULT_SOL_ADDRESS, BlinkSights } from "./const";
+import wallet from "./wallet.json";
 
 const { getEventByQuery } = new EventService();
-\
+
 const client = new BlinksightsClient(BlinkSights);
+
+type ExtendedActionPostResponse = ActionPostResponse & {
+  mintedTransaction: string;
+};
 
 export default class ActionController {
   async getAction(req: Request, res: Response) {
@@ -47,7 +61,7 @@ export default class ActionController {
         description: `${event?.description}`,
         title: `${event?.name}`,
       };
-      client.createActionGetResponseV1(req.url,payload)
+      client.createActionGetResponseV1(req.url, payload);
       res.set(ACTIONS_CORS_HEADERS);
       res.status(StatusCodes.OK).json(payload);
       return res.json(payload);
@@ -133,15 +147,22 @@ export default class ActionController {
         await connection.getLatestBlockhash()
       ).blockhash;
 
-      const payload: ActionPostResponse = {
-        transaction: transaction
-          .serialize({
-            requireAllSignatures: false,
-            verifySignatures: true,
-          })
-          .toString("base64"),
-        message: `You've successfully purchased ticket for  ${event?.name} for ${price} SOL 🎊`,
-      };
+      // Mint the transaction and include it in the response
+
+      const mintedTransaction = await this.mintTransaction(account, event);
+
+      const serializedTransaction = transaction
+        .serialize({
+          requireAllSignatures: false,
+          verifySignatures: true,
+        })
+        .toString("base64");
+      const payload = {
+        transaction: serializedTransaction,
+        mintedTransaction: mintedTransaction.toString(), // Add the minted transaction here
+        message: `You've successfully purchased a ticket for ${event?.name} for ${price} SOL 🎊`,
+      } as ActionPostResponse & { mintedTransaction: string };
+
       console.log("Payload:", payload);
       console.log("Transaction:", transaction);
 
@@ -153,6 +174,48 @@ export default class ActionController {
         success: false,
         message: `Error: ${error.message}`,
       });
+    }
+  }
+
+  async mintTransaction(user: PublicKey, event: any) {
+    try {
+      const umi = createUmi("https://api.devnet.solana.com", "confirmed");
+
+      // Ensure the wallet is provided and valid
+      if (!wallet) throw new Error("Wallet secret key is missing.");
+
+      const keypair = umi.eddsa.createKeypairFromSecretKey(
+        new Uint8Array(wallet as number[])
+      );
+      const adminSigner = createSignerFromKeypair(umi, keypair);
+
+      // Set the user as the signer who will sign the transaction later
+      umi.use(signerIdentity(createNoopSigner(publicKey(user))));
+
+      // Generate the Asset KeyPair
+      const asset = generateSigner(umi);
+      console.log("This is your asset address", asset.publicKey.toString());
+
+      // Fetch the Collection
+      const collection = await fetchCollection(
+        umi,
+        publicKey("72An7SwKfUmTAu34x2azX7tYwCBznFKxDR6RV9gxoQDr")
+      );
+
+      // Create the asset within the collection
+      const tx = await create(umi, {
+        asset,
+        collection,
+        name: `${event.name}`, // Using event name for asset
+        uri: event.image as string, // Using event image as URI
+        authority: adminSigner,
+      }).buildAndSign(umi);
+
+      // Serialize the transaction
+      return umi.transactions.serialize(tx);
+    } catch (error: any) {
+      console.error("Error minting transaction:", error.message);
+      throw new Error(`Failed to mint transaction: ${error.message}`);
     }
   }
 }

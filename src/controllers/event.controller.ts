@@ -4,6 +4,7 @@ import EventService from "../services/event.service";
 const { create, getEventById, getEvents, getEventByQuery } = new EventService();
 
 const deployedLink = "https://www.swapxpress.com/";
+// const deployedLink = "http://localhost:5500.com";
 
 export default class EventController {
   async createEvent(req: Request, res: Response) {
