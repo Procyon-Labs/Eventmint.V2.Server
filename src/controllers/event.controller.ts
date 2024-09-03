@@ -3,8 +3,7 @@ import EventService from "../services/event.service";
 
 const { create, getEventById, getEvents, getEventByQuery } = new EventService();
 
-const deployedLink =
-  "https://www.dscvrbl.ink/?action=https://eventmint.onrender.com";
+const deployedLink = "https://eventmint.onrender.com";
 // const deployedLink = "http://localhost:5500.com";
 
 export default class EventController {
