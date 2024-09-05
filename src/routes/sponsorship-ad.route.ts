@@ -2,11 +2,14 @@ import {
   CreateSponsorshipAdDto,
   GetSponsorshipAdDto,
   GetSponsorshipAdWithPaginationDto,
+  UniqueIdDTO,
+  UpdateSponsorshipAdDto,
 } from '../validation';
 import { Router } from 'express';
 import { sponsorshipAdController } from '../controllers';
 import { validateBodyDTO } from '../middleware/body.validation.middleware';
 import { validateQueryDTO } from '../middleware/query.validation.middleware';
+import { validateParamsDTO } from '../middleware/params.validation.middleware';
 
 const router = Router();
 
@@ -26,9 +29,7 @@ const router = Router();
  *             $ref: '#/components/schemas/CreateSponsorshipAdDto'
  *     responses:
  *       '200':
- *         description: Successfully checked newsletter message entry existence
- *       '400':
- *         description: Bad request
+ *         description: Successful
  */
 router.post('/', validateBodyDTO(CreateSponsorshipAdDto), sponsorshipAdController.create);
 
@@ -49,8 +50,6 @@ router.post('/', validateBodyDTO(CreateSponsorshipAdDto), sponsorshipAdControlle
  *     responses:
  *       '200':
  *         description: Successful
- *       '400':
- *         description: Bad request
  */
 router.get(
   '/search',
@@ -75,19 +74,39 @@ router.get(
  *     responses:
  *       '200':
  *         description: Successful
- *       '400':
- *         description: Bad request
  */
 router.get('/', validateQueryDTO(GetSponsorshipAdDto), sponsorshipAdController.find);
 
-//   router.patch(
-//     '/:id',
-//     [
-//       processRequestParams(objectIdValidation.find.params),
-//       processRequestBody(newsletterSubscriptionValidation.update.body),
-//     ],
-//     newsletterSubscriptionController.update,
-//   );
+/**
+ * @swagger
+ * /sponsorship-ad/{id}:
+ *   patch:
+ *     summary: Update a sponsorship ad
+ *     description: Updates an existing sponsorship ad by ID.
+ *     tags:
+ *       - Sponsorship Ads
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the sponsorship ad to update
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UpdateSponsorshipAdDto'
+ *     responses:
+ *       '200':
+ *         description: Successful
+ */
+router.patch(
+  '/:id',
+  [validateParamsDTO(UniqueIdDTO), validateBodyDTO(UpdateSponsorshipAdDto)],
+  sponsorshipAdController.update,
+);
 
 //   router.delete(
 //     '/:id',
