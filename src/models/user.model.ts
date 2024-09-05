@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { IUser } from '../interfaces';
+import { DATABASES } from '../config';
 
 const userSchema = new Schema<IUser>(
   {
@@ -39,5 +40,4 @@ const userSchema = new Schema<IUser>(
   },
 );
 
-const User = model<IUser>('User', userSchema);
-export default User;
+export const UserModel = model<IUser>(DATABASES.USER, userSchema);

@@ -1,7 +1,9 @@
-import { IsMongoId, IsNotEmpty, IsNumber, IsString, IsOptional } from 'class-validator';
+import { IsMongoId, IsNotEmpty, IsNumber, IsString, IsOptional, IsPositive, Min } from 'class-validator';
+import { ConvertToInt } from '../utils/decorator';
 
 export class CreateSponsorshipAdDto {
-  @IsMongoId()
+  // @IsMongoId()
+  @IsString()
   @IsNotEmpty()
   user!: string;
 
@@ -90,82 +92,53 @@ export class GetSponsorshipAdDto {
   image?: string;
 }
 
+export class GetSponsorshipAdWithPaginationDto {
+  @IsOptional()
+  @IsString()
+  user?: string;
+
+  @IsOptional()
+  @IsString()
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @IsOptional()
+  @IsString()
+  category?: string;
+
+  @IsOptional()
+  @ConvertToInt() // Because by default any value passed through query is a string, we need to convert it back to a number.
+  @IsNumber()
+  amount?: number;
+
+  @IsOptional()
+  @ConvertToInt() // Because by default any value passed through query is a string, we need to convert it back to a number.
+  @IsNumber()
+  quantity?: number;
+
+  @IsOptional()
+  @IsString()
+  image?: string;
+  
+  @ConvertToInt() // Because by default any value passed through query is a string, we need to convert it back to a number.
+  @IsNumber()
+  @IsPositive()
+  @Min(1)
+  pagination_size: number = 10;
+
+  @ConvertToInt()
+  @IsNumber()
+  @IsPositive()
+  @Min(1)
+  pagination_page: number = 1;
+}
+
 export class DeleteSponsorshipAdDto {
   @IsMongoId()
   @IsNotEmpty()
   id!: string;
 }
 
-export const sponsorshipAdSwaggerSchema = {
-  CreateSponsorshipAdDto: {
-    type: 'object',
-    properties: {
-      user: {
-        type: 'string',
-        description: 'User ID of the creator',
-      },
-      title: {
-        type: 'string',
-        description: 'Title of the sponsorship ad',
-      },
-      description: {
-        type: 'string',
-        description: 'Description of the sponsorship ad',
-      },
-      category: {
-        type: 'string',
-        description: 'Category of the sponsorship ad',
-      },
-      amount: {
-        type: 'number',
-        description: 'Amount to be paid for the sponsorship ad',
-      },
-      quantity: {
-        type: 'number',
-        description: 'Quantity of the sponsorship ad available',
-      },
-      image: {
-        type: 'string',
-        description: 'Image URL for the sponsorship ad',
-      },
-    },
-    required: ['user', 'title', 'description', 'category', 'amount', 'quantity', 'image'],
-  },
-  SponsorshipAd: {
-    type: 'object',
-    properties: {
-      _id: {
-        type: 'string',
-        description: 'ID of the sponsorship ad',
-      },
-      user: {
-        type: 'string',
-        description: 'User ID of the creator',
-      },
-      title: {
-        type: 'string',
-        description: 'Title of the sponsorship ad',
-      },
-      description: {
-        type: 'string',
-        description: 'Description of the sponsorship ad',
-      },
-      category: {
-        type: 'string',
-        description: 'Category of the sponsorship ad',
-      },
-      amount: {
-        type: 'number',
-        description: 'Amount to be paid for the sponsorship ad',
-      },
-      quantity: {
-        type: 'number',
-        description: 'Quantity of the sponsorship ad available',
-      },
-      image: {
-        type: 'string',
-        description: 'Image URL for the sponsorship ad',
-      },
-    },
-  },
-};

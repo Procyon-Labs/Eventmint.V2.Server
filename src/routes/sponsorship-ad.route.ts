@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { sponsorshipAdController } from '../controllers';
 import { validateBodyDTO } from '../middleware/body.validation.middleware';
-import { CreateSponsorshipAdDto } from '../validation';
+import { CreateSponsorshipAdDto, GetSponsorshipAdWithPaginationDto } from '../validation';
+import { validateQueryDTO } from '../middleware/query.validation.middleware';
 
 const router = Router();
 
@@ -20,22 +21,39 @@ const router = Router();
  *           schema:
  *             $ref: '#/components/schemas/CreateSponsorshipAdDto'
  *     responses:
- *       201:
- *         description: Sponsorship ad created successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/SponsorshipAd'
- *       400:
+ *       '200':
+ *         description: Successfully checked newsletter message entry existence
+ *       '400':
  *         description: Bad request
  */
 router.post('/', validateBodyDTO(CreateSponsorshipAdDto), sponsorshipAdController.create);
 
-// router.get(
-//     '/search',
-//     [processRequestQuery(newsletterSubscriptionValidation.find.query), orSearchParamConverter],
-//     newsletterSubscriptionController.find,
-//   );
+
+/**
+ * @swagger
+ * /sponsorship-ad/search:
+ *   get:
+ *     summary: Search sponsorship ads
+ *     description: Retrieves a list of sponsorship ads based on search criteria.
+ *     tags:
+ *       - Sponsorship Ads
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Query parameters for searching sponsorship ads
+ *         schema:
+ *           $ref: '#/components/schemas/GetSponsorshipAdWithPaginationDto'
+ *     responses:
+ *       '200':
+ *         description: Successfully checked newsletter message entry existence
+ *       '400':
+ *         description: Bad request
+ */
+router.get(
+    '/search',
+    validateQueryDTO(GetSponsorshipAdWithPaginationDto),
+sponsorshipAdController.getAllWithPagination,
+  );
 
 //   router.get(
 //     '/count',

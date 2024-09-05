@@ -1,54 +1,63 @@
-import { Model, Document } from 'mongoose';
-// import { UserModel } from '../models';
+import { Model, Document, FilterQuery } from 'mongoose';
+import { UserModel } from '../models';
+import { PaginateModel } from '../interfaces';
 
 export class GeneralService<T extends Document> {
-  private DBModel: Model<T>;
-
-  constructor(model: Model<T>) {
-    this.DBModel = model;
+  private model: PaginateModel<T>;
+  constructor(private readonly _model: any) {
+    this.model = _model;
   }
 
-  // registerModels = async () => {
-  //   await UserModel.findOne();
-  //   return true;
+  registerModels = async () => {
+    await UserModel.findOne();
+    console.log('Registering user model')
+  };
+
+  create = async (body: Partial<T>) => {
+    return await this.model.create(body);
+  };
+
+  // getAll = async (pagination: number, searchDetails: object = {}): Promise<T[]> => {
+  //   return await this.model.find(searchDetails)
+  //     .limit(10)
+  //     .skip(pagination)
+  //     .sort({ updatedAt: 'desc' })
+  //     .select('-__v');
   // };
 
-  create = async (body: Partial<T>): Promise<T> => {
-    return await this.DBModel.create(body);
-  };
+  async getAllWithPagination(filter: FilterQuery<T>) {
+    const page = filter.pagination_page ?? 1;
+    const size = filter.pagination_size ?? 10;
 
-  getAll = async (pagination: number, searchDetails: object = {}): Promise<T[]> => {
-    return await this.DBModel.find(searchDetails)
-      .limit(10)
-      .skip(pagination)
-      .sort({ updatedAt: 'desc' })
-      .select('-__v');
-  };
+    delete filter.pagination_page;
+    delete filter.pagination_size;
 
-  update = async (searchDetails: object, update: object): Promise<T> => {
-    return await this.DBModel.findOneAndUpdate({ ...searchDetails }, update, {
+    const data = await this.model.paginate(filter, { limit: size, page: page });
+
+    return data;
+  }
+
+
+  update = async (searchDetails: object, update: object)=> {
+    return await this.model.findOneAndUpdate({ ...searchDetails }, update, {
       new: true,
     }).select('-__v');
   };
 
-  getCount = async (searchData: object) => {
-    return await this.DBModel.countDocuments({ ...searchData }).sort({ updatedAt: 'desc' });
-  };
-
-  find = async (searchData: object): Promise<T[]> => {
-    return await this.DBModel.find({ ...searchData })
+  find = async (searchData: object) => {
+    return await this.model.find({ ...searchData })
       .sort({ updatedAt: 'desc' })
       .select('-__v');
   };
 
-  findOne = async (searchData: object): Promise<T> => {
-    return this.DBModel.findOne({ ...searchData })
+  findOne = async (searchData: object)=> {
+    return this.model.findOne({ ...searchData })
       .sort({ updatedAt: 'desc' })
       .select('-__v');
   };
 
   softDelete = async (searchParams: object): Promise<T> => {
-    return await this.DBModel.findOneAndUpdate(
+    return await this.model.findOneAndUpdate(
       { ...searchParams, deleted: false },
       { deleted: true },
       {
@@ -58,10 +67,6 @@ export class GeneralService<T extends Document> {
   };
 
   hardDelete = async (searchParams: object): Promise<T> => {
-    return await this.DBModel.findOneAndDelete(searchParams).select('-__v');
-  };
-
-  exists = async (searchParams: object) => {
-    return await this.DBModel.exists({ ...searchParams }).sort({ updatedAt: 'desc' });
+    return await this.model.findOneAndDelete(searchParams).select('-__v');
   };
 }

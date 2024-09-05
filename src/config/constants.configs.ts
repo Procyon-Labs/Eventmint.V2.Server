@@ -11,7 +11,7 @@ export const BlinkSights = '270562cb6807044cf9a21f605a1ddfc5efb265778831aaa390ec
 
 export const basePath = '/api/v1';
 export const DATABASES = {
-  USER: 'user',
+  USER: 'User',
   POINTS: 'point',
 
   EVENT: 'event',

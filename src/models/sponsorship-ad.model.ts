@@ -7,7 +7,8 @@ import { paginatePlugin } from '../utils';
 const sponsorshipAdSchema = new Schema<ISponsorshipAd>(
   {
     user: {
-      type: Schema.Types.ObjectId,
+      // type: Schema.Types.ObjectId,
+      type: String,
       required: true,
       ref: DATABASES.USER,
       autopopulate: true,
@@ -19,7 +20,16 @@ const sponsorshipAdSchema = new Schema<ISponsorshipAd>(
     quantity: { type: Number, required: false },
     image: { type: String, required: true },
   },
-  { timestamps: true },
+  { timestamps: true,  
+    toJSON: {
+    virtuals: true,
+    transform: function (doc, ret) {
+      delete ret._id;
+      delete ret.__v;
+      delete ret.password;
+      return ret;
+    },
+  }, },
 );
 
 sponsorshipAdSchema.plugin(mongooseAutoPopulate);

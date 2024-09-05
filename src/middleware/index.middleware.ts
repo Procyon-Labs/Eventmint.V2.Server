@@ -1,4 +1,3 @@
-import asyncError from './errors.middlewares';
 import cors from 'cors';
 import helmet from 'helmet';
 import indexRoutes from '../routes/index.routes';
@@ -18,7 +17,6 @@ export default (app: Express) => {
   app.use(json());
   app.use(helmet());
   app.use(urlencoded({ extended: true }));
-  app.use(asyncError);
   setupSwagger(app);
   indexRoutes(app);
 };
