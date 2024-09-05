@@ -88,10 +88,12 @@ export class GetSponsorshipAdDto {
   category?: string;
 
   @IsOptional()
+  @ConvertToInt()
   @IsNumber()
   amount?: number;
 
   @IsOptional()
+  @ConvertToInt()
   @IsNumber()
   quantity?: number;
 

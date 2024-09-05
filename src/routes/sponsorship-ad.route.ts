@@ -1,4 +1,8 @@
-import { CreateSponsorshipAdDto, GetSponsorshipAdWithPaginationDto } from '../validation';
+import {
+  CreateSponsorshipAdDto,
+  GetSponsorshipAdDto,
+  GetSponsorshipAdWithPaginationDto,
+} from '../validation';
 import { Router } from 'express';
 import { sponsorshipAdController } from '../controllers';
 import { validateBodyDTO } from '../middleware/body.validation.middleware';
@@ -44,7 +48,7 @@ router.post('/', validateBodyDTO(CreateSponsorshipAdDto), sponsorshipAdControlle
  *           $ref: '#/components/schemas/GetSponsorshipAdWithPaginationDto'
  *     responses:
  *       '200':
- *         description: Successfully checked newsletter message entry existence
+ *         description: Successful
  *       '400':
  *         description: Bad request
  */
@@ -54,35 +58,27 @@ router.get(
   sponsorshipAdController.getAllWithPagination,
 );
 
-//   router.get(
-//     '/count',
-//     [processRequestQuery(newsletterSubscriptionValidation.find.query), orSearchParamConverter],
-//     newsletterSubscriptionController.getCount,
-//   );
-
-//   router.get(
-//     '/exists',
-//     [processRequestQuery(newsletterSubscriptionValidation.find.query), orSearchParamConverter],
-//     newsletterSubscriptionController.exists,
-//   );
-
-//   router.get(
-//     '/unsubscribe/:id',
-//     [processRequestQuery(newsletterSubscriptionValidation.find.query), orSearchParamConverter],
-//     newsletterSubscriptionController.delete,
-//   );
-
-//   router.get(
-//     '/',
-//     [processRequestQuery(newsletterSubscriptionValidation.find.query), orSearchParamConverter],
-//     newsletterSubscriptionController.getAll,
-//   );
-
-//   router.get(
-//     '/:pagination',
-//     [processRequestQuery(newsletterSubscriptionValidation.find.query), orSearchParamConverter],
-//     newsletterSubscriptionController.getAll,
-//   );
+/**
+ * @swagger
+ * /sponsorship-ad:
+ *   get:
+ *     summary: Search sponsorship ads (No pagination)
+ *     description: Retrieves a list of sponsorship ads based on search criteria.
+ *     tags:
+ *       - Sponsorship Ads
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Query parameters for searching sponsorship ads
+ *         schema:
+ *           $ref: '#/components/schemas/GetSponsorshipAdWithPaginationDto'
+ *     responses:
+ *       '200':
+ *         description: Successful
+ *       '400':
+ *         description: Bad request
+ */
+router.get('/', validateQueryDTO(GetSponsorshipAdDto), sponsorshipAdController.find);
 
 //   router.patch(
 //     '/:id',

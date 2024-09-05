@@ -1,5 +1,5 @@
 import Transaction from '../models/transaction.model';
-import ETransactions from '../interface/transaction.interface';
+import { ETransactions } from '../interfaces';
 
 export default class TransactionService {
   async create(transaction: Partial<ETransactions>) {

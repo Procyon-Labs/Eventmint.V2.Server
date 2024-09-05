@@ -32,8 +32,6 @@ export class GeneralController<T extends Document> {
   }
 
   async getAllWithPagination(req: Request, res: Response) {
-    console.log(req.query);
-
     const data = await this.generalService.getAllWithPagination(req.query as any);
     if (!data) return InternalErrorResponse(res);
     if (data.data.length === 0) return NotFoundResponse(res);
