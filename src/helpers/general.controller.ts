@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { GeneralService } from '../services';
+import { GeneralService } from './general.service';
 import { Document, Model } from 'mongoose';
 import { SuccessResponse, InternalErrorResponse, NotFoundResponse } from '../utils';
 import { MESSAGES } from '../config';
@@ -10,7 +10,7 @@ export class GeneralController<T extends Document> {
   constructor(model: Model<any>) {
     this.generalService = new GeneralService<T>(model);
     this.create = this.create.bind(this);
-    this.delete = this.delete.bind(this);
+    // this.delete = this.delete.bind(this);
     this.exists = this.exists.bind(this);
     this.find = this.find.bind(this);
     this.getAll = this.getAll.bind(this);
@@ -70,13 +70,13 @@ export class GeneralController<T extends Document> {
     return SuccessResponse(res, data, MESSAGES.UPDATED);
   }
 
-  async delete(req: Request, res: Response) {
-    const { id } = req.params;
-    const data = await this.generalService.softDelete({ _id: id });
-    if (!data) return NotFoundResponse(res);
+  // async delete(req: Request, res: Response) {
+  //   const { id } = req.params;
+  //   const data = await this.generalService.softDelete({ _id: id });
+  //   if (!data) return NotFoundResponse(res);
 
-    return SuccessResponse(res, data, MESSAGES.DELETED);
-  }
+  //   return SuccessResponse(res, data, MESSAGES.DELETED);
+  // }
 
   // Admins only
   async hardDelete(req: Request, res: Response) {

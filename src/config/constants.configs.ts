@@ -1,8 +1,13 @@
 import dotenv from 'dotenv';
+import { PublicKey } from '@solana/web3.js';
 dotenv.config();
 
 export const PORT = process.env.PORT || 3000;
 export const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+
+export const DEFAULT_SOL_ADDRESS = new PublicKey('HgbrurVvvFNjyGZr21b6v7jRD3r1LR8ZTsTB3b5kv7MW');
+export const DEFAULT_SOL_AMOUNT = 0.1; // Replace with the default SOL amount
+export const BlinkSights = '270562cb6807044cf9a21f605a1ddfc5efb265778831aaa390ec55fec09ced4a';
 
 export const basePath = '/api/v1';
 export const DATABASES = {

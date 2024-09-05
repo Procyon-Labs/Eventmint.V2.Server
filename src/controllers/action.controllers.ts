@@ -1,5 +1,13 @@
-import { Request, Response } from 'express';
+import BadRequestError from '../errors/bad-request';
+import EventService from '../services/event.service';
+import TransactionService from '../services/transaction.service';
+import wallet from '../config/wallet.json';
+import { BlinkSights, DEFAULT_SOL_ADDRESS } from '../config';
+import { BlinksightsClient } from 'blinksights-sdk';
 import { create, fetchCollection } from '@metaplex-foundation/mpl-core';
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import {
   createNoopSigner,
   createSignerFromKeypair,
@@ -7,12 +15,6 @@ import {
   publicKey,
   signerIdentity,
 } from '@metaplex-foundation/umi';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import EventService from '../services/event.service';
-import TransactionService from '../services/transaction.service';
-import { BlinksightsClient } from 'blinksights-sdk';
-import { StatusCodes } from 'http-status-codes';
-import BadRequestError from '../errors/bad-request';
 import {
   ACTIONS_CORS_HEADERS,
   ActionGetResponse,
@@ -28,8 +30,6 @@ import {
   SystemProgram,
   Transaction,
 } from '@solana/web3.js';
-import { DEFAULT_SOL_ADDRESS, BlinkSights } from './const';
-import wallet from './wallet.json';
 
 const { getEventByQuery } = new EventService();
 

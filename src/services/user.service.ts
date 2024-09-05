@@ -1,4 +1,5 @@
-import IUser from '../interface/user.interface';
+import { FilterQuery } from 'mongoose';
+import { IUser } from '../interfaces';
 import User from '../models/user.model';
 
 export default class UserService {
@@ -13,7 +14,7 @@ export default class UserService {
   async getUserById(id: string) {
     return await User.findById(id);
   }
-  async findOne(param: {}) {
+  async findOne(param: object) {
     return await User.findOne(param, '-__v');
   }
   async getUserByEmail(email: string) {
@@ -24,7 +25,7 @@ export default class UserService {
     return await User.findByIdAndUpdate(id, { $set: obj }, { new: true });
   }
 
-  async getUsers(query: Partial<IUser>) {
+  async getUsers(query: FilterQuery<IUser>) {
     return await User.find(query);
   }
 }

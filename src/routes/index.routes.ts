@@ -2,9 +2,9 @@ import actionRouter from './action.routes';
 import eventRouter from './event.routes';
 import usereRouter from './user.routes';
 import { basePath } from '../config/constants.configs';
-import { Request, Response } from 'express';
+import { Express, Request, Response } from 'express';
 
-export default (app: any) => {
+export default (app: Express) => {
   app.get('/', (req: Request, res: Response) => {
     return res.send({ success: true, message: 'API is Live!!!' });
   });

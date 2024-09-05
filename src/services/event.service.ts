@@ -1,6 +1,6 @@
 // services/event.service.ts
 
-import IEvent from '../interface/event.interface';
+import { IEvent } from '../interfaces';
 import Event from '../models/event.model';
 
 export default class EventService {

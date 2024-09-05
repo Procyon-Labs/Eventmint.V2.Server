@@ -1,4 +1,4 @@
-import ETransactions from '../interface/transaction.interface';
+import { ETransactions } from '../interfaces';
 import { model, Schema } from 'mongoose';
 
 const transactionSchema = new Schema<ETransactions>(

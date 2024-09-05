@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { DATABASES } from '../config/constants.configs';
-import IEvent from '../interface/event.interface';
+import { IEvent } from '../interfaces';
 
 const eventSchema = new Schema<IEvent>(
   {

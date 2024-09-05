@@ -1,4 +1,4 @@
-export default interface ETransactions {
+export interface ETransactions {
   id?: string;
   buyerId: string;
   eventId: string;
