@@ -1,13 +1,13 @@
-import { model, Schema } from "mongoose";
-import { DATABASES } from "../config/constants.configs";
-import IEvent from "../interface/event.interface";
+import { model, Schema } from 'mongoose';
+import { DATABASES } from '../config/constants.configs';
+import IEvent from '../interface/event.interface';
 
 const eventSchema = new Schema<IEvent>(
   {
     userId: {
       type: String,
       required: true,
-      ref: "profile",
+      ref: 'profile',
     },
     name: {
       type: String,
@@ -85,7 +85,7 @@ const eventSchema = new Schema<IEvent>(
     strict: true,
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 eventSchema.index({ date: 1 });
 const Event = model<IEvent>(DATABASES.EVENT, eventSchema);

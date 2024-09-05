@@ -13,7 +13,7 @@ export default (app: Express) => {
       origin: '*',
       allowedHeaders: ['Content-Type', 'Authorization', 'Accept-Encoding'],
       methods: ['GET', 'POST', 'PUT', 'OPTIONS'],
-    })
+    }),
   );
   app.use(json());
   app.use(helmet());

@@ -18,7 +18,7 @@ const sponsorshipApplicationSchema = new Schema<ISponsorshipApplication>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 sponsorshipApplicationSchema.plugin(mongooseAutoPopulate);
@@ -26,5 +26,5 @@ sponsorshipApplicationSchema.plugin(paginatePlugin);
 
 export const SponsorshipApplicationModel = model<ISponsorshipApplication>(
   DATABASES.SPONSORSHIP_APPLICATION,
-  sponsorshipApplicationSchema
+  sponsorshipApplicationSchema,
 );

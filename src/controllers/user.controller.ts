@@ -1,15 +1,9 @@
-import { Request, Response } from "express";
-import UserService from "../services/user.service";
-import cloudinary from "../config/cloudinary.configs";
-import { StatusCodes } from "http-status-codes";
-const {
-  create,
-  getUserById,
-  getUserByEmail,
-  getUsers,
-  findOne,
-  checkUserExistence,
-} = new UserService();
+import { Request, Response } from 'express';
+import UserService from '../services/user.service';
+import cloudinary from '../config/cloudinary.configs';
+import { StatusCodes } from 'http-status-codes';
+const { create, getUserById, getUserByEmail, getUsers, findOne, checkUserExistence } =
+  new UserService();
 
 export default class UserController {
   async createUser(req: Request, res: Response) {
@@ -20,7 +14,7 @@ export default class UserController {
       if (userFromEmail) {
         return res.status(StatusCodes.CONFLICT).send({
           success: false,
-          message: "Duplicate email",
+          message: 'Duplicate email',
         });
       }
     }
@@ -30,14 +24,14 @@ export default class UserController {
       if (foundUser) {
         return res.status(StatusCodes.CONFLICT).send({
           success: false,
-          message: "Email already exists",
+          message: 'Email already exists',
         });
       }
 
       let imageUrl;
       if (req.file) {
         const result = await cloudinary.uploader.upload(req.file.path, {
-          folder: "EventMint",
+          folder: 'EventMint',
         });
         imageUrl = result.secure_url;
       }
@@ -46,7 +40,7 @@ export default class UserController {
 
       return res.status(StatusCodes.OK).send({
         success: true,
-        message: "User created successfully",
+        message: 'User created successfully',
         user,
       });
     } catch (error: any) {
@@ -64,13 +58,13 @@ export default class UserController {
       if (!user) {
         return res.status(StatusCodes.NOT_FOUND).send({
           success: false,
-          message: "User with the given ID not found",
+          message: 'User with the given ID not found',
         });
       }
 
       return res.status(StatusCodes.OK).send({
         success: true,
-        message: "User fetched successfully",
+        message: 'User fetched successfully',
         user,
       });
     } catch (error: any) {
@@ -88,14 +82,14 @@ export default class UserController {
       if (!data) {
         return res.status(StatusCodes.NOT_FOUND).send({
           success: true,
-          message: "User with the given ID does not exist",
+          message: 'User with the given ID does not exist',
           data: false,
         });
       }
 
       return res.status(StatusCodes.OK).send({
         success: true,
-        message: "User exists",
+        message: 'User exists',
         data,
       });
     } catch (error: any) {
@@ -149,19 +143,19 @@ export default class UserController {
       if (!req.file) {
         return res.status(StatusCodes.BAD_REQUEST).send({
           success: false,
-          message: "Include an Image file",
+          message: 'Include an Image file',
         });
       }
 
       // Upload file to Cloudinary
       const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "EventMint",
+        folder: 'EventMint',
       });
 
       if (!result || !result.secure_url) {
         return res.status(StatusCodes.CONFLICT).send({
           success: false,
-          message: "File upload failed",
+          message: 'File upload failed',
         });
       }
 
@@ -170,11 +164,11 @@ export default class UserController {
 
       return res.status(StatusCodes.CREATED).send({
         success: true,
-        message: "Image uploaded successfully",
+        message: 'Image uploaded successfully',
         imageUrl: result.secure_url,
       });
     } catch (err: any) {
-      console.error("Error uploading image:", err);
+      console.error('Error uploading image:', err);
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
         success: false,
         message: `Error occurred while uploading file: ${err.message || err}`,
@@ -188,7 +182,7 @@ export default class UserController {
 
       return res.status(StatusCodes.OK).send({
         success: true,
-        message: "Users fetched successfully",
+        message: 'Users fetched successfully',
         users,
       });
     } catch (error: any) {

@@ -14,7 +14,10 @@ import 'express-async-errors';
   });
 
   // (for render services) Keep the API awake by pinging it periodically
-  setInterval(() => {
-    pingSelf(BASE_URL);
-  }, 7 * 60 * 1000); //ping every 7 minutes
+  setInterval(
+    () => {
+      pingSelf(BASE_URL);
+    },
+    7 * 60 * 1000,
+  ); //ping every 7 minutes
 })();

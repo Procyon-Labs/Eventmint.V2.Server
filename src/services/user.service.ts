@@ -7,7 +7,7 @@ export default class UserService {
   }
 
   async checkUserExistence(id: string) {
-    return await User.exists({ _id: id })? true : false;
+    return (await User.exists({ _id: id })) ? true : false;
   }
 
   async getUserById(id: string) {

@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-mongoose.set("strictQuery", true);
-import { MESSAGES } from "./constants.configs";
+import mongoose from 'mongoose';
+mongoose.set('strictQuery', true);
+import { MESSAGES } from './constants.configs';
 
 export default function connectToMongo() {
   mongoose

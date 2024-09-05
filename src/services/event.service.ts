@@ -1,7 +1,7 @@
 // services/event.service.ts
 
-import IEvent from "../interface/event.interface";
-import Event from "../models/event.model";
+import IEvent from '../interface/event.interface';
+import Event from '../models/event.model';
 
 export default class EventService {
   async create(event: Partial<IEvent>) {
@@ -10,7 +10,7 @@ export default class EventService {
 
   async getEventById(id: string) {
     const event = await Event.findById(id);
-    if (!event) throw new Error("invalid eventID");
+    if (!event) throw new Error('invalid eventID');
     return event;
   }
 

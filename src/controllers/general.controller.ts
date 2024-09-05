@@ -1,11 +1,7 @@
 import { Request, Response } from 'express';
 import { GeneralService } from '../services';
 import { Document, Model } from 'mongoose';
-import {
-  SuccessResponse,
-  InternalErrorResponse,
-  NotFoundResponse,
-} from '../utils';
+import { SuccessResponse, InternalErrorResponse, NotFoundResponse } from '../utils';
 import { MESSAGES } from '../config';
 
 export class GeneralController<T extends Document> {

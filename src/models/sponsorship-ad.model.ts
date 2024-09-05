@@ -19,7 +19,7 @@ const sponsorshipAdSchema = new Schema<ISponsorshipAd>(
     quantity: { type: Number, required: false },
     image: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 sponsorshipAdSchema.plugin(mongooseAutoPopulate);
@@ -27,5 +27,5 @@ sponsorshipAdSchema.plugin(paginatePlugin);
 
 export const SponsorshipAdModel = model<ISponsorshipAd>(
   DATABASES.SPONSORSHIP_AD,
-  sponsorshipAdSchema
+  sponsorshipAdSchema,
 );

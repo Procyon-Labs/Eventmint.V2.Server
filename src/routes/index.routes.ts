@@ -12,7 +12,7 @@ export default (app: any) => {
   app.use(`${basePath}/event`, eventRouter);
   app.use(`${basePath}/action`, actionRouter);
 
-   /**
+  /**
    * @swagger
    * /:
    *   get:
