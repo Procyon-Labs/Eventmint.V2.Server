@@ -1,5 +1,5 @@
-import { StatusCodes } from "http-status-codes";
-import CustomApiError from "./custom-api";
+import { StatusCodes } from 'http-status-codes';
+import CustomApiError from './custom-api';
 
 export default class BadRequestError extends CustomApiError {
   statusCode: number;

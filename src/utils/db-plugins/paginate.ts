@@ -1,7 +1,8 @@
 import { FilterQuery, PopulateOptions } from 'mongoose';
-import { PaginationOptions } from '../interfaces';
+import { PaginationOptions } from '../../interfaces';
 
 export async function pagination(
+  this: any,
   filter: FilterQuery<unknown>,
   options: PaginationOptions & { populate?: PopulateOptions } = { limit: 10 },
 ) {

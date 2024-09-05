@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
-import EventService from "../services/event.service";
+import { Request, Response } from 'express';
+import EventService from '../services/event.service';
 
 const { create, getEventById, getEvents, getEventByQuery } = new EventService();
 
-const deployedLink = "https://eventmint.onrender.com";
+const deployedLink = 'https://eventmint.onrender.com';
 // const deployedLink = "http://localhost:5500.com";
 
 export default class EventController {
@@ -13,7 +13,7 @@ export default class EventController {
       if (foundEvent) {
         return res.status(409).send({
           success: false,
-          message: "Event name already exists",
+          message: 'Event name already exists',
         });
       }
 
@@ -21,11 +21,9 @@ export default class EventController {
 
       return res.status(200).send({
         success: true,
-        message: "Event created successfully",
+        message: 'Event created successfully',
         event,
-        blink: `${deployedLink}/api/v1/action/${encodeURIComponent(
-          event.name
-        )}`,
+        blink: `${deployedLink}/api/v1/action/${encodeURIComponent(event.name)}`,
       });
     } catch (error: any) {
       return res.status(500).send({
@@ -42,13 +40,13 @@ export default class EventController {
       if (!event) {
         return res.status(404).send({
           success: false,
-          message: "Event with the given ID not found",
+          message: 'Event with the given ID not found',
         });
       }
 
       return res.status(200).send({
         success: true,
-        message: "Event fetched successfully",
+        message: 'Event fetched successfully',
         event,
       });
     } catch (error: any) {
@@ -66,13 +64,13 @@ export default class EventController {
       if (events.length === 0) {
         return res.status(404).send({
           success: false,
-          message: "Events with the given userId not found",
+          message: 'Events with the given userId not found',
         });
       }
 
       return res.status(200).send({
         success: true,
-        message: "Events fetched successfully",
+        message: 'Events fetched successfully',
         events,
       });
     } catch (error: any) {

@@ -1,5 +1,6 @@
-import { model, Schema } from "mongoose";
-import IUser from "../interface/user.interface";
+import { model, Schema } from 'mongoose';
+import { IUser, Roles, UserType } from '../interfaces';
+import { DATABASES } from '../config';
 
 const userSchema = new Schema<IUser>(
   {
@@ -32,12 +33,20 @@ const userSchema = new Schema<IUser>(
       type: String,
       trim: true,
     },
+
+    userType: {
+      type: String,
+      default: UserType.USER,
+    },
+    role: {
+      type: String,
+      default: Roles.CUSTOMER,
+    },
   },
   {
     timestamps: true,
     strict: false,
-  }
+  },
 );
 
-const User = model<IUser>("User", userSchema);
-export default User;
+export const UserModel = model<IUser>(DATABASES.USER, userSchema);

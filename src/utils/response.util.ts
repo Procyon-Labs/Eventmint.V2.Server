@@ -1,13 +1,6 @@
 import { Response } from 'express';
-import { MESSAGES } from '../constants';
-
-enum StatusCode {
-  SUCCESS = '10000',
-  FAILURE = '10001',
-  RETRY = '10002',
-  INVALID_ACCESS_TOKEN = '10003',
-  WE_MOVE = '10004',
-}
+import { MESSAGES } from '../config';
+import { PaginationData } from '../interfaces';
 
 enum ResponseStatus {
   SUCCESS = 200,
@@ -22,25 +15,35 @@ enum ResponseStatus {
 export function AuthFailureResponse(res: Response, message = MESSAGES.AUTH_FAILURE): Response {
   return res
     .status(ResponseStatus.UNAUTHORIZED)
-    .send({ success: false, statusCode: StatusCode.FAILURE, message });
+    .send({ success: false, status: ResponseStatus.UNAUTHORIZED, message });
+}
+
+export function BadRequestResponseWithError(
+  res: Response,
+  errors: string[],
+  message = MESSAGES.BAD_PARAMETERS,
+): Response {
+  return res
+    .status(ResponseStatus.BAD_REQUEST)
+    .send({ success: false, status: ResponseStatus.BAD_REQUEST, message, errors });
 }
 
 export function NotFoundResponse(res: Response, message = MESSAGES.NOT_FOUND): Response {
   return res
     .status(ResponseStatus.NOT_FOUND)
-    .send({ success: false, statusCode: StatusCode.FAILURE, message });
+    .send({ success: false, status: ResponseStatus.NOT_FOUND, message });
 }
 
 export function ForbiddenResponse(res: Response, message = MESSAGES.FORBIDDEN): Response {
   return res
     .status(ResponseStatus.FORBIDDEN)
-    .send({ success: false, statusCode: StatusCode.FAILURE, message });
+    .send({ success: false, status: ResponseStatus.FORBIDDEN, message });
 }
 
 export function BadRequestResponse(res: Response, message = MESSAGES.BAD_PARAMETERS): Response {
   return res
     .status(ResponseStatus.BAD_REQUEST)
-    .send({ success: false, statusCode: StatusCode.FAILURE, message });
+    .send({ success: false, status: ResponseStatus.BAD_REQUEST, message });
 }
 
 export function ForbiddenButWeMoveResponse<T>(
@@ -50,25 +53,25 @@ export function ForbiddenButWeMoveResponse<T>(
 ): Response {
   return res
     .status(ResponseStatus.FORBIDDEN)
-    .json({ success: true, statusCode: StatusCode.WE_MOVE, message, data });
+    .json({ success: true, status: ResponseStatus.FORBIDDEN, message, data });
 }
 
 export function InternalErrorResponse(res: Response, message = MESSAGES.INTERNAL_ERROR): Response {
   return res
     .status(ResponseStatus.INTERNAL_ERROR)
-    .send({ success: false, statusCode: StatusCode.FAILURE, message });
+    .send({ success: false, status: ResponseStatus.INTERNAL_ERROR, message });
 }
 
 export function SuccessMsgResponse(res: Response, message = MESSAGES.FETCHED): Response {
   return res
     .status(ResponseStatus.SUCCESS)
-    .send({ success: true, statusCode: StatusCode.SUCCESS, message });
+    .send({ success: true, status: ResponseStatus.SUCCESS, message });
 }
 
 export function FailureMsgResponse(res: Response, message = MESSAGES.ERROR): Response {
   return res
     .status(ResponseStatus.SUCCESS)
-    .send({ success: false, statusCode: StatusCode.FAILURE, message });
+    .send({ success: false, status: ResponseStatus.SUCCESS, message });
 }
 
 export function SuccessResponse<T>(
@@ -78,7 +81,18 @@ export function SuccessResponse<T>(
 ): Response {
   return res
     .status(ResponseStatus.SUCCESS)
-    .json({ success: true, statusCode: StatusCode.SUCCESS, message, data });
+    .json({ success: true, status: ResponseStatus.SUCCESS, message, data });
+}
+
+export function SuccessResponseWithPagination<T>(
+  res: Response,
+  data: T,
+  pagination: PaginationData,
+  message = MESSAGES.SUCCESSFUL,
+): Response {
+  return res
+    .status(ResponseStatus.SUCCESS)
+    .json({ success: true, status: ResponseStatus.SUCCESS, message, data, pagination });
 }
 
 export function AccessTokenErrorResponse(
@@ -87,7 +101,7 @@ export function AccessTokenErrorResponse(
 ): Response {
   return res
     .status(ResponseStatus.UNAUTHORIZED)
-    .send({ success: false, statusCode: StatusCode.INVALID_ACCESS_TOKEN, message });
+    .send({ success: false, status: ResponseStatus.UNAUTHORIZED, message });
 }
 
 export function TokenRefreshResponse(
@@ -98,7 +112,7 @@ export function TokenRefreshResponse(
 ): Response {
   return res.status(ResponseStatus.SUCCESS).json({
     success: true,
-    statusCode: StatusCode.SUCCESS,
+    status: ResponseStatus.SUCCESS,
     message,
     accessToken: accessToken,
     refreshToken: refreshToken,
@@ -108,5 +122,5 @@ export function TokenRefreshResponse(
 export function ComingSoonResponse(res: Response, message = MESSAGES.COMING_SOON): Response {
   return res
     .status(ResponseStatus.UNAVAILABLE)
-    .send({ success: false, statusCode: StatusCode.FAILURE, message });
+    .send({ success: false, status: ResponseStatus.UNAVAILABLE, message });
 }

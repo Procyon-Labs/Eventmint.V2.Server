@@ -1,12 +1,12 @@
-import ETransactions from "../interface/transaction.interface";
-import { model, Schema } from "mongoose";
+import { ETransactions } from '../interfaces';
+import { model, Schema } from 'mongoose';
 
 const transactionSchema = new Schema<ETransactions>(
   {
     buyerId: {
       type: String,
       required: true,
-      ref: "user",
+      ref: 'user',
     },
     eventId: {
       type: String,
@@ -22,8 +22,8 @@ const transactionSchema = new Schema<ETransactions>(
     strict: true,
     timestamps: false,
     versionKey: false,
-  }
+  },
 );
 
-const Transaction = model("transaction", transactionSchema);
+const Transaction = model('transaction', transactionSchema);
 export default Transaction;

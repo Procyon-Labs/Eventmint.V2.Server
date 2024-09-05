@@ -1,30 +1,31 @@
-import IUser from '../interface/user.interface';
-import User from '../models/user.model';
+import { FilterQuery } from 'mongoose';
+import { IUser } from '../interfaces';
+import { UserModel } from '../models';
 
 export default class UserService {
-  async create(user: Partial<IUser>) {
-    return await User.create(user);
+  async create(User: Partial<IUser>) {
+    return await UserModel.create(User);
   }
 
   async checkUserExistence(id: string) {
-    return await User.exists({ _id: id })? true : false;
+    return (await UserModel.exists({ _id: id })) ? true : false;
   }
 
   async getUserById(id: string) {
-    return await User.findById(id);
+    return await UserModel.findById(id);
   }
-  async findOne(param: {}) {
-    return await User.findOne(param, '-__v');
+  async findOne(param: object) {
+    return await UserModel.findOne(param, '-__v');
   }
   async getUserByEmail(email: string) {
-    return await User.findOne({ email });
+    return await UserModel.findOne({ email });
   }
 
   async editById(id: string, obj: Partial<IUser>) {
-    return await User.findByIdAndUpdate(id, { $set: obj }, { new: true });
+    return await UserModel.findByIdAndUpdate(id, { $set: obj }, { new: true });
   }
 
-  async getUsers(query: Partial<IUser>) {
-    return await User.find(query);
+  async getUsers(query: FilterQuery<IUser>) {
+    return await UserModel.find(query);
   }
 }
