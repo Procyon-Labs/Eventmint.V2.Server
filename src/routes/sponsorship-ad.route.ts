@@ -1,7 +1,7 @@
+import { CreateSponsorshipAdDto, GetSponsorshipAdWithPaginationDto } from '../validation';
 import { Router } from 'express';
 import { sponsorshipAdController } from '../controllers';
 import { validateBodyDTO } from '../middleware/body.validation.middleware';
-import { CreateSponsorshipAdDto, GetSponsorshipAdWithPaginationDto } from '../validation';
 import { validateQueryDTO } from '../middleware/query.validation.middleware';
 
 const router = Router();
@@ -28,7 +28,6 @@ const router = Router();
  */
 router.post('/', validateBodyDTO(CreateSponsorshipAdDto), sponsorshipAdController.create);
 
-
 /**
  * @swagger
  * /sponsorship-ad/search:
@@ -50,10 +49,10 @@ router.post('/', validateBodyDTO(CreateSponsorshipAdDto), sponsorshipAdControlle
  *         description: Bad request
  */
 router.get(
-    '/search',
-    validateQueryDTO(GetSponsorshipAdWithPaginationDto),
-sponsorshipAdController.getAllWithPagination,
-  );
+  '/search',
+  validateQueryDTO(GetSponsorshipAdWithPaginationDto),
+  sponsorshipAdController.getAllWithPagination,
+);
 
 //   router.get(
 //     '/count',

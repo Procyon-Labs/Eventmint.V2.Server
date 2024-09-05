@@ -2,14 +2,6 @@ import { Response } from 'express';
 import { MESSAGES } from '../config';
 import { PaginationData } from '../interfaces';
 
-enum status {
-  SUCCESS = '10000',
-  FAILURE = '10001',
-  RETRY = '10002',
-  INVALID_ACCESS_TOKEN = '10003',
-  WE_MOVE = '10004',
-}
-
 enum ResponseStatus {
   SUCCESS = 200,
   BAD_REQUEST = 400,

@@ -1,5 +1,13 @@
-import { IsMongoId, IsNotEmpty, IsNumber, IsString, IsOptional, IsPositive, Min } from 'class-validator';
 import { ConvertToInt } from '../utils/decorator';
+import {
+  IsMongoId,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  IsOptional,
+  IsPositive,
+  Min,
+} from 'class-validator';
 
 export class CreateSponsorshipAdDto {
   // @IsMongoId()
@@ -122,7 +130,7 @@ export class GetSponsorshipAdWithPaginationDto {
   @IsOptional()
   @IsString()
   image?: string;
-  
+
   @ConvertToInt() // Because by default any value passed through query is a string, we need to convert it back to a number.
   @IsNumber()
   @IsPositive()
@@ -141,4 +149,3 @@ export class DeleteSponsorshipAdDto {
   @IsNotEmpty()
   id!: string;
 }
-

@@ -1,8 +1,13 @@
-import { Request, Response } from 'express';
-import { GeneralService } from './general.service';
 import { Document, Model } from 'mongoose';
-import { SuccessResponse, InternalErrorResponse, NotFoundResponse, SuccessResponseWithPagination } from '../utils';
+import { GeneralService } from './general.service';
 import { MESSAGES } from '../config';
+import { Request, Response } from 'express';
+import {
+  SuccessResponse,
+  InternalErrorResponse,
+  NotFoundResponse,
+  SuccessResponseWithPagination,
+} from '../utils';
 
 export class GeneralController<T extends Document> {
   public generalService: GeneralService<T>;
@@ -27,9 +32,9 @@ export class GeneralController<T extends Document> {
   }
 
   async getAllWithPagination(req: Request, res: Response) {
-    console.log(req.query)
-    
-     const data = await this.generalService.getAllWithPagination(req.query as any);
+    console.log(req.query);
+
+    const data = await this.generalService.getAllWithPagination(req.query as any);
     if (!data) return InternalErrorResponse(res);
     if (data.data.length === 0) return NotFoundResponse(res);
 

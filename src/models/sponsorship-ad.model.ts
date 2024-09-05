@@ -20,16 +20,18 @@ const sponsorshipAdSchema = new Schema<ISponsorshipAd>(
     quantity: { type: Number, required: false },
     image: { type: String, required: true },
   },
-  { timestamps: true,  
+  {
+    timestamps: true,
     toJSON: {
-    virtuals: true,
-    transform: function (doc, ret) {
-      delete ret._id;
-      delete ret.__v;
-      delete ret.password;
-      return ret;
+      virtuals: true,
+      transform: function (doc, ret) {
+        delete ret._id;
+        delete ret.__v;
+        delete ret.password;
+        return ret;
+      },
     },
-  }, },
+  },
 );
 
 sponsorshipAdSchema.plugin(mongooseAutoPopulate);

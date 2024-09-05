@@ -1,1 +1,1 @@
-export * from './sponsorship-ad.swagger.schema'
+export * from './sponsorship-ad.swagger.schema';

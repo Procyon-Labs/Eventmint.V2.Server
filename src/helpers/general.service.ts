@@ -1,6 +1,6 @@
-import { Model, Document, FilterQuery } from 'mongoose';
-import { UserModel } from '../models';
+import { Document, FilterQuery, Model } from 'mongoose';
 import { PaginateModel } from '../interfaces';
+import { UserModel } from '../models';
 
 export class GeneralService<T extends Document> {
   private model: PaginateModel<T>;
@@ -10,7 +10,7 @@ export class GeneralService<T extends Document> {
 
   registerModels = async () => {
     await UserModel.findOne();
-    console.log('Registering user model')
+    console.log('Registering user model');
   };
 
   create = async (body: Partial<T>) => {
@@ -37,33 +37,38 @@ export class GeneralService<T extends Document> {
     return data;
   }
 
-
-  update = async (searchDetails: object, update: object)=> {
-    return await this.model.findOneAndUpdate({ ...searchDetails }, update, {
-      new: true,
-    }).select('-__v');
+  update = async (searchDetails: object, update: object) => {
+    return await this.model
+      .findOneAndUpdate({ ...searchDetails }, update, {
+        new: true,
+      })
+      .select('-__v');
   };
 
   find = async (searchData: object) => {
-    return await this.model.find({ ...searchData })
+    return await this.model
+      .find({ ...searchData })
       .sort({ updatedAt: 'desc' })
       .select('-__v');
   };
 
-  findOne = async (searchData: object)=> {
-    return this.model.findOne({ ...searchData })
+  findOne = async (searchData: object) => {
+    return this.model
+      .findOne({ ...searchData })
       .sort({ updatedAt: 'desc' })
       .select('-__v');
   };
 
   softDelete = async (searchParams: object): Promise<T> => {
-    return await this.model.findOneAndUpdate(
-      { ...searchParams, deleted: false },
-      { deleted: true },
-      {
-        new: true,
-      },
-    ).select('-__v');
+    return await this.model
+      .findOneAndUpdate(
+        { ...searchParams, deleted: false },
+        { deleted: true },
+        {
+          new: true,
+        },
+      )
+      .select('-__v');
   };
 
   hardDelete = async (searchParams: object): Promise<T> => {

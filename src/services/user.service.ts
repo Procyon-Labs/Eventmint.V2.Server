@@ -1,6 +1,6 @@
 import { FilterQuery } from 'mongoose';
 import { IUser } from '../interfaces';
-import {UserModel} from '../models';
+import { UserModel } from '../models';
 
 export default class UserService {
   async create(User: Partial<IUser>) {

@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-mongoose.set('strictQuery', true);
 import { MESSAGES } from './constants.configs';
+mongoose.set('strictQuery', true);
 
 export default function connectToMongo() {
   mongoose
-    .connect(process.env.MONGO_URI!,  {
+    .connect(process.env.MONGO_URI!, {
       autoIndex: false, // Don't build indexes
       maxPoolSize: 10, // Maintain up to 10 socket connections
       serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
@@ -17,5 +17,4 @@ export default function connectToMongo() {
     .catch((err) => {
       console.log(MESSAGES.DATABASE.ERROR, err);
     });
-  
 }
