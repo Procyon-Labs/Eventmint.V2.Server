@@ -22,6 +22,11 @@ const MESSAGES = {
     NOT_FOUND: "Profile not found.",
   },
   UNEXPECTED_ERROR: "An unexpected error occured.",
+  UPDATED: 'Resource updated successfully',
+  ERROR: 'Oops! An error occurred while processing the resource',
+  CREATED: 'Resource created successfully',
+  DELETED: 'Resource deleted successfully',
+ 
 };
 
 export { PORT, basePath, MESSAGES, DATABASES };
