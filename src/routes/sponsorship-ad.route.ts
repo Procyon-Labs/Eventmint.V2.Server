@@ -38,7 +38,7 @@ router.post('/', validateBodyDTO(CreateSponsorshipAdDto), sponsorshipAdControlle
  * /sponsorship-ad/search:
  *   get:
  *     summary: Search sponsorship ads
- *     description: Retrieves a list of sponsorship ads based on search criteria.
+ *     description: Retrieves a list of sponsorship ads based on search criteria with pagination.
  *     tags:
  *       - Sponsorship Ads
  *     parameters:
@@ -108,10 +108,25 @@ router.patch(
   sponsorshipAdController.update,
 );
 
-//   router.delete(
-//     '/:id',
-//     processRequestParams(objectIdValidation.find.params),
-//     newsletterSubscriptionController.delete,
-//   );
+/**
+ * @swagger
+ * /sponsorship-ad/{id}:
+ *   delete:
+ *     summary: Delete a sponsorship ad
+ *     description: Deletes an existing sponsorship ad by ID.
+ *     tags:
+ *       - Sponsorship Ads
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the sponsorship ad to delete
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Successful
+ */
+router.delete('/:id', validateParamsDTO(UniqueIdDTO), sponsorshipAdController.hardDelete);
 
 export default router;
