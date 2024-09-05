@@ -1,6 +1,7 @@
 import actionRouter from './action.routes';
 import eventRouter from './event.routes';
-import usereRouter from './user.routes';
+import userRouter from './user.routes';
+import sponsorshipAdRouter from './sponsorship-ad.route';
 import { basePath } from '../config/constants.configs';
 import { Express, Request, Response } from 'express';
 
@@ -8,9 +9,10 @@ export default (app: Express) => {
   app.get('/', (req: Request, res: Response) => {
     return res.send({ success: true, message: 'API is Live!!!' });
   });
-  app.use(`${basePath}/user`, usereRouter);
+  app.use(`${basePath}/user`, userRouter);
   app.use(`${basePath}/event`, eventRouter);
   app.use(`${basePath}/action`, actionRouter);
+  app.use(`${basePath}/sponsorship-ad`, sponsorshipAdRouter);
 
   /**
    * @swagger

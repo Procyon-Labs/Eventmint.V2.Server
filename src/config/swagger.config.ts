@@ -2,6 +2,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { BASE_URL, basePath } from './constants.configs';
 import { Express } from 'express';
+import { sponsorshipAdSwaggerSchema } from '../validation';
 
 export function setupSwagger(app: Express) {
   const SWAGGER_OPTIONS = {
@@ -15,6 +16,11 @@ export function setupSwagger(app: Express) {
         contact: {
           name: 'Orji Michael',
           email: 'orjimichael4886@gmail.com',
+        },
+      },
+      components: {
+        schemas: {
+          ...sponsorshipAdSwaggerSchema,
         },
       },
       servers: [

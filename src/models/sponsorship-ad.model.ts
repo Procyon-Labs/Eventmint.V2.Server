@@ -1,6 +1,6 @@
 import mongooseAutoPopulate from 'mongoose-autopopulate';
 import { DATABASES } from '../config';
-import { ISponsorshipAd } from '../interface';
+import { ISponsorshipAd } from '../interfaces';
 import { model, Schema } from 'mongoose';
 import { paginatePlugin } from '../utils';
 

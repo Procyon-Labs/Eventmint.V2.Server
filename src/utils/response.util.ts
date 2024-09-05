@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { MESSAGES } from '../constants';
+import { MESSAGES } from '../config';
 
 enum StatusCode {
   SUCCESS = '10000',
@@ -23,6 +23,16 @@ export function AuthFailureResponse(res: Response, message = MESSAGES.AUTH_FAILU
   return res
     .status(ResponseStatus.UNAUTHORIZED)
     .send({ success: false, statusCode: StatusCode.FAILURE, message });
+}
+
+export function BadRequestResponseWithError(
+  res: Response,
+  errors: string[],
+  message = MESSAGES.BAD_PARAMETERS,
+): Response {
+  return res
+    .status(ResponseStatus.BAD_REQUEST)
+    .send({ success: false, statusCode: StatusCode.FAILURE, message, errors });
 }
 
 export function NotFoundResponse(res: Response, message = MESSAGES.NOT_FOUND): Response {
