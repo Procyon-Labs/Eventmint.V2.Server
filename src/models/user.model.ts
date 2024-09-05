@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { IUser } from '../interfaces';
+import { IUser, Roles, UserType } from '../interfaces';
 import { DATABASES } from '../config';
 
 const userSchema = new Schema<IUser>(
@@ -32,6 +32,15 @@ const userSchema = new Schema<IUser>(
     bio: {
       type: String,
       trim: true,
+    },
+
+    userType: {
+      type: String,
+      default: UserType.USER,
+    },
+    role: {
+      type: String,
+      default: Roles.CUSTOMER,
     },
   },
   {

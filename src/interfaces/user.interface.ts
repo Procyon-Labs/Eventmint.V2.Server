@@ -7,5 +7,19 @@ export interface IUser extends Document {
   email: string | undefined | null;
   imageUrl?: string | undefined | null;
   bio?: string | undefined | null;
+  userType: string;
+  role: string;
   createdAt?: Date;
+}
+
+export enum UserType {
+  USER = 'user',
+  ADMIN = 'admin',
+  SUPER_ADMIN = 'superAdmin',
+}
+
+export enum Roles {
+  BUSINESS_OWNER = 'businessOwner',
+  SPONSOR = 'sponsor',
+  CUSTOMER = 'customer',
 }
