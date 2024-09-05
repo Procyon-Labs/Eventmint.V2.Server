@@ -27,7 +27,6 @@ const sponsorshipAdSchema = new Schema<ISponsorshipAd>(
       transform: function (doc, ret) {
         delete ret._id;
         delete ret.__v;
-        delete ret.password;
         return ret;
       },
     },

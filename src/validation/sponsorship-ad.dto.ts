@@ -102,37 +102,7 @@ export class GetSponsorshipAdDto {
   image?: string;
 }
 
-export class GetSponsorshipAdWithPaginationDto {
-  @IsOptional()
-  @IsString()
-  user?: string;
-
-  @IsOptional()
-  @IsString()
-  title?: string;
-
-  @IsOptional()
-  @IsString()
-  description?: string;
-
-  @IsOptional()
-  @IsString()
-  category?: string;
-
-  @IsOptional()
-  @ConvertToInt() // Because by default any value passed through query is a string, we need to convert it back to a number.
-  @IsNumber()
-  amount?: number;
-
-  @IsOptional()
-  @ConvertToInt() // Because by default any value passed through query is a string, we need to convert it back to a number.
-  @IsNumber()
-  quantity?: number;
-
-  @IsOptional()
-  @IsString()
-  image?: string;
-
+export class GetSponsorshipAdWithPaginationDto extends GetSponsorshipAdDto {
   @ConvertToInt() // Because by default any value passed through query is a string, we need to convert it back to a number.
   @IsNumber()
   @IsPositive()

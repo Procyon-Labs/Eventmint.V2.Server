@@ -7,7 +7,7 @@ import { paginatePlugin } from '../utils';
 const sponsorshipApplicationSchema = new Schema<ISponsorshipApplication>(
   {
     sponsorshipAd: {
-      type: Schema.Types.ObjectId,
+      type: String,
       required: true,
       ref: DATABASES.SPONSORSHIP_AD,
       autopopulate: true,
@@ -18,6 +18,14 @@ const sponsorshipApplicationSchema = new Schema<ISponsorshipApplication>(
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: function (doc, ret) {
+        delete ret._id;
+        delete ret.__v;
+        return ret;
+      },
+    },
   },
 );
 

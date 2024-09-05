@@ -2,6 +2,7 @@ import actionRouter from './action.routes';
 import eventRouter from './event.routes';
 import userRouter from './user.routes';
 import sponsorshipAdRouter from './sponsorship-ad.route';
+import sponsorshipApplicationRouter from './sponsorship-application.route';
 import { basePath } from '../config/constants.configs';
 import { Express, Request, Response } from 'express';
 
@@ -13,6 +14,7 @@ export default (app: Express) => {
   app.use(`${basePath}/event`, eventRouter);
   app.use(`${basePath}/action`, actionRouter);
   app.use(`${basePath}/sponsorship-ad`, sponsorshipAdRouter);
+  app.use(`${basePath}/sponsorship-application`, sponsorshipApplicationRouter);
 
   /**
    * @swagger

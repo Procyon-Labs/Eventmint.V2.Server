@@ -165,50 +165,49 @@ export const sponsorshipAdSwaggerSchema = {
       },
     },
   },
+  SponsorshipAd: {
+    type: 'object',
+    properties: {
+      _id: {
+        type: 'string',
+        example: '6603dbc57c3f573889f14ae8',
+        description: 'ID of the sponsorship ad',
+      },
+      user: {
+        type: 'string',
+        example: '6603dbc57c3f573889f14ae8',
+        description: 'User ID of the creator',
+      },
+      title: {
+        type: 'string',
+        example: 'Exciting Sponsorship Opportunity',
+        description: 'Title of the sponsorship ad',
+      },
+      description: {
+        type: 'string',
+        example: 'Get your brand seen by millions with this unique opportunity.',
+        description: 'Description of the sponsorship ad',
+      },
+      category: {
+        type: 'string',
+        example: 'Sports',
+        description: 'Category of the sponsorship ad',
+      },
+      amount: {
+        type: 'number',
+        example: 500,
+        description: 'Amount to be paid for the sponsorship ad',
+      },
+      quantity: {
+        type: 'number',
+        example: 10,
+        description: 'Quantity of the sponsorship ad available',
+      },
+      image: {
+        type: 'string',
+        example: 'https://example.com/image.jpg',
+        description: 'Image URL for the sponsorship ad',
+      },
+    },
+  },
 };
-
-// SponsorshipAd: {
-//   type: 'object',
-//   properties: {
-//     _id: {
-//       type: 'string',
-//       example: '6603dbc57c3f573889f14ae8',
-//       description: 'ID of the sponsorship ad',
-//     },
-//     user: {
-//       type: 'string',
-//       example: '6603dbc57c3f573889f14ae8',
-//       description: 'User ID of the creator',
-//     },
-//     title: {
-//       type: 'string',
-//       example: 'Exciting Sponsorship Opportunity',
-//       description: 'Title of the sponsorship ad',
-//     },
-//     description: {
-//       type: 'string',
-//       example: 'Get your brand seen by millions with this unique opportunity.',
-//       description: 'Description of the sponsorship ad',
-//     },
-//     category: {
-//       type: 'string',
-//       example: 'Sports',
-//       description: 'Category of the sponsorship ad',
-//     },
-//     amount: {
-//       type: 'number',
-//       example: 500,
-//       description: 'Amount to be paid for the sponsorship ad',
-//     },
-//     quantity: {
-//       type: 'number',
-//       example: 10,
-//       description: 'Quantity of the sponsorship ad available',
-//     },
-//     image: {
-//       type: 'string',
-//       example: 'https://example.com/image.jpg',
-//       description: 'Image URL for the sponsorship ad',
-//     },
-//   },
-// },
