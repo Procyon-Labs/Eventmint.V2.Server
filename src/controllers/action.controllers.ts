@@ -61,7 +61,7 @@ export default class ActionController {
         description: `${event?.description}`,
         title: `${event?.name}`,
       };
-      client.createActionGetResponseV1(req.url, payload);
+      // client.createActionGetResponseV1(req.url, payload);
       res.set(ACTIONS_CORS_HEADERS);
       res.status(StatusCodes.OK).json(payload);
       return res.json(payload);
