@@ -11,6 +11,9 @@ export const DATABASES = {
 
   EVENT: 'event',
   TRANSACTION: 'transaction',
+
+  SPONSORSHIP_AD: 'sponsorship_ad',
+  SPONSORSHIP_APPLICATION: 'sponsorship_application',
 };
 
 export const MESSAGES = {
@@ -32,4 +35,3 @@ export const MESSAGES = {
   CREATED: 'Resource created successfully',
   DELETED: 'Resource deleted successfully',
 };
-
