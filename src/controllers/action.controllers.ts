@@ -215,7 +215,7 @@
 import BadRequestError from '../errors/bad-request';
 import EventService from '../services/event.service';
 import TransactionService from '../services/transaction.service';
-import wallet from '../config/wallet.json';
+
 import { BlinkSights, DEFAULT_SOL_ADDRESS } from '../config';
 import { BlinksightsClient } from 'blinksights-sdk';
 import { create, fetchCollection } from '@metaplex-foundation/mpl-core';
@@ -244,10 +244,19 @@ import {
   SystemProgram,
   Transaction,
 } from '@solana/web3.js';
+require('dotenv').config();
 
 const { getEventByQuery } = new EventService();
 
 const client = new BlinksightsClient(BlinkSights);
+
+const walletSecretKey = process.env.WALLET_SECRET_KEY;
+
+if (!walletSecretKey) {
+  throw new Error('WALLET_SECRET_KEY is not defined in environment variables.');
+}
+
+const wallet = JSON.parse(walletSecretKey);
 
 type ExtendedActionPostResponse = ActionPostResponse & {
   mintedTransaction: string;
