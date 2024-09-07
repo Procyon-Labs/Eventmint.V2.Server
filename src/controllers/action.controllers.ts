@@ -1,7 +1,7 @@
 import BadRequestError from '../errors/bad-request';
 import EventService from '../services/event.service';
 import TransactionService from '../services/transaction.service';
-import wallet from '../config/wallet.json';
+
 import { BlinkSights, DEFAULT_SOL_ADDRESS } from '../config';
 import { BlinksightsClient } from 'blinksights-sdk';
 import { create, fetchCollection } from '@metaplex-foundation/mpl-core';
