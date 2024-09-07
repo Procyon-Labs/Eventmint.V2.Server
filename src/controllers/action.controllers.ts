@@ -35,10 +35,6 @@ const { getEventByQuery } = new EventService();
 
 const client = new BlinksightsClient(BlinkSights);
 
-type ExtendedActionPostResponse = ActionPostResponse & {
-  mintedTransaction: string;
-};
-
 export default class ActionController {
   async getAction(req: Request, res: Response) {
     try {
@@ -53,13 +49,14 @@ export default class ActionController {
       }
 
       let payload: ActionGetResponse;
+
       payload = {
         icon: event?.image as unknown as string,
         label: `Buy Ticket (${event?.price} SOL)`,
         description: `${event?.description}`,
         title: `${event?.name}`,
       };
-      // client.createActionGetResponseV1(req.url, payload);
+
       res.set(ACTIONS_CORS_HEADERS);
       res.status(StatusCodes.OK).json(payload);
       return res.json(payload);
@@ -87,16 +84,18 @@ export default class ActionController {
       let account: PublicKey;
 
       //Validate client account
+
       try {
         account = new PublicKey(body.account);
-      } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
         return res.status(400).json({
           success: false,
           message: 'Invalid "account" provided',
         });
       }
 
-      const connection = new Connection(process.env.SOLANA_RPC! || clusterApiUrl('devnet'));
+      const connection = new Connection(clusterApiUrl('devnet'));
 
       // Ensure the receiving account will be rent exempt
       const minimumBalance = await connection.getMinimumBalanceForRentExemption(
