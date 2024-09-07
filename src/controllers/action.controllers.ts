@@ -357,19 +357,17 @@ export default class ActionController {
       // Mint the transaction and include it in the response
       const mintedTransaction = await this.mintTransaction(account, event);
 
-      const serializedTransaction = transaction
-        .serialize({
-          requireAllSignatures: false,
-          verifySignatures: true,
-        })
-        .toString('base64');
+      const payload: ActionPostResponse = {
+        transaction: transaction
+          .serialize({
+            requireAllSignatures: false,
+            verifySignatures: true,
+          })
+          .toString('base64'),
 
-      const payload: ExtendedActionPostResponse = {
-        transaction: serializedTransaction,
-        mintedTransaction: mintedTransaction.toString(),
         message: `You've successfully purchased a ticket for ${event?.name} for ${price} SOL 🎊`,
       };
-
+      mintedTransaction.toString();
       console.log('Payload:', payload);
       console.log('Transaction:', transaction);
 
