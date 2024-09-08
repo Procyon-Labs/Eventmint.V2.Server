@@ -1,7 +1,7 @@
 import BadRequestError from '../errors/bad-request';
 import EventService from '../services/event.service';
 import TransactionService from '../services/transaction.service';
-
+import dotenv from 'dotenv';
 import { BlinkSights, DEFAULT_SOL_ADDRESS } from '../config';
 import { BlinksightsClient } from 'blinksights-sdk';
 import { create, fetchCollection } from '@metaplex-foundation/mpl-core';
@@ -30,6 +30,7 @@ import {
   SystemProgram,
   Transaction,
 } from '@solana/web3.js';
+dotenv.config();
 
 const { getEventByQuery } = new EventService();
 
@@ -171,10 +172,14 @@ export default class ActionController {
     try {
       const umi = createUmi('https://api.devnet.solana.com', 'confirmed');
 
-      // Ensure the wallet is provided and valid
-      if (!wallet) throw new Error('Wallet secret key is missing.');
+      // Ensure the WALLET_SECRET_KEY is provided and valid
+      const walletSecretKeyString = process.env.WALLET_SECRET_KEY;
+      if (!walletSecretKeyString) throw new Error('WALLET_SECRET_KEY is missing in the env file.');
 
-      const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet as number[]));
+      // Convert the WALLET_SECRET_KEY from a string to a Uint8Array
+      const walletSecretKey = Uint8Array.from(walletSecretKeyString.split(',').map(Number));
+
+      const keypair = umi.eddsa.createKeypairFromSecretKey(walletSecretKey);
       const adminSigner = createSignerFromKeypair(umi, keypair);
 
       // Set the user as the signer who will sign the transaction later
