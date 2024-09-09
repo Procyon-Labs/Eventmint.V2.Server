@@ -23,6 +23,7 @@ const eventSchema = new Schema<IEvent>(
     date: {
       type: Date,
       required: true,
+      default: Date.now,
     },
     location: {
       type: String,
