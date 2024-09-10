@@ -6,7 +6,7 @@ const eventSchema = new mongoose_1.Schema({
     userId: {
         type: String,
         required: true,
-        ref: "profile",
+        ref: 'profile',
     },
     name: {
         type: String,
@@ -16,13 +16,13 @@ const eventSchema = new mongoose_1.Schema({
     },
     image: {
         type: String,
-        // required: true,
-        default: "https://res.cloudinary.com/dtfvdjvyr/image/upload/v1719802304/event-logo_iyl1ec.png",
+        required: true,
         trim: true,
     },
     date: {
         type: Date,
         required: true,
+        default: Date.now,
     },
     location: {
         type: String,
@@ -81,7 +81,7 @@ const eventSchema = new mongoose_1.Schema({
         min: 0,
     },
 }, {
-    strict: false,
+    strict: true,
     timestamps: true,
     versionKey: false,
 });

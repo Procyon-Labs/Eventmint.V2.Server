@@ -5,7 +5,7 @@ const transactionSchema = new mongoose_1.Schema({
     buyerId: {
         type: String,
         required: true,
-        ref: "user",
+        ref: 'user',
     },
     eventId: {
         type: String,
@@ -21,5 +21,5 @@ const transactionSchema = new mongoose_1.Schema({
     timestamps: false,
     versionKey: false,
 });
-const Transaction = (0, mongoose_1.model)("transaction", transactionSchema);
+const Transaction = (0, mongoose_1.model)('transaction', transactionSchema);
 exports.default = Transaction;

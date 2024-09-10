@@ -1,7 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserModel = void 0;
 const mongoose_1 = require("mongoose");
+const interfaces_1 = require("../interfaces");
+const config_1 = require("../config");
 const userSchema = new mongoose_1.Schema({
+    _id: {
+        type: String,
+        required: true,
+        trim: true,
+    },
     firstName: {
         type: String,
         required: true,
@@ -21,15 +29,21 @@ const userSchema = new mongoose_1.Schema({
     imageUrl: {
         type: String,
         trim: true,
-        default: "https://res.cloudinary.com/dtfvdjvyr/image/upload/v1719802304/event-logo_iyl1ec.png",
     },
     bio: {
         type: String,
         trim: true,
     },
+    userType: {
+        type: String,
+        default: interfaces_1.UserType.USER,
+    },
+    role: {
+        type: String,
+        default: interfaces_1.Roles.CUSTOMER,
+    },
 }, {
     timestamps: true,
     strict: false,
 });
-const User = (0, mongoose_1.model)("User", userSchema);
-exports.default = User;
+exports.UserModel = (0, mongoose_1.model)(config_1.DATABASES.USER, userSchema);

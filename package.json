@@ -14,7 +14,7 @@
     "*.ts": "prettier --write"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ugo Chinemerem Franklin",
   "license": "ISC",
   "dependencies": {
     "@metaplex-foundation/mpl-core": "^1.1.1",

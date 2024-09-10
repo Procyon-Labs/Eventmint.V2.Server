@@ -24,7 +24,7 @@ class EventService {
         return __awaiter(this, void 0, void 0, function* () {
             const event = yield event_model_1.default.findById(id);
             if (!event)
-                throw new Error("invalid eventID");
+                throw new Error('invalid eventID');
             return event;
         });
     }

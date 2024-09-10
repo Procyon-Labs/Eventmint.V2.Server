@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const user_service_1 = __importDefault(require("../services/user.service"));
 const cloudinary_configs_1 = __importDefault(require("../config/cloudinary.configs"));
 const http_status_codes_1 = require("http-status-codes");
-const { create, getUserById, getUserByEmail, getUsers, findOne } = new user_service_1.default();
+const { create, getUserById, getUserByEmail, getUsers, findOne, checkUserExistence } = new user_service_1.default();
 class UserController {
     createUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -25,7 +25,7 @@ class UserController {
                 if (userFromEmail) {
                     return res.status(http_status_codes_1.StatusCodes.CONFLICT).send({
                         success: false,
-                        message: "Duplicate email",
+                        message: 'Duplicate email',
                     });
                 }
             }
@@ -34,20 +34,20 @@ class UserController {
                 if (foundUser) {
                     return res.status(http_status_codes_1.StatusCodes.CONFLICT).send({
                         success: false,
-                        message: "Email already exists",
+                        message: 'Email already exists',
                     });
                 }
                 let imageUrl;
                 if (req.file) {
                     const result = yield cloudinary_configs_1.default.uploader.upload(req.file.path, {
-                        folder: "EventMint",
+                        folder: 'EventMint',
                     });
                     imageUrl = result.secure_url;
                 }
                 const user = yield create(Object.assign(Object.assign({}, req.body), { imageUrl }));
                 return res.status(http_status_codes_1.StatusCodes.OK).send({
                     success: true,
-                    message: "User created successfully",
+                    message: 'User created successfully',
                     user,
                 });
             }
@@ -66,12 +66,12 @@ class UserController {
                 if (!user) {
                     return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).send({
                         success: false,
-                        message: "User with the given ID not found",
+                        message: 'User with the given ID not found',
                     });
                 }
                 return res.status(http_status_codes_1.StatusCodes.OK).send({
                     success: true,
-                    message: "User fetched successfully",
+                    message: 'User fetched successfully',
                     user,
                 });
             }
@@ -83,36 +83,100 @@ class UserController {
             }
         });
     }
+    checkUserExistence(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield checkUserExistence(req.params.id);
+                if (!data) {
+                    return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).send({
+                        success: true,
+                        message: 'User with the given ID does not exist',
+                        data: false,
+                    });
+                }
+                return res.status(http_status_codes_1.StatusCodes.OK).send({
+                    success: true,
+                    message: 'User exists',
+                    data,
+                });
+            }
+            catch (error) {
+                return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send({
+                    success: false,
+                    message: `Error occurred while fetching user: ${error.message}`,
+                });
+            }
+        });
+    }
+    // async uploadImage(req: Request, res: Response) {
+    //   try {
+    //     if (req.file) {
+    //       return res.status(StatusCodes.BAD_REQUEST).send({
+    //         success: false,
+    //         message: 'Include an Image file',
+    //       });
+    //     }
+    //       // Upload file to Cloudinary
+    //       const result  = await cloudinary.uploader.upload(req.file.path, {
+    //         folder: 'EventMint',
+    //       });
+    //       const imageUrl = result.secure_url;
+    //       if (!imageUrl) {
+    //         return res.status(StatusCodes.CONFLICT).send({
+    //           success: false,
+    //           message: "File Upload Failed",
+    //         });
+    //       }
+    //       return res.status(StatusCodes.CREATED).send({
+    //         success: true,
+    //         message: "Image uploaded successfully",
+    //         imageUrl,
+    //       });
+    //     }
+    //     return res.status(StatusCodes.BAD_REQUEST).send({
+    //       success: false,
+    //       message: "Include an Image file",
+    //     });
+    //   } catch (err) {
+    //     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+    //       success: false,
+    //       message: `Error while uploading file`,
+    //     });
+    //   }
+    // }
     uploadImage(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (req.file) {
-                    // Upload file to Cloudinary
-                    const result = yield cloudinary_configs_1.default.uploader.upload(req.file.path, {
-                        folder: "Verxio",
-                    });
-                    const imageUrl = result.secure_url;
-                    if (!imageUrl) {
-                        return res.status(http_status_codes_1.StatusCodes.CONFLICT).send({
-                            success: false,
-                            message: "File Upload Failed",
-                        });
-                    }
-                    return res.status(http_status_codes_1.StatusCodes.CREATED).send({
-                        success: true,
-                        message: "Image uploaded successfully",
-                        imageUrl,
+                // Type guard to check if req.file exists
+                if (!req.file) {
+                    return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).send({
+                        success: false,
+                        message: 'Include an Image file',
                     });
                 }
-                return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).send({
-                    success: false,
-                    message: "Include an Image file",
+                // Upload file to Cloudinary
+                const result = yield cloudinary_configs_1.default.uploader.upload(req.file.path, {
+                    folder: 'EventMint',
+                });
+                if (!result || !result.secure_url) {
+                    return res.status(http_status_codes_1.StatusCodes.CONFLICT).send({
+                        success: false,
+                        message: 'File upload failed',
+                    });
+                }
+                // Optionally, delete the file from the server if it's stored temporarily
+                // fs.unlinkSync(req.file.path);
+                return res.status(http_status_codes_1.StatusCodes.CREATED).send({
+                    success: true,
+                    message: 'Image uploaded successfully',
+                    imageUrl: result.secure_url,
                 });
             }
             catch (err) {
+                console.error('Error uploading image:', err);
                 return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send({
                     success: false,
-                    message: `Error while uploading file`,
+                    message: `Error occurred while uploading file: ${err.message || err}`,
                 });
             }
         });
@@ -123,7 +187,7 @@ class UserController {
                 const users = yield getUsers(req.query);
                 return res.status(http_status_codes_1.StatusCodes.OK).send({
                     success: true,
-                    message: "Users fetched successfully",
+                    message: 'Users fetched successfully',
                     users,
                 });
             }

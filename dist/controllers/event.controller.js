@@ -14,7 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const event_service_1 = __importDefault(require("../services/event.service"));
 const { create, getEventById, getEvents, getEventByQuery } = new event_service_1.default();
-const devnetBlink = "https://dial.to/devnet?action=solana-action:";
+const deployedLink = 'https://eventmint.onrender.com';
+// const deployedLink = "http://localhost:5500.com";
 class EventController {
     createEvent(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -23,16 +24,15 @@ class EventController {
                 if (foundEvent) {
                     return res.status(409).send({
                         success: false,
-                        message: "Event name already exists",
+                        message: 'Event name already exists',
                     });
                 }
                 const event = yield create(Object.assign(Object.assign({}, req.body), { userId: req.params.userId }));
-                const blinkUrl = `${devnetBlink}${encodeURIComponent(`http://localhost:5500/api/v1/action/${event.name}`)}`;
                 return res.status(200).send({
                     success: true,
-                    message: "Event created successfully",
+                    message: 'Event created successfully',
                     event,
-                    blink: blinkUrl,
+                    blink: `${deployedLink}/api/v1/action/${encodeURIComponent(event.name)}`,
                 });
             }
             catch (error) {
@@ -50,12 +50,12 @@ class EventController {
                 if (!event) {
                     return res.status(404).send({
                         success: false,
-                        message: "Event with the given ID not found",
+                        message: 'Event with the given ID not found',
                     });
                 }
                 return res.status(200).send({
                     success: true,
-                    message: "Event fetched successfully",
+                    message: 'Event fetched successfully',
                     event,
                 });
             }
@@ -74,12 +74,12 @@ class EventController {
                 if (events.length === 0) {
                     return res.status(404).send({
                         success: false,
-                        message: "Events with the given userId not found",
+                        message: 'Events with the given userId not found',
                     });
                 }
                 return res.status(200).send({
                     success: true,
-                    message: "Events fetched successfully",
+                    message: 'Events fetched successfully',
                     events,
                 });
             }

@@ -8,40 +8,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const user_model_1 = __importDefault(require("../models/user.model"));
+const models_1 = require("../models");
 class UserService {
-    create(user) {
+    create(User) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield user_model_1.default.create(user);
+            return yield models_1.UserModel.create(User);
+        });
+    }
+    checkUserExistence(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return (yield models_1.UserModel.exists({ _id: id })) ? true : false;
         });
     }
     getUserById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield user_model_1.default.findById(id);
+            return yield models_1.UserModel.findById(id);
         });
     }
     findOne(param) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield user_model_1.default.findOne(param, "-__v");
+            return yield models_1.UserModel.findOne(param, '-__v');
         });
     }
     getUserByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield user_model_1.default.findOne({ email });
+            return yield models_1.UserModel.findOne({ email });
         });
     }
     editById(id, obj) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield user_model_1.default.findByIdAndUpdate(id, { $set: obj }, { new: true });
+            return yield models_1.UserModel.findByIdAndUpdate(id, { $set: obj }, { new: true });
         });
     }
     getUsers(query) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield user_model_1.default.find(query);
+            return yield models_1.UserModel.find(query);
         });
     }
 }

@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const transaction_model_1 = __importDefault(require("../models/transaction.model"));
 class TransactionService {
-    create(transaction) {
+    createtrx(transaction) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield transaction_model_1.default.create(transaction);
         });
