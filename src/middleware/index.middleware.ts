@@ -12,6 +12,7 @@ export default (app: Express) => {
       origin: 'https://www.eventmint.xyz', // Replace with your client URL
       methods: ['GET', 'POST', 'PUT', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true,
     }),
   );
   app.use(json());
