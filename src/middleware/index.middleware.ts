@@ -7,12 +7,13 @@ import { setupSwagger } from '../config/swagger.config';
 
 export default (app: Express) => {
   app.use(morgan('combined'));
+  app.options('*', cors());
   app.use(
     cors({
       origin: '*', // Replace with your client URL
       methods: ['GET', 'POST', 'PUT', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
-      credentials: true,
+      credentials: false,
     }),
   );
   app.use(json());
