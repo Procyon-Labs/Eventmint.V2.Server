@@ -9,7 +9,7 @@ export default (app: Express) => {
   app.use(morgan('combined'));
   app.use(
     cors({
-      origin: 'https://www.eventmint.xyz', // Replace with your client URL
+      origin: '*', // Replace with your client URL
       methods: ['GET', 'POST', 'PUT', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
       credentials: true,
