@@ -22,6 +22,7 @@ export function validateBodyDTO(dtoClass: any) {
         return BadRequestResponseWithError(res, errorMessage);
       } else {
         req.body = dto;
+
         next();
       }
     });
