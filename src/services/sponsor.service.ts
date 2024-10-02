@@ -3,25 +3,26 @@ import { ISponsor } from '../interfaces';
 
 import SPONSOR from '../models/sponsor.model';
 import cloudinary from '../config/cloudinary.configs';
+
 export default class SponsorService {
-  async create(event: Partial<ISponsor>) {
-    return await SPONSOR.create(event);
+  async create(sponsor: Partial<ISponsor>) {
+    return await SPONSOR.create(sponsor);
   }
 
-  async getEventById(id: string) {
-    const event = await SPONSOR.findById(id);
-    if (!event) throw new Error('invalid sponsorID');
-    return event;
+  async getSponsorById(id: string) {
+    const sponsor = await SPONSOR.findById(id);
+    if (!sponsor) throw new Error('invalid sponsorID');
+    return sponsor;
   }
 
-  async getEventByQuery(query: Partial<ISponsor>) {
-    const event = await SPONSOR.findOne(query);
-    return event;
+  async getSponsorByQuery(query: Partial<ISponsor>) {
+    const sponsor = await SPONSOR.findOne(query);
+    return sponsor;
   }
 
-  async getEvents(query: Partial<ISponsor>) {
-    const event = await SPONSOR.find(query).lean().maxTimeMS(5000);
-    return event;
+  async getSponsors(query: Partial<ISponsor>) {
+    const sponsor = await SPONSOR.find(query).lean().maxTimeMS(5000);
+    return sponsor;
   }
   async uploadImage(filePath: string) {
     try {
