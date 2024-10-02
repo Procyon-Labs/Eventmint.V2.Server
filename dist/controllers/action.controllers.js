@@ -78,7 +78,7 @@ class ActionController {
                 catch (err) {
                     return res.status(400).set(ACTIONS_CORS_HEADERS).send('Invalid "account" provided');
                 }
-                const connection = new web3_js_1.Connection(process.env.SOLANA_RPC || (0, web3_js_1.clusterApiUrl)('devnet'));
+                const connection = new web3_js_1.Connection(process.env.PUBLIC_SOLANA_RPC_URL || (0, web3_js_1.clusterApiUrl)('devnet'));
                 // Ensure the receiving account will be rent exempt
                 const minimumBalance = yield connection.getMinimumBalanceForRentExemption(0);
                 let price;

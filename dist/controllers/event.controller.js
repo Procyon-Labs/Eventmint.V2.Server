@@ -91,5 +91,29 @@ class EventController {
             }
         });
     }
+    getAllEvents(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const events = yield getEvents({}); // Fetch all events without filtering
+                if (events.length === 0) {
+                    return res.status(404).send({
+                        success: false,
+                        message: 'No events found',
+                    });
+                }
+                return res.status(200).send({
+                    success: true,
+                    message: 'All events fetched successfully',
+                    events,
+                });
+            }
+            catch (error) {
+                return res.status(500).send({
+                    success: false,
+                    message: `Error occurred while fetching events: ${error.message}`,
+                });
+            }
+        });
+    }
 }
 exports.default = EventController;
