@@ -2,7 +2,7 @@
 
 import { IEvent } from '../interfaces';
 import Event from '../models/event.model';
-
+import cloudinary from '../config/cloudinary.configs';
 export default class EventService {
   async create(event: Partial<IEvent>) {
     return await Event.create(event);
@@ -22,5 +22,20 @@ export default class EventService {
   async getEvents(query: Partial<IEvent>) {
     const event = await Event.find(query).lean().maxTimeMS(5000);
     return event;
+  }
+  async uploadImage(filePath: string) {
+    try {
+      // Upload file to Cloudinary
+      const result = await cloudinary.uploader.upload(filePath, { folder: 'Eventmint' });
+      const imageUrl = result.secure_url;
+
+      if (!imageUrl) {
+        throw new Error('File upload failed');
+      }
+
+      return imageUrl;
+    } catch (error: any) {
+      throw new Error(`Image upload error: ${error.message}`);
+    }
   }
 }
