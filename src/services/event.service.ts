@@ -20,7 +20,7 @@ export default class EventService {
   }
 
   async getEvents(query: Partial<IEvent>) {
-    const event = await Event.find(query).maxTimeMS(5000);
+    const event = await Event.find(query).lean().maxTimeMS(5000);
     return event;
   }
 }
