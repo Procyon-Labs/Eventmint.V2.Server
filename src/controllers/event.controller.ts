@@ -80,4 +80,27 @@ export default class EventController {
       });
     }
   }
+  async getAllEvents(req: Request, res: Response) {
+    try {
+      const events = await getEvents({}); // Fetch all events without filtering
+
+      if (events.length === 0) {
+        return res.status(404).send({
+          success: false,
+          message: 'No events found',
+        });
+      }
+
+      return res.status(200).send({
+        success: true,
+        message: 'All events fetched successfully',
+        events,
+      });
+    } catch (error: any) {
+      return res.status(500).send({
+        success: false,
+        message: `Error occurred while fetching events: ${error.message}`,
+      });
+    }
+  }
 }

@@ -95,7 +95,9 @@ export default class ActionController {
       } catch (err: any) {
         return res.status(400).set(ACTIONS_CORS_HEADERS).send('Invalid "account" provided');
       }
-      const connection = new Connection(process.env.SOLANA_RPC || clusterApiUrl('devnet'));
+      const connection = new Connection(
+        process.env.PUBLIC_SOLANA_RPC_URL || clusterApiUrl('devnet'),
+      );
 
       // Ensure the receiving account will be rent exempt
       const minimumBalance = await connection.getMinimumBalanceForRentExemption(
