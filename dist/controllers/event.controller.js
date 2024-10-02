@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const event_service_1 = __importDefault(require("../services/event.service"));
-const { create, getEventById, getEvents, getEventByQuery } = new event_service_1.default();
-const deployedLink = 'https://eventmint.onrender.com';
+const { create, getEventById, getEvents, getEventByQuery, uploadImage } = new event_service_1.default();
+const deployedLink = 'https://dial.to/?action=solana-action:https://www.eventmint.onrender.com';
 // const deployedLink = "http://localhost:5500.com";
 class EventController {
     createEvent(req, res) {
@@ -111,6 +111,30 @@ class EventController {
                 return res.status(500).send({
                     success: false,
                     message: `Error occurred while fetching events: ${error.message}`,
+                });
+            }
+        });
+    }
+    uploadImage(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (req.file) {
+                    const imageUrl = yield uploadImage(req.file.path); // Call the uploadImage method in the service
+                    return res.status(201).send({
+                        success: true,
+                        message: 'Image uploaded successfully',
+                        imageUrl,
+                    });
+                }
+                return res.status(409).send({
+                    success: false,
+                    message: 'Include an Image file',
+                });
+            }
+            catch (err) {
+                return res.status(500).send({
+                    success: false,
+                    message: err.message,
                 });
             }
         });

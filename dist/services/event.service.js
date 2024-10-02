@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const event_model_1 = __importDefault(require("../models/event.model"));
+const cloudinary_configs_1 = __importDefault(require("../config/cloudinary.configs"));
 class EventService {
     create(event) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -38,6 +39,22 @@ class EventService {
         return __awaiter(this, void 0, void 0, function* () {
             const event = yield event_model_1.default.find(query).lean().maxTimeMS(5000);
             return event;
+        });
+    }
+    uploadImage(filePath) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // Upload file to Cloudinary
+                const result = yield cloudinary_configs_1.default.uploader.upload(filePath, { folder: 'Eventmint' });
+                const imageUrl = result.secure_url;
+                if (!imageUrl) {
+                    throw new Error('File upload failed');
+                }
+                return imageUrl;
+            }
+            catch (error) {
+                throw new Error(`Image upload error: ${error.message}`);
+            }
         });
     }
 }
