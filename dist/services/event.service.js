@@ -36,7 +36,7 @@ class EventService {
     }
     getEvents(query) {
         return __awaiter(this, void 0, void 0, function* () {
-            const event = yield event_model_1.default.find(query).maxTimeMS(5000);
+            const event = yield event_model_1.default.find(query).lean().maxTimeMS(5000);
             return event;
         });
     }
