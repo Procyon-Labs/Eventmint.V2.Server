@@ -15,6 +15,7 @@ export const DATABASES = {
   POINTS: 'point',
 
   EVENT: 'event',
+  SPONSOR: 'sponsor',
   TRANSACTION: 'transaction',
 
   SPONSORSHIP_AD: 'sponsorship_ad',
