@@ -17,6 +17,7 @@ exports.DATABASES = {
     USER: 'User',
     POINTS: 'point',
     EVENT: 'event',
+    SPONSOR: 'sponsor',
     TRANSACTION: 'transaction',
     SPONSORSHIP_AD: 'sponsorship_ad',
     SPONSORSHIP_APPLICATION: 'sponsorship_application',

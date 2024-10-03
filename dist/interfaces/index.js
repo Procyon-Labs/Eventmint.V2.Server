@@ -20,3 +20,4 @@ __exportStar(require("./event.interface"), exports);
 __exportStar(require("./user.interface"), exports);
 __exportStar(require("./transaction.interface"), exports);
 __exportStar(require("./pagination.interface"), exports);
+__exportStar(require("./sponsor.interface"), exports);
