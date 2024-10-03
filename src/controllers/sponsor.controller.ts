@@ -30,7 +30,7 @@ export default class SponsorController {
     } catch (error: any) {
       return res.status(500).send({
         success: false,
-        message: `Error occurred while creating Sponsor: ${error.message}`,
+        message: `Error occurred while creating sponsor: ${error.message}`,
       });
     }
   }
