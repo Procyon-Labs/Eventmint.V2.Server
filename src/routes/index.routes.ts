@@ -1,5 +1,6 @@
 import actionRouter from './action.routes';
 import eventRouter from './event.routes';
+import sponsorRouter from './sponsor.routes';
 import userRouter from './user.routes';
 import sponsorshipAdRouter from './sponsorship-ad.route';
 import sponsorshipApplicationRouter from './sponsorship-application.route';
@@ -8,10 +9,15 @@ import { Express, Request, Response } from 'express';
 
 export default (app: Express) => {
   app.get('/', (req: Request, res: Response) => {
-    return res.send({ success: true, message: 'API is Live!!!' });
+    return res.send({
+      success: true,
+      message:
+        'Welcome to Eventmint API ensure to go through the API docs before using this service',
+    });
   });
   app.use(`${basePath}/user`, userRouter);
   app.use(`${basePath}/event`, eventRouter);
+  app.use(`${basePath}/sponsor`, sponsorRouter);
   app.use(`${basePath}/action`, actionRouter);
   app.use(`${basePath}/sponsorship-ad`, sponsorshipAdRouter);
   app.use(`${basePath}/sponsorship-application`, sponsorshipApplicationRouter);
