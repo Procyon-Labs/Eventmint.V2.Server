@@ -10,14 +10,15 @@ const morgan_1 = __importDefault(require("morgan"));
 const express_1 = require("express");
 const swagger_config_1 = require("../config/swagger.config");
 exports.default = (app) => {
+    const corsOptions = {
+        origin: '*',
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+    };
     app.use((0, morgan_1.default)('combined'));
     app.options('*', (0, cors_1.default)());
-    app.use((0, cors_1.default)({
-        origin: '*', // Replace with your client URL
-        methods: ['GET', 'POST', 'PUT', 'OPTIONS'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
-        credentials: false,
-    }));
+    app.use('*', (0, cors_1.default)(corsOptions));
     app.use((0, express_1.json)());
     app.use((0, helmet_1.default)());
     app.use((0, express_1.urlencoded)({ extended: true }));
