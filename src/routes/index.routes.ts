@@ -19,6 +19,7 @@ export default (app: Express) => {
   app.use(`${basePath}/event`, eventRouter);
   app.use(`${basePath}/sponsor`, sponsorRouter);
   app.use(`${basePath}/action`, actionRouter);
+  app.use(`${basePath}/sponsor`, actionRouter);
   app.use(`${basePath}/sponsorship-ad`, sponsorshipAdRouter);
   app.use(`${basePath}/sponsorship-application`, sponsorshipApplicationRouter);
 
