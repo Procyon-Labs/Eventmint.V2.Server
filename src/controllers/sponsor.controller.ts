@@ -25,7 +25,7 @@ export default class SponsorController {
         success: true,
         message: 'Sponsor created successfully',
         sponsor,
-        blink: `${deployedLink}/api/v1/action/${encodeURIComponent(sponsor.keymessage)}`,
+        blink: `${deployedLink}/api/v1/sponsor/${encodeURIComponent(sponsor.keymessage)}`,
       });
     } catch (error: any) {
       return res.status(500).send({
