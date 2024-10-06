@@ -17,7 +17,6 @@ import {
 } from '@solana/actions';
 import { DEFAULT_SOL_ADDRESS } from '../config';
 import { Request, Response } from 'express';
-import HttpException from '../errors/http-exception';
 
 dotenv.config();
 
@@ -69,7 +68,7 @@ export default class SponsorController {
       res.set(ACTIONS_CORS_HEADERS).json(payload);
     } catch (error: any) {
       console.error('Error in getAction:', error);
-      res.status(500).json({ success: false, message: UNEXPECTED_ERROR });
+      res.status(500).json({ success: false, message: `error getting blink` });
     }
   }
 
