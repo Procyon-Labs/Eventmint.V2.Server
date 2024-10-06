@@ -46,7 +46,8 @@
     "pino": "^8.21.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "winston": "^3.15.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",

@@ -1,33 +1,74 @@
-// import winston from 'winston';
-// import { APP_NAME } from '../constants';
-// import fs from 'fs';
-// import path from 'path';
+// src/utils/logger.ts
 
-// // Winston logger
-// export const winstonLogger = winston.createLogger({
-//   level: 'info',
-//   format: winston.format.json(),
-//   defaultMeta: { service: APP_NAME },
-//   transports: [
-//     // new winston.transports.Console(),
-//     new winston.transports.File({ filename: 'error.log', level: 'error' }),
-//     new winston.transports.File({ filename: 'info.log', level: 'info' }),
-//     new winston.transports.File({ filename: 'combined.log' }),
-//   ],
-// });
+import { createLogger, format, transports, Logger as WinstonLogger } from 'winston';
 
-// export async function downloadLogs(fileToDownload = 'combined.log') {
-//   try {
-//     const rootFolderPath = process.cwd(); // Get the root folder path
-//     const filePath = path.join(rootFolderPath, fileToDownload);
+enum LogLevel {
+  ERROR = 'error',
+  WARN = 'warn',
+  INFO = 'info',
+  HTTP = 'http',
+  VERBOSE = 'verbose',
+  DEBUG = 'debug',
+  SILLY = 'silly',
+}
 
-//     // Read the content of the file asynchronously
-//     const data = await fs.promises.readFile(filePath, 'utf8');
+class Logger {
+  private logger: WinstonLogger;
+  private context: string;
 
-//     return data;
-//   } catch (error: any) {
-//     // Handle errors
-//     winstonLogger.error(error.message);
-//     return false;
-//   }
-// }
+  constructor(context: string) {
+    this.context = context;
+    this.logger = createLogger({
+      level: process.env.LOG_LEVEL || 'info',
+      format: format.combine(
+        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        format.errors({ stack: true }),
+        format.splat(),
+        format.json(),
+      ),
+      defaultMeta: { service: 'sponsor-service' },
+      transports: [
+        new transports.Console({
+          format: format.combine(
+            format.colorize(),
+            format.printf(
+              (info) => `${info.timestamp} ${info.level}: [${this.context}] ${info.message}`,
+            ),
+          ),
+        }),
+        new transports.File({ filename: 'error.log', level: 'error' }),
+        new transports.File({ filename: 'combined.log' }),
+      ],
+    });
+  }
+
+  error(message: string, meta?: any): void {
+    this.logger.error(message, { context: this.context, ...meta });
+  }
+
+  warn(message: string, meta?: any): void {
+    this.logger.warn(message, { context: this.context, ...meta });
+  }
+
+  info(message: string, meta?: any): void {
+    this.logger.info(message, { context: this.context, ...meta });
+  }
+
+  http(message: string, meta?: any): void {
+    this.logger.http(message, { context: this.context, ...meta });
+  }
+
+  verbose(message: string, meta?: any): void {
+    this.logger.verbose(message, { context: this.context, ...meta });
+  }
+
+  debug(message: string, meta?: any): void {
+    this.logger.debug(message, { context: this.context, ...meta });
+  }
+
+  silly(message: string, meta?: any): void {
+    this.logger.silly(message, { context: this.context, ...meta });
+  }
+}
+
+export { Logger, LogLevel };
