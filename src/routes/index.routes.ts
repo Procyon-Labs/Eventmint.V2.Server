@@ -1,6 +1,6 @@
 import actionRouter from './action.routes';
 import eventRouter from './event.routes';
-import sponsorRouter from './sponsor.routes';
+import sponsorRouter from './sponsor.action.routes';
 import userRouter from './user.routes';
 import sponsorshipAdRouter from './sponsorship-ad.route';
 import sponsorshipApplicationRouter from './sponsorship-application.route';
