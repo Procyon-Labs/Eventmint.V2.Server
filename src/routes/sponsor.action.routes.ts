@@ -3,8 +3,8 @@ import { createActionHeaders } from '@solana/actions';
 import express from 'express';
 import { Request, Response } from 'express';
 
-import ActionController from '../controllers/action.controllers';
-const { getAction, postAction } = new ActionController();
+import SponsorController from '../controllers/sponsor.action.controller';
+const { getAction, postAction } = new SponsorController();
 
 const router = express.Router();
 
