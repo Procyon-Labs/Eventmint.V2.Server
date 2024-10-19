@@ -25,6 +25,7 @@ const ACTIONS_CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type,Authorization',
+  'Content-Type': 'application/json',
 };
 
 const sponsorService = new SponsorService();
@@ -36,28 +37,39 @@ if (!DEFAULT_SOL_ADDRESS) {
 export default class SponsorController {
   async getAction(req: Request, res: Response) {
     try {
-      const baseHref = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+      // Ensure we're getting the full base URL correctly
+      const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+      const host = req.get('host');
+      const path = req.originalUrl.split('?')[0]; // Remove any query parameters
+      const baseHref = `${protocol}://${host}${path}`;
+
       const sponsorName = decodeURIComponent(req.params.keymessage);
       const sponsor = await sponsorService.getSponsorByQuery({ keymessage: sponsorName });
 
       if (!sponsor) {
-        return res.status(400).json({ success: false, message: 'Invalid sponsor name' });
+        return res.status(404).set(ACTIONS_CORS_HEADERS).json({
+          error: 'Not Found',
+          message: 'Invalid sponsor name',
+        });
       }
 
+      // Construct the action response according to Solana Action spec
       const payload: ActionGetResponse = {
-        icon: sponsor.image,
         label: `Buy Now (${sponsor.budget} SOL)`,
+        icon: sponsor.image || undefined, // Only include if exists
         description: sponsor.campaign,
         title: sponsor.keymessage,
         links: {
           actions: [
             {
               label: `Buy Now (${sponsor.budget} SOL)`,
-              href: `${baseHref}?amount={amount}`,
+              href: baseHref,
+              method: 'POST',
               parameters: [
                 {
                   name: 'amount',
                   label: 'Enter your pitch deck',
+                  required: true,
                 },
               ],
             },
@@ -65,10 +77,13 @@ export default class SponsorController {
         },
       };
 
-      res.set(ACTIONS_CORS_HEADERS).json(payload);
-    } catch (error: any) {
+      return res.status(200).set(ACTIONS_CORS_HEADERS).json(payload);
+    } catch (error) {
       console.error('Error in getAction:', error);
-      res.status(500).json({ success: false, message: `error getting blink` });
+      return res.status(500).set(ACTIONS_CORS_HEADERS).json({
+        error: 'Internal Server Error',
+        message: 'Failed to process action request',
+      });
     }
   }
 
@@ -78,45 +93,59 @@ export default class SponsorController {
       const sponsor = await sponsorService.getSponsorByQuery({ keymessage: sponsorName });
 
       if (!sponsor) {
-        throw new BadRequestError('Invalid sponsor ID');
+        throw new BadRequestError('Sponsor not found');
       }
 
       const body: ActionPostRequest = req.body;
 
+      if (!body.account) {
+        return res.status(400).set(ACTIONS_CORS_HEADERS).json({
+          error: 'Bad Request',
+          message: 'Account address is required',
+        });
+      }
+
       let account: PublicKey;
       try {
         account = new PublicKey(body.account);
-      } catch (err: any) {
-        return res
-          .status(400)
-          .set(ACTIONS_CORS_HEADERS)
-          .json({ success: false, message: 'Invalid "account" provided' });
+      } catch (err) {
+        return res.status(400).set(ACTIONS_CORS_HEADERS).json({
+          error: 'Bad Request',
+          message: 'Invalid account address format',
+        });
       }
 
+      // Initialize Solana connection
       const connection = new Connection(
         process.env.PUBLIC_SOLANA_RPC_URL || clusterApiUrl('devnet'),
+        'confirmed',
       );
 
       const minimumBalance = await connection.getMinimumBalanceForRentExemption(0);
+      const price = Number(sponsor.budget);
 
-      let price = sponsor.budget;
-      if (typeof price !== 'number' || price <= 0) {
-        throw new Error('Invalid sponsor budget');
+      if (isNaN(price) || price <= 0) {
+        throw new BadRequestError('Invalid sponsor budget');
       }
 
       if (price * LAMPORTS_PER_SOL < minimumBalance) {
-        throw new Error(`Transaction amount is too low to be rent exempt: ${price} SOL`);
+        throw new BadRequestError(
+          `Transaction amount too low: minimum ${minimumBalance / LAMPORTS_PER_SOL} SOL required`,
+        );
       }
 
       const sellerPubkey = new PublicKey(sponsor.userId);
       const defaultPubkey = new PublicKey(DEFAULT_SOL_ADDRESS);
 
+      // Create transaction
       const transaction = new Transaction().add(
+        // 90% to seller
         SystemProgram.transfer({
           fromPubkey: account,
           toPubkey: sellerPubkey,
           lamports: Math.floor(price * LAMPORTS_PER_SOL * 0.9),
         }),
+        // 10% to platform
         SystemProgram.transfer({
           fromPubkey: account,
           toPubkey: defaultPubkey,
@@ -124,13 +153,14 @@ export default class SponsorController {
         }),
       );
 
+      const { blockhash } = await connection.getLatestBlockhash('finalized');
       transaction.feePayer = account;
-      transaction.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+      transaction.recentBlockhash = blockhash;
 
       const serializedTransaction = transaction
         .serialize({
           requireAllSignatures: false,
-          verifySignatures: true,
+          verifySignatures: false,
         })
         .toString('base64');
 
@@ -141,13 +171,21 @@ export default class SponsorController {
         },
       });
 
-      res.set(ACTIONS_CORS_HEADERS).json(payload);
-    } catch (error: any) {
+      return res.status(200).set(ACTIONS_CORS_HEADERS).json(payload);
+    } catch (error) {
       console.error('Error in postAction:', error);
+
       if (error instanceof BadRequestError) {
-        return res.status(400).json({ success: false, message: error.message });
+        return res.status(400).set(ACTIONS_CORS_HEADERS).json({
+          error: 'Bad Request',
+          message: error.message,
+        });
       }
-      res.status(500).json({ success: false, message: UNEXPECTED_ERROR });
+
+      return res.status(500).set(ACTIONS_CORS_HEADERS).json({
+        error: 'Internal Server Error',
+        message: UNEXPECTED_ERROR,
+      });
     }
   }
 }

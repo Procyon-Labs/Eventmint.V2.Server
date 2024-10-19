@@ -13,7 +13,7 @@ export default class SponsorController {
     try {
       const foundSponsor = await getSponsorByQuery({ keymessage: req.body.keymessage });
       if (foundSponsor) {
-        return res.status(409).send({
+        return res.status(409).json({
           success: false,
           message: 'Sponsor name already exists',
         });
@@ -21,16 +21,16 @@ export default class SponsorController {
 
       const sponsor = await create({ ...req.body, userId: req.params.userId });
 
-      return res.status(200).send({
+      return res.status(201).json({
         success: true,
         message: 'Sponsor created successfully',
         sponsor,
         blink: `${deployedLink}/api/v1/sponsor/${encodeURIComponent(sponsor.keymessage)}`,
       });
-    } catch (error: any) {
-      return res.status(500).send({
+    } catch (error) {
+      return res.status(500).json({
         success: false,
-        message: `Error occurred while creating sponsor: ${error.message}`,
+        message: error instanceof Error ? error.message : 'Error occurred while creating sponsor',
       });
     }
   }
@@ -51,10 +51,10 @@ export default class SponsorController {
         message: 'Sponsor fetched successfully',
         sponsor,
       });
-    } catch (error: any) {
-      return res.status(500).send({
+    } catch (error) {
+      return res.status(500).json({
         success: false,
-        message: `Error occurred while fetching sponsor: ${error.message}`,
+        message: error instanceof Error ? error.message : 'Error occurred while fetching sponsor',
       });
     }
   }
@@ -75,10 +75,10 @@ export default class SponsorController {
         message: 'Sponsor fetched successfully',
         sponsor,
       });
-    } catch (error: any) {
+    } catch (error) {
       return res.status(500).send({
         success: false,
-        message: `Error occurred while fetching Sponsor: ${error.message}`,
+        message: error instanceof Error ? error.message : 'Error occurred while fetching sponsors',
       });
     }
   }
@@ -98,10 +98,10 @@ export default class SponsorController {
         message: 'All sponsors fetched successfully',
         sponsor,
       });
-    } catch (error: any) {
+    } catch (error) {
       return res.status(500).send({
         success: false,
-        message: `Error occurred while fetching sponsors: ${error.message}`,
+        message: error instanceof Error ? error.message : `Error occurred while fetching sponsors`,
       });
     }
   }
@@ -120,10 +120,10 @@ export default class SponsorController {
         success: false,
         message: 'Include an Image file',
       });
-    } catch (err: any) {
+    } catch (error) {
       return res.status(500).send({
         success: false,
-        message: err.message,
+        message: error instanceof Error ? error.message : `Error occurred while uploading images`,
       });
     }
   }
