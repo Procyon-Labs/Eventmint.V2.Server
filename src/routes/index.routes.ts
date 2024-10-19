@@ -12,7 +12,7 @@ export default (app: Express) => {
     return res.send({
       success: true,
       message:
-        'Welcome to Eventmint API ensure to go through the API docs before using this service',
+        'Welcome to Eventmint API. Ensure to go through the API docs before using this service: https://documenter.getpostman.com/view/24549149/2sA3kbgdzd',
     });
   });
   app.use(`${basePath}/user`, userRouter);
