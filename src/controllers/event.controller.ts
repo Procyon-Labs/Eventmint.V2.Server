@@ -3,7 +3,7 @@ import EventService from '../services/event.service';
 import cloudinary from '../config/cloudinary.configs';
 const { create, getEventById, getEvents, getEventByQuery, uploadImage } = new EventService();
 
-const deployedLink = 'https://procyon-labs-server.onrender.com';
+const deployedLink = 'https://eventmint.fun';
 // const deployedLink = "http://localhost:5500.com";
 
 export default class EventController {
