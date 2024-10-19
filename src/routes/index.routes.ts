@@ -15,13 +15,10 @@ export default (app: Express) => {
         'Welcome to Eventmint API. Ensure to go through the API docs before using this service: https://documenter.getpostman.com/view/24549149/2sA3kbgdzd',
     });
   });
+  app.use(`${basePath}/sponsor`, sponsorRouter);
   app.use(`${basePath}/user`, userRouter);
   app.use(`${basePath}/event`, eventRouter);
-  app.use(`${basePath}/sponsor`, sponsorRouter);
   app.use(`${basePath}/action`, actionRouter);
-
-  app.use(`${basePath}/sponsorship-ad`, sponsorshipAdRouter);
-  app.use(`${basePath}/sponsorship-application`, sponsorshipApplicationRouter);
 
   /**
    * @swagger
