@@ -56,7 +56,7 @@ export default class SponsorController {
       // Construct the action response according to Solana Action spec
       const payload: ActionGetResponse = {
         label: `Buy Now (${sponsor.budget} SOL)`,
-        icon: sponsor.image || undefined, // Only include if exists
+        icon: sponsor.image, // Only include if exists
         description: sponsor.campaign,
         title: sponsor.keymessage,
         links: {
@@ -64,7 +64,6 @@ export default class SponsorController {
             {
               label: `Buy Now (${sponsor.budget} SOL)`,
               href: baseHref,
-              method: 'POST',
               parameters: [
                 {
                   name: 'amount',
