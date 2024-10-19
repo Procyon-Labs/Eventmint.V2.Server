@@ -38,12 +38,10 @@ export default class SponsorController {
   async getAction(req: Request, res: Response) {
     try {
       // Ensure we're getting the full base URL correctly
-      const protocol = req.headers['x-forwarded-proto'] || req.protocol;
-      const host = req.get('host');
-      const path = req.originalUrl.split('?')[0]; // Remove any query parameters
-      const baseHref = `${protocol}://${host}${path}`;
+      console.log('here');
+      const baseHref = new URL(`${req.protocol}://${req.get('host')}${req.originalUrl}`).toString();
 
-      const sponsorName = decodeURIComponent(req.params.keymessage);
+      const sponsorName = decodeURIComponent(req.params.keymessage).replace(/-/g, ' ');
       const sponsor = await sponsorService.getSponsorByQuery({ keymessage: sponsorName });
 
       if (!sponsor) {
@@ -55,34 +53,37 @@ export default class SponsorController {
 
       // Construct the action response according to Solana Action spec
       const payload: ActionGetResponse = {
-        label: `Buy Now (${sponsor.budget} SOL)`,
-        icon: sponsor.image, // Only include if exists
-        description: sponsor.campaign,
-        title: sponsor.keymessage,
+        icon: sponsor?.image as unknown as string,
+        label: `Submit Now (${sponsor.budget} SOL)`,
+        description: `${sponsor.campaign}`,
+        title: `${sponsor.keymessage}`,
         links: {
           actions: [
             {
-              label: `Buy Now (${sponsor.budget} SOL)`,
-              href: baseHref,
+              label: `Submit Now (${sponsor.budget} SOL)`,
+              href: `${baseHref}`,
               parameters: [
                 {
                   name: 'amount',
                   label: 'Enter your pitch deck',
-                  required: true,
                 },
               ],
             },
           ],
         },
       };
-
-      return res.status(200).set(ACTIONS_CORS_HEADERS).json(payload);
+      res.set(ACTIONS_CORS_HEADERS);
+      return res.json(payload);
     } catch (error) {
       console.error('Error in getAction:', error);
-      return res.status(500).set(ACTIONS_CORS_HEADERS).json({
-        error: 'Internal Server Error',
-        message: 'Failed to process action request',
-      });
+
+      return res
+        .status(500)
+        .set(ACTIONS_CORS_HEADERS)
+        .json({
+          error: 'Internal Server Error',
+          message: error instanceof Error ? error.message : 'Error occurred while creating  blink',
+        });
     }
   }
 
