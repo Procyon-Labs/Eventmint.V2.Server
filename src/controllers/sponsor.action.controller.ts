@@ -152,21 +152,12 @@ export default class SponsorController {
           lamports: Math.floor(price * LAMPORTS_PER_SOL * 0.1),
         }),
       );
-
-      const { blockhash } = await connection.getLatestBlockhash('finalized');
+      transaction.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
       transaction.feePayer = account;
-      transaction.recentBlockhash = blockhash;
-
-      const serializedTransaction = transaction
-        .serialize({
-          requireAllSignatures: false,
-          verifySignatures: false,
-        })
-        .toString('base64');
 
       const payload: ActionPostResponse = await createPostResponse({
         fields: {
-          transaction: serializedTransaction,
+          transaction,
           message: 'Transaction created successfully',
         },
       });
