@@ -15,7 +15,7 @@ import {
   ActionPostResponse,
   createPostResponse,
 } from '@solana/actions';
-import { DEFAULT_SOL_ADDRESS, MESSAGES, ACTIONS_CORS_HEADERS } from '../config';
+import { DEFAULT_SOL_ADDRESS, ACTIONS_CORS_HEADERS } from '../config';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 dotenv.config();
