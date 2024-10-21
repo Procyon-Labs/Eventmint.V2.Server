@@ -15,20 +15,14 @@ import {
   ActionPostResponse,
   createPostResponse,
 } from '@solana/actions';
-import { DEFAULT_SOL_ADDRESS } from '../config';
+import { DEFAULT_SOL_ADDRESS, MESSAGES, ACTIONS_CORS_HEADERS } from '../config';
 import { Request, Response } from 'express';
-
+import { StatusCodes } from 'http-status-codes';
 dotenv.config();
 
 const UNEXPECTED_ERROR = 'An unexpected error occurred';
-const ACTIONS_CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type,Authorization',
-  'Content-Type': 'application/json',
-};
 
-const sponsorService = new SponsorService();
+const { getSponsorByQuery } = new SponsorService();
 
 if (!DEFAULT_SOL_ADDRESS) {
   throw new Error('DEFAULT_SOL_ADDRESS is not defined in the environment variables');
@@ -37,60 +31,50 @@ if (!DEFAULT_SOL_ADDRESS) {
 export default class SponsorController {
   async getAction(req: Request, res: Response) {
     try {
-      // Ensure we're getting the full base URL correctly
-      console.log('here');
       const baseHref = new URL(`${req.protocol}://${req.get('host')}${req.originalUrl}`).toString();
-
-      const sponsorName = decodeURIComponent(req.params.keymessage).replace(/-/g, ' ');
-      const sponsor = await sponsorService.getSponsorByQuery({ keymessage: sponsorName });
+      const keymessage = decodeURIComponent(req.params.keymessage.replace(/-/g, ' '));
+      const sponsor = await getSponsorByQuery({ keymessage: keymessage });
 
       if (!sponsor) {
-        return res.status(404).set(ACTIONS_CORS_HEADERS).json({
-          error: 'Not Found',
-          message: 'Invalid sponsor name',
-        });
+        throw new BadRequestError('invaild event Id');
       }
 
-      // Construct the action response according to Solana Action spec
-      const payload: ActionGetResponse = {
+      let payload: ActionGetResponse = {
         icon: sponsor?.image as unknown as string,
-        label: `Submit Now (${sponsor.budget} SOL)`,
-        description: `${sponsor.campaign}`,
-        title: `${sponsor.keymessage}`,
+        label: `Submit Now (${sponsor?.budget} SOL)`,
+        description: `${sponsor?.campaign}`,
+        title: `${sponsor?.keymessage}`,
         links: {
           actions: [
             {
-              label: `Submit Now (${sponsor.budget} SOL)`,
-              href: `${baseHref}`,
+              label: `Submit Now (${sponsor?.budget} SOL)`,
+              href: `${baseHref}?amount={amount}`,
               parameters: [
                 {
                   name: 'amount',
-                  label: 'Enter your pitch deck',
+                  label: 'Submit Poof of audience',
                 },
               ],
             },
           ],
         },
       };
+
       res.set(ACTIONS_CORS_HEADERS);
       return res.json(payload);
-    } catch (error) {
-      console.error('Error in getAction:', error);
-
-      return res
-        .status(500)
-        .set(ACTIONS_CORS_HEADERS)
-        .json({
-          error: 'Internal Server Error',
-          message: error instanceof Error ? error.message : 'Error occurred while creating  blink',
-        });
+    } catch (error: any) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+        success: false,
+        message: `Error: ${error.message}`,
+        res,
+      });
     }
   }
 
   async postAction(req: Request, res: Response) {
     try {
-      const sponsorName = decodeURIComponent(req.params.keymessage);
-      const sponsor = await sponsorService.getSponsorByQuery({ keymessage: sponsorName });
+      const sponsorName = req.params.keymessage.replace(/-/g, ' ');
+      const sponsor = await getSponsorByQuery({ keymessage: sponsorName });
 
       if (!sponsor) {
         throw new BadRequestError('Sponsor not found');
@@ -108,7 +92,7 @@ export default class SponsorController {
       let account: PublicKey;
       try {
         account = new PublicKey(body.account);
-      } catch (err) {
+      } catch (error: any) {
         return res.status(400).set(ACTIONS_CORS_HEADERS).json({
           error: 'Bad Request',
           message: 'Invalid account address format',

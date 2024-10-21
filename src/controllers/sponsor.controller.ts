@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import SponsorService from '../services/sponsor.service';
 import cloudinary from '../config/cloudinary.configs';
-const { create, uploadImage, getSponsorById, getSponsorByQuery, getSponsors } =
+const { create, uploadImage, getSponsorByUserId, getSponsorByQuery, getSponsors } =
   new SponsorService();
 
 const deployedLink = 'https://eventmint.fun';
@@ -25,7 +25,7 @@ export default class SponsorController {
         success: true,
         message: 'Sponsor created successfully',
         sponsor,
-        blink: `${deployedLink}/api/v1/sponsor/${encodeURIComponent(sponsor.keymessage)}`,
+        blink: `${deployedLink}/api/v1/sponsoraction/${encodeURIComponent(sponsor.keymessage)}`,
       });
     } catch (error) {
       return res.status(500).json({
@@ -37,7 +37,7 @@ export default class SponsorController {
 
   async getSponsorById(req: Request, res: Response) {
     try {
-      const sponsor = await getSponsorById(req.params.id);
+      const sponsor = await getSponsorByUserId(req.params.id);
 
       if (!sponsor) {
         return res.status(404).send({
@@ -103,6 +103,18 @@ export default class SponsorController {
         success: false,
         message: error instanceof Error ? error.message : `Error occurred while fetching sponsors`,
       });
+    }
+  }
+  async getSponsorByUserId(req: Request, res: Response) {
+    const { userId } = req.params;
+    try {
+      const sponsor = await getSponsorByUserId(userId);
+      if (!sponsor) {
+        return res.status(404).json({ error: 'Sponsor not found' });
+      }
+      return res.status(200).json(sponsor);
+    } catch (error: any) {
+      return res.status(400).json({ error: 'Bad Request', message: error.message });
     }
   }
 

@@ -1,9 +1,9 @@
 import actionRouter from './action.routes';
 import eventRouter from './event.routes';
 import sponsorRouter from './sponsor.action.routes';
+import mainSponsor from './sponsor.routes';
+
 import userRouter from './user.routes';
-import sponsorshipAdRouter from './sponsorship-ad.route';
-import sponsorshipApplicationRouter from './sponsorship-application.route';
 import { basePath } from '../config/constants.configs';
 import { Express, Request, Response } from 'express';
 
@@ -15,7 +15,8 @@ export default (app: Express) => {
         'Welcome to Eventmint API. Ensure to go through the API docs before using this service: https://documenter.getpostman.com/view/24549149/2sA3kbgdzd',
     });
   });
-  app.use(`${basePath}/sponsor`, sponsorRouter);
+  app.use(`${basePath}/sponsoraction`, sponsorRouter);
+  app.use(`${basePath}/sponsor`, mainSponsor);
   app.use(`${basePath}/user`, userRouter);
   app.use(`${basePath}/event`, eventRouter);
   app.use(`${basePath}/action`, actionRouter);
