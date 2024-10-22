@@ -11,7 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GeneralController = void 0;
 const general_service_1 = require("./general.service");
-const config_1 = require("../config");
 const utils_1 = require("../utils");
 class GeneralController {
     constructor(model) {
@@ -58,7 +57,7 @@ class GeneralController {
             const data = yield this.generalService.update({ _id: id }, req.body);
             if (!data)
                 return (0, utils_1.NotFoundResponse)(res);
-            return (0, utils_1.SuccessResponse)(res, data, config_1.MESSAGES.UPDATED);
+            return (0, utils_1.SuccessResponse)(res, data, "Updated successfully");
         });
     }
     // async delete(req: Request, res: Response) {
@@ -74,7 +73,7 @@ class GeneralController {
             const data = yield this.generalService.hardDelete({ _id: id });
             if (!data)
                 return (0, utils_1.NotFoundResponse)(res);
-            return (0, utils_1.SuccessResponse)(res, data, config_1.MESSAGES.DELETED);
+            return (0, utils_1.SuccessResponse)(res, data, "Deleted successfully");
         });
     }
 }

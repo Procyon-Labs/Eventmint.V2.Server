@@ -34,7 +34,7 @@ export default class SponsorController {
       const baseHref = new URL(`${req.protocol}://${req.get('host')}${req.originalUrl}`).toString();
       const keymessage = decodeURIComponent(req.params.keymessage.replace(/-/g, ' '));
       const sponsor = await getSponsorByQuery({ keymessage: keymessage });
-
+      
       if (!sponsor) {
         throw new BadRequestError('invaild event Id');
       }
@@ -47,6 +47,7 @@ export default class SponsorController {
         links: {
           actions: [
             {
+              type: "post",
               label: `Submit Now (${sponsor?.budget} SOL)`,
               href: `${baseHref}?amount={amount}`,
               parameters: [
@@ -101,7 +102,8 @@ export default class SponsorController {
 
       // Initialize Solana connection
       const connection = new Connection(
-        process.env.PUBLIC_SOLANA_RPC_URL || clusterApiUrl('devnet'),
+        // process.env.PUBLIC_SOLANA_RPC_URL || 
+        clusterApiUrl('devnet'),
         'confirmed',
       );
 
@@ -141,6 +143,7 @@ export default class SponsorController {
 
       const payload: ActionPostResponse = await createPostResponse({
         fields: {
+          type: "transaction",
           transaction,
           message: 'Transaction created successfully',
         },

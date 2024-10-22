@@ -52,7 +52,7 @@ export class GeneralController<T extends Document> {
     const data = await this.generalService.update({ _id: id }, req.body);
     if (!data) return NotFoundResponse(res);
 
-    return SuccessResponse(res, data, MESSAGES.UPDATED);
+    return SuccessResponse(res, data, "Updated successfully");
   }
 
   // async delete(req: Request, res: Response) {
@@ -69,6 +69,6 @@ export class GeneralController<T extends Document> {
     const data = await this.generalService.hardDelete({ _id: id });
     if (!data) return NotFoundResponse(res);
 
-    return SuccessResponse(res, data, MESSAGES.DELETED);
+    return SuccessResponse(res, data, "Deleted successfully");
   }
 }

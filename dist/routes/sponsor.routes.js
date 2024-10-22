@@ -10,7 +10,7 @@ const router = (0, express_1.Router)();
 const sponsorController = new sponsor_controller_1.default();
 router.get('/getsponsors', sponsorController.getAllSponsors);
 router.post('/:userId', sponsorController.createSponsor);
-router.get('/:id', sponsorController.getSponsorById);
+router.get('/user/:userId/sponsors', sponsorController.getSponsorByUserId);
 router.get('/user/:userId/sponsors', sponsorController.getSponsorEvents);
 //upload profile image
 router.post('/upload', multer_config_1.default.single('image'), sponsorController.uploadImage);

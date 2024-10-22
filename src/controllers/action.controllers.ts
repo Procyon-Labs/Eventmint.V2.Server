@@ -3,18 +3,8 @@ import EventService from '../services/event.service';
 import TransactionService from '../services/transaction.service';
 import dotenv from 'dotenv';
 import { BlinkSights, DEFAULT_SOL_ADDRESS } from '../config';
-import { BlinksightsClient } from 'blinksights-sdk';
-import { create, fetchCollection } from '@metaplex-foundation/mpl-core';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import {
-  createNoopSigner,
-  createSignerFromKeypair,
-  generateSigner,
-  publicKey,
-  signerIdentity,
-} from '@metaplex-foundation/umi';
 import {
   ActionGetResponse,
   ActionPostRequest,
@@ -39,7 +29,7 @@ const ACTIONS_CORS_HEADERS = {
 
 const { getEventByQuery } = new EventService();
 
-const client = new BlinksightsClient(BlinkSights);
+// const client = new BlinksightsClient(BlinkSights);
 
 export default class ActionController {
   async getAction(req: Request, res: Response) {
@@ -151,6 +141,7 @@ export default class ActionController {
 
       const payload: ActionPostResponse = await createPostResponse({
         fields: {
+          type: "transaction",
           transaction,
           message: `Send ${price} SOL to ${sellerPubkey.toBase58()}`,
         },

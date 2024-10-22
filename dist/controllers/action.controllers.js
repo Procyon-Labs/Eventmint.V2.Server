@@ -16,7 +16,6 @@ const bad_request_1 = __importDefault(require("../errors/bad-request"));
 const event_service_1 = __importDefault(require("../services/event.service"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const config_1 = require("../config");
-const blinksights_sdk_1 = require("blinksights-sdk");
 const http_status_codes_1 = require("http-status-codes");
 const actions_1 = require("@solana/actions");
 const web3_js_1 = require("@solana/web3.js");
@@ -27,7 +26,7 @@ const ACTIONS_CORS_HEADERS = {
     'Access-Control-Allow-Headers': 'Content-Type,Authorization',
 };
 const { getEventByQuery } = new event_service_1.default();
-const client = new blinksights_sdk_1.BlinksightsClient(config_1.BlinkSights);
+// const client = new BlinksightsClient(BlinkSights);
 class ActionController {
     getAction(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -119,6 +118,7 @@ class ActionController {
                     .toString('base64');
                 const payload = yield (0, actions_1.createPostResponse)({
                     fields: {
+                        type: "transaction",
                         transaction,
                         message: `Send ${price} SOL to ${sellerPubkey.toBase58()}`,
                     },

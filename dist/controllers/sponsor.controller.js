@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sponsor_service_1 = __importDefault(require("../services/sponsor.service"));
-const { create, uploadImage, getSponsorById, getSponsorByQuery, getSponsors } = new sponsor_service_1.default();
-const deployedLink = 'https://dial.to/?action=solana-action:https://www.eventmint.onrender.com';
+const { create, uploadImage, getSponsorByUserId, getSponsorByQuery, getSponsors } = new sponsor_service_1.default();
+const deployedLink = 'https://eventmint.fun';
 // const deployedLink = "http://localhost:5500.com";
 class SponsorController {
     createSponsor(req, res) {
@@ -22,23 +22,23 @@ class SponsorController {
             try {
                 const foundSponsor = yield getSponsorByQuery({ keymessage: req.body.keymessage });
                 if (foundSponsor) {
-                    return res.status(409).send({
+                    return res.status(409).json({
                         success: false,
                         message: 'Sponsor name already exists',
                     });
                 }
                 const sponsor = yield create(Object.assign(Object.assign({}, req.body), { userId: req.params.userId }));
-                return res.status(200).send({
+                return res.status(201).json({
                     success: true,
                     message: 'Sponsor created successfully',
                     sponsor,
-                    blink: `${deployedLink}/api/v1/action/${encodeURIComponent(sponsor.keymessage)}`,
+                    blink: `${deployedLink}/api/v1/sponsoraction/${encodeURIComponent(sponsor.keymessage)}`,
                 });
             }
             catch (error) {
-                return res.status(500).send({
+                return res.status(500).json({
                     success: false,
-                    message: `Error occurred while creating sponsor: ${error.message}`,
+                    message: error instanceof Error ? error.message : 'Error occurred while creating sponsor',
                 });
             }
         });
@@ -46,7 +46,7 @@ class SponsorController {
     getSponsorById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const sponsor = yield getSponsorById(req.params.id);
+                const sponsor = yield getSponsorByUserId(req.params.id);
                 if (!sponsor) {
                     return res.status(404).send({
                         success: false,
@@ -60,9 +60,9 @@ class SponsorController {
                 });
             }
             catch (error) {
-                return res.status(500).send({
+                return res.status(500).json({
                     success: false,
-                    message: `Error occurred while fetching sponsor: ${error.message}`,
+                    message: error instanceof Error ? error.message : 'Error occurred while fetching sponsor',
                 });
             }
         });
@@ -86,7 +86,7 @@ class SponsorController {
             catch (error) {
                 return res.status(500).send({
                     success: false,
-                    message: `Error occurred while fetching Sponsor: ${error.message}`,
+                    message: error instanceof Error ? error.message : 'Error occurred while fetching sponsors',
                 });
             }
         });
@@ -110,8 +110,23 @@ class SponsorController {
             catch (error) {
                 return res.status(500).send({
                     success: false,
-                    message: `Error occurred while fetching sponsors: ${error.message}`,
+                    message: error instanceof Error ? error.message : `Error occurred while fetching sponsors`,
                 });
+            }
+        });
+    }
+    getSponsorByUserId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { userId } = req.params;
+            try {
+                const sponsor = yield getSponsorByUserId(userId);
+                if (!sponsor) {
+                    return res.status(404).json({ error: 'Sponsor not found' });
+                }
+                return res.status(200).json(sponsor);
+            }
+            catch (error) {
+                return res.status(400).json({ error: 'Bad Request', message: error.message });
             }
         });
     }
@@ -131,10 +146,10 @@ class SponsorController {
                     message: 'Include an Image file',
                 });
             }
-            catch (err) {
+            catch (error) {
                 return res.status(500).send({
                     success: false,
-                    message: err.message,
+                    message: error instanceof Error ? error.message : `Error occurred while uploading images`,
                 });
             }
         });

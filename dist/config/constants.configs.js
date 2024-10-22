@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MESSAGES = exports.DATABASES = exports.basePath = exports.BlinkSights = exports.DEFAULT_SOL_AMOUNT = exports.DEFAULT_SOL_ADDRESS = exports.BASE_URL = exports.PORT = void 0;
+exports.ACTIONS_CORS_HEADERS = exports.MESSAGES = exports.DATABASES = exports.basePath = exports.BlinkSights = exports.DEFAULT_SOL_AMOUNT = exports.DEFAULT_SOL_ADDRESS = exports.BASE_URL = exports.PORT = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const web3_js_1 = require("@solana/web3.js");
 dotenv_1.default.config();
@@ -24,50 +24,36 @@ exports.DATABASES = {
 };
 exports.MESSAGES = {
     DATABASE: {
-        CONNECTED: 'Database connection established successfully.',
-        ERROR: 'Failed to connect to the database.',
+        CONNECTED: 'Connection to database has been established successfully',
+        ERROR: 'Unable to connect to database.',
     },
-    PROFILE: {
-        CREATED: 'Profile created successfully.',
-        FETCHED: 'Profile retrieved successfully.',
-        INVALID_ID: 'User ID does not exist.',
-        DUPLICATE_EMAIL: 'Email already exists.',
-        UPDATED: 'Profile updated successfully.',
-        NOT_FOUND: 'Profile not found.',
+    PRODUCT: {
+        CREATED: 'Product added successfully.',
+        FETCHED: "Product's info fetched successfully.",
+        PRODUCT_NOT_FOUND: 'Product not found.',
+        NO_QUERY: 'Please provide the needed query.',
     },
-    FETCHED: 'Resource retrieved successfully.',
-    COMING_SOON: 'This feature will be available in a future update.',
-    UNEXPECTED_ERROR: 'An unexpected error occurred.',
-    UPDATED: 'Resource updated successfully.',
-    ERROR: 'An error occurred while processing the resource.',
-    CREATED: 'Resource created successfully.',
-    DELETED: 'Resource deleted successfully.',
-    SUCCESSFUL: 'Operation completed successfully.',
-    ASSIGNED: 'Resource assigned successfully.',
-    NOT_FOUND: 'The requested resource was not found.',
-    DEFAULT: 'Request received and acknowledged.',
-    ALREADY_EXISTS: 'Resource already exists.',
-    USER_ALREADY_EXISTS: 'User already exists.',
-    AUTH_DEFAULT: 'Authentication is required for this action.',
-    LOGOUT: 'Logged out successfully.',
-    LOGIN_FIRST: 'Please log in to continue.',
-    LOGGED_IN: 'Login successful.',
-    LOGIN_FAILURE: 'Login failed. Check your credentials.',
-    USER_UNAUTHORIZED: 'You are not authorized for this action.',
-    USER_NOT_FOUND: 'User not found.',
-    MAIL_SENT: 'Email sent. Check your inbox.',
-    INVALID_UNIQUE_ID: 'Invalid unique ID provided.',
-    UNKNOWN_ERROR: 'An unknown error occurred.',
-    AUTH_FAILURE: 'Authentication failed. Check your credentials.',
-    FORBIDDEN: 'Access denied.',
-    AUTHENTICATION_FAILURE: 'Authentication failed. Please log in again.',
-    NOT_AUTHENTICATED: 'Authentication is required for this action.',
-    BAD_PARAMETERS: 'Invalid parameters provided.',
-    INTERNAL_ERROR: 'An internal error occurred.',
-    SUCCESS_MSG_RESPONSE: 'Operation completed successfully.',
-    FAILURE_MSG_RESPONSE: 'Operation failed.',
-    ACCESS_TOKEN_ERROR_RESPONSE: 'Invalid access token. Please log in again.',
-    TOKEN_REFRESH_RESPONSE: 'Access token refreshed successfully.',
-    ROUTE_NOT_FOUND: 'The requested page does not exist.',
-    WELCOME_V1: 'Welcome to Version 1.',
+    USER: {
+        CREATED: 'User waitlisted successfully.',
+        UPDATED: 'User profile updated successfully.',
+        FETCHED: "User's info fetched successfully.",
+        USER_NOT_FOUND: 'User not found.',
+        NO_QUERY: 'Please provide the needed query.',
+    },
+    TRANSACTION: {
+        FETCHED: "Transaction's info fetched successfully.",
+        TRANSACTION_NOT_FOUND: 'Transaction not found.',
+    },
+    INVALID_ID: "Id doesn't exists.",
+    NOT_ID: 'Not a valid object Id.',
+    UNEXPECTED_ERROR: 'An unexpected error occured',
+};
+exports.ACTIONS_CORS_HEADERS = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,POST,PUT,OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Encoding, Accept-Encoding, X-Accept-Action-Version, X-Accept-Blockchain-Ids',
+    'Access-Control-Expose-Headers': 'X-Action-Version, X-Blockchain-Ids',
+    'Content-Type': 'application/json',
+    'X-Action-Version': '2.1.3',
+    'X-Blockchain-Ids': 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
 };

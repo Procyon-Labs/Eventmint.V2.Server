@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const event_service_1 = __importDefault(require("../services/event.service"));
 const { create, getEventById, getEvents, getEventByQuery, uploadImage } = new event_service_1.default();
-const deployedLink = 'https://dial.to/?action=solana-action:https://www.eventmint.onrender.com';
+const deployedLink = 'https://eventmint.fun';
 // const deployedLink = "http://localhost:5500.com";
 class EventController {
     createEvent(req, res) {

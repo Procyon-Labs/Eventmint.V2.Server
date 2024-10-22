@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./sponsorship-ad.model"), exports);
 __exportStar(require("./sponsorship-application.model"), exports);
 __exportStar(require("./user.model"), exports);
+__exportStar(require("./sponsor.model"), exports);
