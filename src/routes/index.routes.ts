@@ -2,6 +2,7 @@ import actionRouter from './action.routes';
 import eventRouter from './event.routes';
 import sponsorRouter from './sponsor.action.routes';
 import mainSponsor from './sponsor.routes';
+import submissionRouter from './submission.routes';
 
 import userRouter from './user.routes';
 import { basePath } from '../config/constants.configs';
@@ -17,6 +18,7 @@ export default (app: Express) => {
   });
   app.use(`${basePath}/sponsoraction`, sponsorRouter);
   app.use(`${basePath}/sponsor`, mainSponsor);
+  app.use(`${basePath}/sponsor/details`, submissionRouter);
   app.use(`${basePath}/user`, userRouter);
   app.use(`${basePath}/event`, eventRouter);
   app.use(`${basePath}/action`, actionRouter);
