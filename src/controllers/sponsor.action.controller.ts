@@ -30,7 +30,7 @@ if (!DEFAULT_SOL_ADDRESS) {
 }
 
 const headers = createActionHeaders({
-  chainId: "devenet",
+  chainId: "devnet",
   actionVersion: "2.2.3"
 });
 
