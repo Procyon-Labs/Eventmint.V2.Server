@@ -19,21 +19,28 @@ const web3_js_1 = require("@solana/web3.js");
 const actions_1 = require("@solana/actions");
 const config_1 = require("../config");
 const http_status_codes_1 = require("http-status-codes");
+const submission_service_1 = __importDefault(require("../services/submission.service"));
+const SubmissionService = new submission_service_1.default();
 dotenv_1.default.config();
 const UNEXPECTED_ERROR = 'An unexpected error occurred';
 const { getSponsorByQuery } = new sponsor_service_1.default();
 if (!config_1.DEFAULT_SOL_ADDRESS) {
     throw new Error('DEFAULT_SOL_ADDRESS is not defined in the environment variables');
 }
+const headers = (0, actions_1.createActionHeaders)({
+    chainId: "devnet",
+    actionVersion: "2.2.3"
+});
 class SponsorController {
     getAction(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const baseHref = new URL(`${req.protocol}://${req.get('host')}${req.originalUrl}`).toString();
+                const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+                const baseHref = new URL(`${protocol}://${req.get('host')}${req.originalUrl}`).toString();
                 const keymessage = decodeURIComponent(req.params.keymessage.replace(/-/g, ' '));
                 const sponsor = yield getSponsorByQuery({ keymessage: keymessage });
                 if (!sponsor) {
-                    throw new bad_request_1.default('invaild event Id');
+                    return res.status(404).json("Invalid keymessage");
                 }
                 let payload = {
                     icon: sponsor === null || sponsor === void 0 ? void 0 : sponsor.image,
@@ -45,18 +52,22 @@ class SponsorController {
                             {
                                 type: "post",
                                 label: `Submit Now (${sponsor === null || sponsor === void 0 ? void 0 : sponsor.budget} SOL)`,
-                                href: `${baseHref}?amount={amount}`,
+                                href: `${baseHref}?proof={proof}`,
                                 parameters: [
                                     {
-                                        name: 'amount',
-                                        label: 'Submit Poof of audience',
+                                        name: 'proof',
+                                        label: 'Submit Proof of audience',
+                                        type: "url"
                                     },
                                 ],
                             },
                         ],
                     },
                 };
-                res.set(config_1.ACTIONS_CORS_HEADERS);
+                res.set(Object.assign(Object.assign({}, config_1.ACTIONS_CORS_HEADERS), { "X-Action-Version": "2.1.3", 
+                    // "X-Blockchain-Ids": "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1"
+                    "X-Blockchain-Ids": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp" }));
+                res.set(headers);
                 return res.json(payload);
             }
             catch (error) {
@@ -74,7 +85,7 @@ class SponsorController {
                 const sponsorName = req.params.keymessage.replace(/-/g, ' ');
                 const sponsor = yield getSponsorByQuery({ keymessage: sponsorName });
                 if (!sponsor) {
-                    throw new bad_request_1.default('Sponsor not found');
+                    return res.status(404).json("Invalid campaign title");
                 }
                 const body = req.body;
                 if (!body.account) {
@@ -94,7 +105,9 @@ class SponsorController {
                     });
                 }
                 // Initialize Solana connection
-                const connection = new web3_js_1.Connection(process.env.PUBLIC_SOLANA_RPC_URL || (0, web3_js_1.clusterApiUrl)('devnet'), 'confirmed');
+                const connection = new web3_js_1.Connection(
+                // process.env.PUBLIC_SOLANA_RPC_URL || 
+                (0, web3_js_1.clusterApiUrl)('devnet'), 'confirmed');
                 const minimumBalance = yield connection.getMinimumBalanceForRentExemption(0);
                 const price = Number(sponsor.budget);
                 if (isNaN(price) || price <= 0) {
@@ -128,7 +141,12 @@ class SponsorController {
                         message: 'Transaction created successfully',
                     },
                 });
-                return res.status(200).set(config_1.ACTIONS_CORS_HEADERS).json(payload);
+                yield SubmissionService.create({ sponsorId: sponsor._id, userId: account.toString(), submission: req.query.proof });
+                res.set(Object.assign(Object.assign({}, config_1.ACTIONS_CORS_HEADERS), { "X-Action-Version": "2.1.3", 
+                    // "X-Blockchain-Ids": "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1"
+                    "X-Blockchain-Ids": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp" }));
+                res.set(headers);
+                return res.status(200).json(payload);
             }
             catch (error) {
                 console.error('Error in postAction:', error);

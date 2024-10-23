@@ -19,6 +19,8 @@ import {
 import { DEFAULT_SOL_ADDRESS, ACTIONS_CORS_HEADERS } from '../config';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import Submission from "../services/submission.service";
+const SubmissionService = new Submission();
 dotenv.config();
 
 const UNEXPECTED_ERROR = 'An unexpected error occurred';
@@ -59,11 +61,12 @@ export default class SponsorController {
             {
               type: "post",
               label: `Submit Now (${sponsor?.budget} SOL)`,
-              href: `${baseHref}?amount={amount}`,
+              href: `${baseHref}?proof={proof}`,
               parameters: [
                 {
-                  name: 'amount',
-                  label: 'Submit Poof of audience',
+                  name: 'proof',
+                  label: 'Submit Proof of audience',
+                  type: "url"
                 },
               ],
             },
@@ -165,6 +168,8 @@ export default class SponsorController {
           message: 'Transaction created successfully',
         },
       });
+
+      await SubmissionService.create({ sponsorId: sponsor._id, userId: account.toString(), submission: req.query.proof as string })
 
       res.set({
         ...ACTIONS_CORS_HEADERS,

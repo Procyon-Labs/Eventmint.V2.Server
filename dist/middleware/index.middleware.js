@@ -17,7 +17,7 @@ exports.default = (app) => {
         allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
     };
     app.use((0, morgan_1.default)('combined'));
-    app.options('*', (0, cors_1.default)());
+    app.options("*", (0, cors_1.default)(corsOptions));
     app.use('*', (0, cors_1.default)(corsOptions));
     app.use((0, express_1.json)());
     app.use((0, helmet_1.default)());
