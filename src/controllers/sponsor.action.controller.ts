@@ -65,7 +65,7 @@ export default class SponsorController {
               parameters: [
                 {
                   name: 'proof',
-                  label: 'Submit Proof of audience',
+                  label: 'Submit Proof of Audience',
                   type: "url"
                 },
               ],
