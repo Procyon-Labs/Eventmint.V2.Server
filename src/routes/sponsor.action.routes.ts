@@ -10,11 +10,7 @@ const router = express.Router();
 
 router.get('/:keymessage', getAction);
 //options action
-router.options('/:keymessage', (_req: Request, res: Response) => {
-  const headers = createActionHeaders();
-  res.set(headers);
-  return res.json();
-});
+router.options('/:keymessage', getAction);
 
 router.post('/:keymessage', postAction);
 export default router;

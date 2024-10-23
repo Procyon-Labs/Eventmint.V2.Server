@@ -20,7 +20,15 @@ export default (app: Express) => {
   app.use(`${basePath}/user`, userRouter);
   app.use(`${basePath}/event`, eventRouter);
   app.use(`${basePath}/action`, actionRouter);
-
+  app.get("/actions.json", (_req: Request, res: Response) => {
+    const payload = {
+      rules: [
+        { pathPattern: '/api/v1/actions/**', apiPath: '/api/v1/actions/**' },
+        { pathPattern: '/api/v1/sponsoraction/**', apiPath: '/api/v1/sponsoraction/**' },
+      ],
+    };
+    res.json(payload);
+  });
   /**
    * @swagger
    * /:
