@@ -5,7 +5,7 @@ import cloudinary from '../config/cloudinary.configs';
 const { create, uploadImage, getSponsorByUserId, getSponsorByQuery, getSponsors } =
   new SponsorService();
 
-const deployedLink = 'https://dial.to/?action=solana-action:https://eventmint.fun';
+const deployedLink = 'https://dial.to/?cluster=devnet&action=solana-action:https://eventmint.fun';
 // const deployedLink = "http://localhost:5500.com";
 
 export default class SponsorController {
