@@ -13,6 +13,7 @@ import {
   ActionGetResponse,
   ActionPostRequest,
   ActionPostResponse,
+  createActionHeaders,
   createPostResponse,
 } from '@solana/actions';
 import { DEFAULT_SOL_ADDRESS, ACTIONS_CORS_HEADERS } from '../config';
@@ -28,15 +29,24 @@ if (!DEFAULT_SOL_ADDRESS) {
   throw new Error('DEFAULT_SOL_ADDRESS is not defined in the environment variables');
 }
 
+const headers = createActionHeaders({
+  chainId: "devenet",
+  actionVersion: "2.2.3"
+});
+
 export default class SponsorController {
   async getAction(req: Request, res: Response) {
     try {
-      const baseHref = new URL(`${req.protocol}://${req.get('host')}${req.originalUrl}`).toString();
+      const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+
+      const baseHref = new URL(
+        `${protocol}://${req.get('host')}${req.originalUrl}`
+      ).toString();
       const keymessage = decodeURIComponent(req.params.keymessage.replace(/-/g, ' '));
       const sponsor = await getSponsorByQuery({ keymessage: keymessage });
-      
+
       if (!sponsor) {
-        throw new BadRequestError('invaild event Id');
+        return res.status(404).json("Invalid keymessage")
       }
 
       let payload: ActionGetResponse = {
@@ -61,7 +71,14 @@ export default class SponsorController {
         },
       };
 
-      res.set(ACTIONS_CORS_HEADERS);
+      res.set({
+        ...ACTIONS_CORS_HEADERS,
+        "X-Action-Version": "2.1.3",
+        // "X-Blockchain-Ids": "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1"
+        "X-Blockchain-Ids": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+      });
+      res.set(headers);
+
       return res.json(payload);
     } catch (error: any) {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
@@ -78,7 +95,7 @@ export default class SponsorController {
       const sponsor = await getSponsorByQuery({ keymessage: sponsorName });
 
       if (!sponsor) {
-        throw new BadRequestError('Sponsor not found');
+        return res.status(404).json("Invalid campaign title")
       }
 
       const body: ActionPostRequest = req.body;
@@ -149,7 +166,15 @@ export default class SponsorController {
         },
       });
 
-      return res.status(200).set(ACTIONS_CORS_HEADERS).json(payload);
+      res.set({
+        ...ACTIONS_CORS_HEADERS,
+        "X-Action-Version": "2.1.3",
+        // "X-Blockchain-Ids": "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1"
+        "X-Blockchain-Ids": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+      });
+      res.set(headers);
+
+      return res.status(200).json(payload);
     } catch (error) {
       console.error('Error in postAction:', error);
 

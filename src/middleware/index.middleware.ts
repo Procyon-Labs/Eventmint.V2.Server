@@ -13,7 +13,7 @@ export default (app: Express) => {
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
   };
   app.use(morgan('combined'));
-  app.options('*', cors());
+  app.options("*", cors(corsOptions));
   app.use('*', cors(corsOptions));
   app.use(json());
   app.use(helmet());
