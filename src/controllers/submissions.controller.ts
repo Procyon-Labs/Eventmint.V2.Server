@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import Submission from "../services/submission.service";
+import SubmissionModel from "../models/submission.model";
 import Sponsor from "../services/sponsor.service";
 import ISubmission from "../interfaces/submission.interface";
 
@@ -43,9 +44,17 @@ export default class SubmissionController {
 
     async fetchAllSubmission(req: Request, res: Response) {
         try {
-            const subs = await SubmissionService.find({});
+            const subs = await SubmissionModel.find()
+                .populate({
+                    path: 'sponsorId',
+                    match: { userId: req.params.pubKey },
+                    select: 'userId'
+                })
+                .select('_id submission sponsorId');
 
-            const submissions = subs.map((submission: ISubmission) => submission.submission);
+            const filteredSubs = subs.filter((submission: any) => submission.sponsorId);
+
+            const submissions = filteredSubs.map((submission: any) => submission.submission);
 
             return res.status(201).send({
                 success: true,

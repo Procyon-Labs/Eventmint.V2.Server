@@ -9,7 +9,7 @@ const {
 const router = express.Router();
 
 //fetch all Submissions
-router.get("/all", fetchAllSubmission);
+router.get("/all/:pubKey", fetchAllSubmission);
 
 //fetch Submissions
 router.get("/:sponsorId", fetchSubmission);

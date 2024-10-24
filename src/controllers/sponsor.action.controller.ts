@@ -95,7 +95,7 @@ export default class SponsorController {
   async postAction(req: Request, res: Response) {
     try {
       const sponsorName = req.params.keymessage.replace(/-/g, ' ');
-      const sponsor = await getSponsorByQuery({ keymessage: sponsorName });
+      const sponsor: any = await getSponsorByQuery({ keymessage: sponsorName });
 
       if (!sponsor) {
         return res.status(404).json("Invalid campaign title")

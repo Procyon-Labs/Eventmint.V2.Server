@@ -11,6 +11,6 @@ export default class SubmissionService {
     }
 
     async find(params: {}) {
-        return await Submission.find(params);
+        return await Submission.find(params).populate("sponsorId", "userId");
     }
 }

@@ -7,9 +7,10 @@ const submissionSchema = new Schema<ISubmission>({
         required: true
     },
     sponsorId: {
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true,
-        trim: true
+        trim: true,
+        ref: 'sponsor'
     },
     submission: {
         type: String,

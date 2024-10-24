@@ -1,6 +1,8 @@
+import { ObjectId } from "mongoose";
+
 export default interface ISubmission {
-    _id?: string;
+    _id?: ObjectId;
     userId: string;
-    sponsorId: string;
+    sponsorId: ObjectId;
     submission: string;
 }
