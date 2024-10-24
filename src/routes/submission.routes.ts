@@ -8,10 +8,10 @@ const {
 } = new SubmissionController();
 const router = express.Router();
 
-//fetch Submissions
-router.get("/:sponsorId", fetchSubmission);
-
 //fetch all Submissions
-router.get("/", fetchAllSubmission);
+router.get("/details/all", fetchAllSubmission);
+
+//fetch Submissions
+router.get("/details/:sponsorId", fetchSubmission);
 
 export default router;

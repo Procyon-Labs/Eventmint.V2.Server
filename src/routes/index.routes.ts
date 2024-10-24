@@ -17,8 +17,8 @@ export default (app: Express) => {
     });
   });
   app.use(`${basePath}/sponsoraction`, sponsorRouter);
-  app.use(`${basePath}/sponsor`, mainSponsor);
   app.use(`${basePath}/sponsor/details`, submissionRouter);
+  app.use(`${basePath}/sponsor`, mainSponsor);
   app.use(`${basePath}/user`, userRouter);
   app.use(`${basePath}/event`, eventRouter);
   app.use(`${basePath}/action`, actionRouter);
