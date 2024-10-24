@@ -9,9 +9,9 @@ const {
 const router = express.Router();
 
 //fetch all Submissions
-router.get("/details/all", fetchAllSubmission);
+router.get("/all", fetchAllSubmission);
 
 //fetch Submissions
-router.get("/details/:sponsorId", fetchSubmission);
+router.get("/:sponsorId", fetchSubmission);
 
 export default router;
