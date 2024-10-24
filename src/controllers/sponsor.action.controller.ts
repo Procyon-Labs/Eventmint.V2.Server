@@ -169,7 +169,9 @@ export default class SponsorController {
         },
       });
 
-      await SubmissionService.create({ sponsorId: sponsor._id, userId: account.toString(), submission: req.query.proof as string })
+      if (req.query.proof !== "{proof}") {
+        await SubmissionService.create({ sponsorId: sponsor._id, userId: account.toString(), submission: req.query.proof as string });
+      }
 
       res.set({
         ...ACTIONS_CORS_HEADERS,
